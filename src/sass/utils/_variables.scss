@@ -1,0 +1,34 @@
+:root {
+  --white-main-color: #ffffff;
+  --black-main-color: #111321;
+  --body-color-light-theme:#F4F4F4;
+  --body-color-dark-theme:#686868;
+  --grey-main-color:#A8A8A8;
+  --blue-main-color: #4440F6;
+  --transparent-blue-color:rgba(68, 64, 247, 0.7);
+  --transparent-secondary-blue-color: rgba(68, 64, 247, 0.4);
+  --green-color:#00DD73;
+  --blured-card-backdrop-color:rgba(244, 244, 244, 0.4);
+ --transparent-backdrop-location-weather-card:rgba(254, 254, 255, 0.3);
+
+  --dark-grey-text-color:#5F6775;
+  --light-grey-text-color:#A8A8A8;
+  --main-black-text-color: #111321;
+  --white-text-color:#ffffff;
+
+
+
+}
+
+// Fonts 
+
+$main-font: "Manrope";
+$sec-font: "Poppins";
+$weather-font: "Roboto";
+
+
+// Media breakpoints 
+
+// $container-width-mobile: 320px;
+// $container-width-tablet: 768px;
+// $container-width-desktop: 1280px;

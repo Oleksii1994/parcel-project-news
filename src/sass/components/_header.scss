@@ -5,6 +5,7 @@
 .container {
   width: 320px;
   padding: 0 16px;
+  margin: 0 auto;
 }
 
 .header__container {
@@ -43,6 +44,7 @@
 }
 
 .form-search__input {
+  transform: scale(0);
   background-color: transparent;
   border: none;
   width: 173px;
@@ -86,4 +88,11 @@
 }
 
 .form-search__icon {
+}
+
+.header .switch__wrapper {
+  display: none;
+  .screen-tablet & {
+    display: block;
+  }
 }

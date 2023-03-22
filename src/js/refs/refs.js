@@ -3,4 +3,5 @@ export const refs = {
   themeSwitch: document.querySelector('#theme-switch'),
   lightThemeBox: document.querySelector('.light-theme-box'),
   darkThemeBox: document.querySelector('.dark-theme-box'),
+  formSearch: document.querySelector('.form-search'),
 };

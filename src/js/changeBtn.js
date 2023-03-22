@@ -1,6 +1,7 @@
 class FavoriteButton {
   constructor(buttonElement) {
     this.button = buttonElement;
+    this.button.classList.add('favorite-btn');
     this.button.addEventListener('click', () => this.onChangeButton());
   }
   onChangeButton() {

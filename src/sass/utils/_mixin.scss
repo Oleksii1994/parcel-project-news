@@ -1,0 +1,84 @@
+// міксин для стилізації тексту
+// для додавання в стилі: @include text(700, 32px, 44px, -0.01em);
+@mixin text($font-weight, $font-size, $line-height, $letter-spacing) {
+  font-weight: $font-weight;
+  font-size: $font-size;
+  line-height: calc($line-height/$font-size);
+  letter-spacing: $letter-spacing;
+}
+//  міксини для медіа запитів
+//  для використання в коді
+// @include for-size(desktop) {
+//   background-position-y: 35%;
+// }
+@mixin for-size($range) {
+  $mobile: 320px;
+  $tablet: 768px;
+  $desktop: 1280px;
+
+  @if $range == mobile-only {
+    @media (max-width: #{$tablet - 1}) {
+      @content;
+    }
+  } @else if $range == mobile {
+    @media (min-width: $mobile) {
+      @content;
+    }
+  } @else if $range == tablet {
+    @media (min-width: $tablet) {
+      @content;
+    }
+  } @else if $range == tablet-only {
+    @media (max-width: #{$desktop - 1}) {
+      @content;
+    }
+  } @else if $range == desktop-only {
+    @media (max-width: #{$desktop - 1}) {
+      @content;
+    }
+  } @else if $range == desktop {
+    @media (min-width: $desktop) {
+      @content;
+    }
+  }
+}
+// міксин для футера
+@mixin footer-size-mobile($width) {
+  @media (min-width: 320px) {
+    width: $width;
+    @content;
+  }
+}
+
+@mixin footer-size-tablet($width, $height) {
+  @media (min-width: 768px) {
+    width: $width;
+    height: $height;
+    @content;
+  }
+}
+
+@mixin footer-size-desktop($width) {
+  @media (min-width: 1280px) {
+    width: $width;
+    @content;
+  }
+}
+
+// для додавання в стилі: font-family: font(_назва шрифту,який потрібно);
+$font: (
+  _manrope: (
+    'Manrope',
+  ),
+  _roboto: (
+    'Roboto',
+  ),
+  _poppins: (
+    'Poppins',
+    sans-serif,
+  ),
+);
+
+@function font($key) {
+  @return map-get($font, $key);
+}

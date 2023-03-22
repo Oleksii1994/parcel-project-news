@@ -1,5 +1,41 @@
-.news-test{
-  color:rgb(153, 127, 255);
-  font-family: $weather-font;
-  background-color: #fff;
-}
+  .news-test {
+    color: rgb(236, 91, 0);
+    font-family: $weather-font;
+   // background-color: #e3f306;
+  }
+
+  .favorite-btn {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: var(--body-color-light-theme);
+    border-radius: 20px;
+    font-family: $main-font;
+       color: var(--black-main-color);
+  }
+
+  .add-favorite-icon {
+    margin-left: 4px;
+    fill: transparent;
+    stroke: var(--blue-main-color);
+  }
+  .delete-favorite-icon {
+    margin-left: 4px;
+    fill: var(--blue-main-color);
+  }
+  .add-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .delete-button {
+    display: none;
+  }
+
+
+

@@ -1,4 +1,5 @@
 import './js/adaptive-devices';
+import './js/API/fetchAPI';
 
 import './js/mobile-menu';
 import './js/devices-responsive';

@@ -35,6 +35,8 @@ let currDay = dateNow.getDate();
 let selectData = '';
 let liTag = '';
 
+console.log(refs.inputEl);
+
 const calendarDates = new CalendarDates();
 refs.inputEl.addEventListener('click', onInputEl);
 

@@ -1,3 +1,4 @@
+// export const KEY_FAVORITE = 'favorite'; в константи
 
 // import { renderNews } from './js/renderNews';
 // import { fatchNews } from './js/fetchNews';

@@ -58,10 +58,9 @@
   }
 }
 
-@mixin footer-size-desktop($width, $height) {
+@mixin footer-size-desktop($width) {
   @media (min-width: 1280px) {
     width: $width;
-    height: $height;
     @content;
   }
 }

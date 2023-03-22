@@ -9,3 +9,4 @@ import './js/categories-btns';
 import './js/add-to-read';
 import './js/add-to-favorite';
 import './js/pagination';
+import './js/header';

@@ -7,14 +7,23 @@ function onFormSearchSubmit(event) {
   console.log('submit');
 }
 
-refs.formSearch.addEventListener('blur', onFormSearchBlur);
+document.addEventListener('click', onDocumentClick);
 
-function onFormSearchBlur(event) {
-  console.log('blur');
-}
-
-refs.formSearch.addEventListener('click', onFormSearchClick);
-
-function onFormSearchClick(event) {
-  console.log('click');
+function onDocumentClick(event) {
+  if (!document.body.classList.contains('screen-mobile')) {
+    return;
+  }
+  const target = event.target.closest('.form-search');
+  if (!target) {
+    if (refs.formSearch.elements.searchValue.value.trim()) {
+      return;
+    }
+    refs.formSearch.elements.searchValue.style.transform = 'scale(0)';
+    refs.formSearch.elements.button.style.left = '';
+    refs.formSearch.elements.button.style.right = '14px';
+    return;
+  }
+  target.elements.searchValue.style.transform = 'scale(1)';
+  target.elements.button.style.left = '14px';
+  target.elements.button.style.right = '';
 }

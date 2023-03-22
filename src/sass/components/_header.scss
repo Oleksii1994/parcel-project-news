@@ -52,11 +52,16 @@
   border-radius: 20px;
   border: 1px solid var(--black-main-color);
   padding: 5px 5px 5px 48px;
+  transition: transform 320ms linear;
   color: var(--black-main-color);
 
   .dark-theme & {
     color: var(--body-color-light-theme);
     border: 1px solid var(--body-color-light-theme);
+  }
+  .screen-tablet &,
+  .screen-default & {
+    transform: scale(1);
   }
 }
 .form-search__input::placeholder {
@@ -75,13 +80,15 @@
 }
 
 .form-search__button {
+  width: 20px;
+  height: 20px;
   background-color: transparent;
   fill: var(--black-main-color);
   border: none;
   padding: 0;
   position: absolute;
   top: 8px;
-  left: 14px;
+  right: 14px;
   .dark-theme & {
     fill: var(--body-color-light-theme);
   }

@@ -42,6 +42,29 @@
     }
   }
 }
+// міксин для футера
+@mixin footer-size-mobile($width) {
+  @media (min-width: 320px) {
+    width: $width;
+    @content;
+  }
+}
+
+@mixin footer-size-tablet($width, $height) {
+  @media (min-width: 768px) {
+    width: $width;
+    height: $height;
+    @content;
+  }
+}
+
+@mixin footer-size-desktop($width, $height) {
+  @media (min-width: 1280px) {
+    width: $width;
+    height: $height;
+    @content;
+  }
+}
 
 // для додавання в стилі: font-family: font(_назва шрифту,який потрібно);
 $font: (

@@ -12,12 +12,11 @@ const favBtn = initFavoriteButton(buttonElement);
 // const readMoreLink = document.querySelector('.news-card-read-more a');
 favBtn.addEventListener('click', addToFavorite);
 
- // Отримуємо список збережених новин з локального сховища браузера
- let favorites = JSON.parse(localStorage.getItem(KEY_FAVORITE))|| [];
+// Отримуємо список збережених новин з локального сховища браузера
+let favorites = JSON.parse(localStorage.getItem(KEY_FAVORITE)) || [];
 
 // Функція для додавання новини до списку збережених новин
 function addToFavorites() {
- 
   // Перевіряємо, чи новина вже додана до списку збережених новин
   const index = favorites.findIndex(item => item.id === news.id);
 
@@ -25,7 +24,7 @@ function addToFavorites() {
     // Якщо новина не додана до списку, то додаємо її
     favorites.push({
       id: news.id,
-      date: new Date()
+      date: new Date(),
     });
     // Змінюємо текст кнопки на "RemoveFromFavorite"
     // favBtn.textContent = 'Remove from favorite';
@@ -35,7 +34,7 @@ function addToFavorites() {
     // Змінюємо текст кнопки на "AddToFavorite"
     // favBtn.textContent = 'Add to favorite';
   }
-  
+
   // Зберігаємо список збережених новин в локальному сховищі браузера
   localStorage.setItem(KEY_FAVORITE, JSON.stringify(favorites));
 }

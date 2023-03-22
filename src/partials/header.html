@@ -1,1 +1,30 @@
-<p class="header-test">header</p>
+
+  <header class="header">
+    <div class="container header__container">
+      <a class="header__link" href="./index.html">News</a>
+      <nav class="nav">
+        <ul class="nav__list">
+          <li class="nav__item"><a class="nav__link" href="#">Home</a></li>
+          <li class="nav__item">
+            <a class="nav__link" href="#">Favorite</a>
+          </li>
+          <li class="nav__item"><a class="nav__link" href="#">Read</a></li>
+        </ul>
+      </nav>
+      <form class="form-search">
+        <input
+          class="form-search__input"
+          type="text"
+          placeholder="Search"
+          name="searchValue"
+        />
+        <button class="form-search__button" type="submit" name="button">
+          <svg class="form-search__icon" width="20" height="20">
+            <use href="./images/header/header.svg#icon-search"></use>
+          </svg>
+        </button>
+      </form>
+      <include src="./partials/switch-theme.html"></include> 
+    </div>
+  </header>
+</body> 

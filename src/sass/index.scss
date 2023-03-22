@@ -1,6 +1,7 @@
 @import './common';
 @import './base/fonts';
 @import './base/base';
+@import './utils/mixin';
 @import './utils/variables';
 @import './utils/vissually-hidden';
 
@@ -15,6 +16,3 @@
 @import './components/pagination';
 @import './components/footer';
 @import'./components/read';
-
-
-

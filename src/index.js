@@ -1,9 +1,8 @@
 import './js/adaptive-devices';
-
 import './js/mobile-menu';
 import './js/devices-responsive';
 import './js/input-actions';
-import './js/switch-theme';
+// import './js/switch-theme';
 import './js/calendar';
 import './js/weather';
 import './js/categories-btns';

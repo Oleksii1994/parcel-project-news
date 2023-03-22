@@ -43,24 +43,9 @@
   }
 }
 // міксин для футера
-@mixin footer-size-mobile($width) {
-  @media (min-width: 320px) {
-    width: $width;
-    @content;
-  }
-}
-
-@mixin footer-size-tablet($width, $height) {
+@mixin footer-size-tablet($height) {
   @media (min-width: 768px) {
-    width: $width;
     height: $height;
-    @content;
-  }
-}
-
-@mixin footer-size-desktop($width) {
-  @media (min-width: 1280px) {
-    width: $width;
     @content;
   }
 }

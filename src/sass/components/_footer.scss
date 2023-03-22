@@ -5,7 +5,5 @@
   margin-left: auto;
   background-color: #7a7a7a;
 
-  @include footer-size-mobile(320px);
-  @include footer-size-tablet(768px, 146px);
-  @include footer-size-desktop(1280px);
+  @include footer-size-tablet(146px);
 }

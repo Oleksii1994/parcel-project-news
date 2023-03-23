@@ -3,14 +3,14 @@ import { format } from 'date-fns';
 import { API_KEY } from './API/weatherAPI';
 import { refs } from './refs/weather-refs';
 
-let latitude = null;
-let longitude = null;
+let latitude = 50.431;
+let longitude = 30.532;
 
 refs.weatherButton.addEventListener('click', changeButtonWheater);
 
 location();
 
-async function weather(latitude = 50.4536952, longitude = 30.4539104) {
+async function weather(latitude = 50.431, longitude = 30.532) {
   try {
     const response = await axios.get(
       `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
@@ -69,7 +69,7 @@ function renderWeather(data) {
     `;
 }
 
-async function weatherForFive(latitude = 50.4536952, longitude = 30.4539104) {
+async function weatherForFive(latitude = 50.431, longitude = 30.532) {
   try {
     const response = await axios.get(
       `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`

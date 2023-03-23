@@ -201,28 +201,160 @@ const categories = [
   },
 ];
 
+const visibleOtherBtn = {
+  mobile: 0,
+  tablet: 4,
+  desktop: 6,
+};
+
 const categoriesRef = document.querySelector('.categories');
 const otherBoxRef = categoriesRef.querySelector('.categories__other-box');
+const categoriesOtherTextRef = document.querySelector(
+  '.categories__other-text'
+);
+const categoriesOtherBtnRef = document.querySelector('.categories__other-btn');
+const categoriesBtnListRef = document.querySelector('.categories__btn-list');
+
 const otherBtn = categoriesRef.querySelector('#categories-other');
+window.addEventListener('resize', onWindowsResize);
 otherBtn.addEventListener('click', onOtherBtnClick);
 let visibleListStatus = false;
-onLoadPage(categories);
+setTimeout(() => {
+  onLoadPage(categories);
+}, 0);
+
+otherBoxRef.addEventListener('click', onOtherBoxClick);
+
+function onWindowsResize(e) {
+  console.log(window.innerWidth);
+  if (window.innerWidth < 768) {
+    categoriesBtnListRef.innerHTML = '';
+    const markup = categories
+      .map(
+        elem =>
+          `<div class="categories__other-btn-box"><button class="categories__other-item" data-categoryName="${elem.section}" type="button">${elem.display_name}</button></div>`
+      )
+      .join('');
+    console.log(markup);
+    otherBoxRef.innerHTML = markup;
+    return;
+  }
+  if (window.innerWidth < 1280) {
+    console.log(categoriesBtnListRef.innerHTML);
+    if (categoriesBtnListRef.children.length === visibleOtherBtn.tablet) {
+      return;
+    }
+    let markupBtns = [];
+    for (let index = 0; index < visibleOtherBtn.tablet; index++) {
+      markupBtns.push(
+        `<div class="categories__other-btn-box"><button class="categories__other-item" data-categoryName="${categories[index].section}" type="button">${categories[index].display_name}</button></div>`
+      );
+    }
+    categoriesBtnListRef.innerHTML = markupBtns.join('');
+    let markupOther = [];
+    for (let i = visibleOtherBtn.tablet; i < categories.length; i++) {
+      markupOther.push(
+        `<div class="categories__other-btn-box"><button class="categories__other-item" data-categoryName="${categories[i].section}" type="button">${categories[i].display_name}</button></div>`
+      );
+    }
+    otherBoxRef.innerHTML = markupOther.join('');
+    return;
+  }
+  if (window.innerWidth > 1279) {
+    console.log(categoriesBtnListRef.innerHTML);
+    if (categoriesBtnListRef.children.length === visibleOtherBtn.desktop) {
+      return;
+    }
+    let markupBtns = [];
+    for (let index = 0; index < visibleOtherBtn.desktop; index++) {
+      markupBtns.push(
+        `<div class="categories__other-btn-box"><button class="categories__other-item" data-categoryName="${categories[index].section}" type="button">${categories[index].display_name}</button></div>`
+      );
+    }
+    categoriesBtnListRef.innerHTML = markupBtns.join('');
+    let markupOther = [];
+    for (let i = visibleOtherBtn.desktop; i < categories.length; i++) {
+      markupOther.push(
+        `<div class="categories__other-btn-box"><button class="categories__other-item" data-categoryName="${categories[i].section}" type="button">${categories[i].display_name}</button></div>`
+      );
+    }
+    otherBoxRef.innerHTML = markupOther.join('');
+  }
+}
 
 function onOtherBtnClick(e) {
   visibleListStatus = !visibleListStatus;
+
   if (visibleListStatus) {
     otherBoxRef.classList.add('visible');
+    categoriesOtherBtnRef.classList.add('visible');
+    e.currentTarget.classList.add('active');
   } else {
     otherBoxRef.classList.remove('visible');
+    categoriesOtherBtnRef.classList.remove('visible');
+    e.currentTarget.classList.remove('active');
   }
 }
 
 function onLoadPage(categories) {
-  const markup = categories
-    .map(
-      elem =>
-        `<button class="categories__other-item" data-categoryName="${elem.section}" type="button">${elem.display_name}</button>`
-    )
-    .join('');
-  otherBoxRef.insertAdjacentHTML('beforeend', markup);
+  if (window.innerWidth < 768) {
+    //  console.log(window.matchMedia('(max-width: 767px)'));
+    const markup = categories
+      .map(
+        elem =>
+          `<div class="categories__other-btn-box"><button class="categories__other-item" data-categoryName="${elem.section}" type="button">${elem.display_name}</button></div>`
+      )
+      .join('');
+    console.log(markup);
+    otherBoxRef.innerHTML = markup;
+    return;
+  }
+  if (window.innerWidth < 1280) {
+    let markupBtns = [];
+    for (let index = 0; index < visibleOtherBtn.tablet; index++) {
+      markupBtns.push(
+        `<div class="categories__other-btn-box"><button class="categories__other-item" data-categoryName="${categories[index].section}" type="button">${categories[index].display_name}</button></div>`
+      );
+    }
+    categoriesBtnListRef.innerHTML = markupBtns.join('');
+    let markupOther = [];
+    for (let i = visibleOtherBtn.tablet; i < categories.length; i++) {
+      markupOther.push(
+        `<div class="categories__other-btn-box"><button class="categories__other-item" data-categoryName="${categories[i].section}" type="button">${categories[i].display_name}</button></div>`
+      );
+    }
+    otherBoxRef.innerHTML = markupOther.join('');
+  }
+  if (window.innerWidth > 1279) {
+    console.log(categoriesBtnListRef.innerHTML);
+    if (categoriesBtnListRef.children.length === visibleOtherBtn.desktop) {
+      return;
+    }
+    let markupBtns = [];
+    for (let index = 0; index < visibleOtherBtn.desktop; index++) {
+      markupBtns.push(
+        `<div class="categories__other-btn-box"><button class="categories__other-item" data-categoryName="${categories[index].section}" type="button">${categories[index].display_name}</button></div>`
+      );
+    }
+    categoriesBtnListRef.innerHTML = markupBtns.join('');
+    let markupOther = [];
+    for (let i = visibleOtherBtn.desktop; i < categories.length; i++) {
+      markupOther.push(
+        `<div class="categories__other-btn-box"><button class="categories__other-item" data-categoryName="${categories[i].section}" type="button">${categories[i].display_name}</button></div>`
+      );
+    }
+    otherBoxRef.innerHTML = markupOther.join('');
+  }
+}
+
+function onOtherBoxClick(e) {
+  if (e.target.nodeName !== 'BUTTON') {
+    return;
+  }
+  e.target.classList.add('active');
+
+  visibleListStatus = !visibleListStatus;
+  otherBoxRef.classList.remove('visible');
+  categoriesOtherTextRef.textContent = e.target.textContent;
+  categoriesOtherBtnRef.classList.remove('visible');
 }

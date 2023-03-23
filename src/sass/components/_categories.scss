@@ -14,7 +14,7 @@
   transition: opacity 320ms linear;
 }
 
-.categories__other-list {
+.categories__other-btn {
   width: 148px;
   height: 31px;
   left: 16px;
@@ -33,6 +33,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  fill: currentColor;
 }
 
 .categories__other-item {
@@ -49,18 +50,37 @@
   letter-spacing: 0.01em;
   text-align: start;
   width: 120px;
-  text-overflow: ellipsis;
+  // text-overflow: ellipsis;
+
+  &:hover {
+    text-decoration: underline;
+  }
 
   display: block;
-  // overflow: hidden;
+  white-space: nowrap;
 
   &:active {
     text-decoration: underline;
   }
+  &-btn-box {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
+.categories__btn.active {
+  background-color: var(--blue-main-color);
+  color: var(--white-main-color);
+}
+
+.visible .categories__other-icon {
+  // fill: var(--blue-main-color);
+  transform: rotate(180deg);
+  transition: transform 320ms linear;
+}
 .categories__other-icon {
-  fill: var(--blue-main-color);
+  transform: rotate (0);
+  transition: transform 320ms linear;
 }
 .categories__other-box.visible {
   opacity: 1;

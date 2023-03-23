@@ -8,7 +8,7 @@ const KEY_FAVORITE = 'favorite';
 // const buttonElement = document.querySelector('.favorite-button');
 const favBtn = initFavoriteButton(buttonElement);
 
-favBtn.addEventListener('click', addToFavorite);
+favBtn.addEventListener('click', addToFavorites);
 
 // Отримуємо список збережених новин з локального сховища браузера
 let favorites = storage.loadFromLocal(KEY_FAVORITE) || [];
@@ -17,10 +17,10 @@ let favorites = storage.loadFromLocal(KEY_FAVORITE) || [];
 function addToFavorites() {
   if (favorites.length === 0) return;
 
-  refs.text.classList.add('hidden')
+  refs.text.classList.add('hidden');
   // Перевіряємо, чи новина вже додана до списку збережених новин
-   const index = favorites.findIndex(item => item.title === news.title);
-  
+  const index = favorites.findIndex(item => item.title === news.title);
+
   if (index === -1) {
     // Якщо новина не додана до списку, то додаємо її
     favorites.push({
@@ -35,7 +35,7 @@ function addToFavorites() {
     // Змінюємо текст кнопки на "AddToFavorite"
     // favBtn.textContent = 'Add to favorite';
   }
-// Рендерем новину і додаєм її у список
+  // Рендерем новину і додаєм її у список
   let markup = favorites.map(renderNews).join('');
   refs.newList.innerHTML = markup;
 }
@@ -44,8 +44,5 @@ onChangeButton(favorites);
 
 addToFavorites();
 
-
-
-
-  // Зберігаємо список збережених новин в локальному сховищі браузера
-  // localStorage.setItem(KEY_FAVORITE, JSON.stringify(favorites));
+// Зберігаємо список збережених новин в локальному сховищі браузера
+// localStorage.setItem(KEY_FAVORITE, JSON.stringify(favorites));

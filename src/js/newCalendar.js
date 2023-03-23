@@ -26,14 +26,13 @@ const options = {
 };
 
 const input = document.querySelector('#calendar');
-const calendar = document.querySelector('.calendar_icon');
+const calendar = document.querySelector('.calendar__icon');
 const fp = flatpickr(input, options);
 
 function arrowToggle(deg) {
   const arrow = document.querySelector('.calendar__arrow');
   arrow.style.transform = `rotate(${deg}deg)`;
 
-  const calendar = document.querySelector('.calendar__icon');
   const calendarInput = document.querySelector('.calendar__input');
   if (calendar.classList.contains('opened')) {
     calendar.classList.remove('opened');

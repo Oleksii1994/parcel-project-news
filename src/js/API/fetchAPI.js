@@ -18,6 +18,7 @@ class NewsAPIService {
       fq: this.filterQuery,
       'api-key': this.#API_KEY,
       page: this.currentPage,
+      offset: 8,
     });
     const URL = `${this.#BASE_URL}${
       this.#SEARCH_NEWS_PATH
@@ -27,6 +28,8 @@ class NewsAPIService {
     const {
       response: { docs, meta },
     } = await response.json();
+    // тут виводжу в консоль нормалізовані дані
+    console.log(NormalizeData.searchData(docs));
     return { docs, meta };
   }
 
@@ -85,9 +88,44 @@ class NewsAPIService {
 }
 
 // tests
-// const newsApi = new NewsAPIService();
-// newsApi.query = 'covid';
-// newsApi.fetchSearchArticles();
+
+const newsApi = new NewsAPIService();
+newsApi.query = 'covid';
+newsApi.fetchSearchArticles();
 // newsApi.fetchCategories();
 // newsApi.fetchPopularArticles();
 // newsApi.fetchArticlesByCategory();
+
+// клас для нормалізації даних (поки що тільки для новин з пошуку)
+
+class NormalizeData {
+  static formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
+  static searchData(arr) {
+    return arr.map(
+      ({ abstract, headline, pub_date, uri, multimedia, section_name }) => {
+        let imgUrl = '';
+        if (multimedia.length !== 0) {
+          imgUrl = `https://www.nytimes.com/${multimedia[0].url}`;
+        } else {
+          imgUrl =
+            'https://media.tenor.com/_3uPSgb8o5gAAAAC/ukraine-ukraine-flag.gif';
+        }
+
+        return {
+          title: headline.print_headline,
+          text: abstract,
+          date: this.formatDate(pub_date),
+          img: imgUrl,
+          category: section_name,
+          id: uri,
+        };
+      }
+    );
+  }
+}

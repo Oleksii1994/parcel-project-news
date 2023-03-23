@@ -1,0 +1,118 @@
+.container-for-calendar {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 24px 16px 40px 16px;
+  position: relative;
+
+  @media screen and (min-width: 768px) {
+    padding: 28px 16px 48px 16px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    padding: 28px 52px 60px 52px;
+  }
+}
+
+.filter-text {
+  display: none;
+  color: var(--black-main-color);
+
+  @media screen and (min-width: 1280px) {
+    display: block;
+    margin-right: 37px;
+    margin-left: auto;
+
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: center;
+  }
+}
+
+.calendar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  pointer-events: auto;
+
+  position: relative;
+}
+
+.calendar__icon {
+  position: absolute;
+  cursor: pointer;
+  margin: 0;
+  width: 20px;
+  height: 20px;
+  right: 137px;
+  fill: var(--blue-main-color);
+  left: 13px;
+
+  &.opened {
+    fill: var(--white-main-color);
+  }
+}
+
+.calendar__input {
+  outline: none;
+  padding-left: 44px;
+  cursor: pointer;
+  height: 31px;
+  border: 1px solid var(--black-main-color);
+  border-radius: 20px;
+  width: 152px;
+  font-family: $weather-font;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: var(--body-color-dark-theme);
+  background-color: var(--white-main-color);
+
+  &.opened {
+    background: var(--blue-main-color);
+    color: var(--white-main-color);
+  }
+
+  @media screen and (min-width: 320px) {
+    width: 168px;
+    font-size: 14px;
+  }
+}
+
+.calendar__arrow {
+  position: absolute;
+  cursor: pointer;
+  margin: 0;
+  width: 20px;
+  height: 15px;
+  right: 11px;
+  fill: var(--body-color-dark-theme);
+  transition: transform 0.25s ease-in-out;
+
+  &.opened {
+    fill: var(--white-main-color);
+  }
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.flatpickr-prev-month {
+  left: 250px !important;
+  fill: var(--blue-main-color) !important;
+}
+
+.flatpickr-next-month {
+  fill: var(--blue-main-color) !important;
+}
+
+.flatpickr-current-month {
+  left: -36px !important;
+}
+
+.flatpickr-weekdays {
+  height: 13px !important;
+}

@@ -2,6 +2,7 @@ import format from 'date-fns/format';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 export let selectedDate;
+let open = false;
 
 const options = {
   minuteIncrement: 1,
@@ -9,6 +10,7 @@ const options = {
   maxDate: 'today',
   onClose(selectedDates, dateStr, instance) {
     let deg = 0;
+    open = false;
     if (!selectedDates[0]) {
       arrowToggle(deg);
       return;
@@ -25,7 +27,7 @@ const options = {
 
 const input = document.querySelector('#calendar');
 const calendar = document.querySelector('.calendar_icon');
-flatpickr(input, options);
+const fp = flatpickr(input, options);
 
 function arrowToggle(deg) {
   const arrow = document.querySelector('.calendar__arrow');
@@ -41,3 +43,13 @@ function arrowToggle(deg) {
     calendarInput.classList.add('opened');
   }
 }
+
+input.addEventListener('click', () => {
+  if (open === false) {
+    open = true;
+    return;
+  } else {
+    fp.close();
+    open = false;
+  }
+});

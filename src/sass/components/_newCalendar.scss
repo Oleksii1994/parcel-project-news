@@ -61,7 +61,7 @@
   height: 31px;
   border: 1px solid var(--black-main-color);
   border-radius: 20px;
-  width: 152px;
+  width: 151px;
   font-family: $weather-font;
   font-weight: 400;
   font-size: 12px;
@@ -75,7 +75,7 @@
     color: var(--white-main-color);
   }
 
-  @media screen and (min-width: 320px) {
+  @media screen and (min-width: 1280px) {
     width: 168px;
     font-size: 14px;
   }

@@ -1,5 +1,9 @@
 import { refs } from '../js/refs/fav-refs';
-import * as storage from '../js/local-storage-logic';
+import {
+  saveToLocal,
+  loadFromLocal,
+  removeFromLocal,
+} from '../js/local-storage-logic';
 import { renderMarkupGalleryCard } from '../js/renderMarkup';
 // import { fetchSearchArticles } from '../js/API/fetchAPI';
 import { initFavoriteButton } from '../js/changeBtn';
@@ -11,7 +15,7 @@ const favBtn = initFavoriteButton(buttonElement);
 favBtn.addEventListener('click', addToFavorites);
 
 // Отримуємо список збережених новин з локального сховища браузера
-let favorites = storage.loadFromLocal(KEY_FAVORITE) || [];
+let favorites = loadFromLocal(KEY_FAVORITE) || [];
 
 // Функція для додавання новини до списку збережених новин
 function addToFavorites() {

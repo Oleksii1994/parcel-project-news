@@ -1,4 +1,7 @@
 // Budna Elvira
+import { disableBodyScroll } from 'body-scroll-lock';
+import { enableBodyScroll } from 'body-scroll-lock';
+
 (() => {
   const mobileMenu = document.querySelector('.js-menu-container');
   const openMenuBtn = document.querySelector('.js-open-menu');
@@ -10,10 +13,9 @@
     openMenuBtn.setAttribute('aria-expanded', !isMenuOpen);
     mobileMenu.classList.toggle('is-open');
 
-    const scrollLockMethod = !isMenuOpen
-      ? 'disableBodyScroll'
-      : 'enableBodyScroll';
-    bodyScrollLock[scrollLockMethod](document.body);
+    !isMenuOpen
+      ? disableBodyScroll(document.body)
+      : enableBodyScroll(document.body);
   };
 
   openMenuBtn.addEventListener('click', toggleMenu);

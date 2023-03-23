@@ -92,9 +92,9 @@ export class NewsAPIService {
 
 // tests
 
-const newsApi = new NewsAPIService();
-newsApi.query = 'covid';
-newsApi.fetchSearchArticles();
-// newsApi.fetchCategories();
-newsApi.fetchPopularArticles();
-// newsApi.fetchArticlesByCategory();
+const testNewsApi = new NewsAPIService();
+testNewsApi.query = 'covid';
+testNewsApi.fetchSearchArticles();
+// testNewsApi.fetchCategories();
+testNewsApi.fetchPopularArticles();
+// testNewsApi.fetchArticlesByCategory();

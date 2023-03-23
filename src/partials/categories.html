@@ -1,4 +1,21 @@
+<!-- "6. Зверстати блок зі списком категорій для пошуку тематичних новин по  відповідній категорії  (мобільна, планшет та десктопна версії)
+Блок містить список з категоріями новин
+Список новин, що не помістився в рядок, потрібно відобразити випадаючим списком, що відкривається по кліку на кнопку Others
+На мобільній версії всі категорії повинні відображатись у випадаючому списку, що відкривається по кліку на кнопку Categories
+Клік по обраній категорії повинен робити запит на бекенд для отримання відповідного списку новин" -->
+
 <p class="categories-test">categories-btns</p>
 
-<!-- Паршал для подключения календаря -->
-<include src="./partials/calendar.html"></include>
+<div class="categories">
+  <button
+    type="button"
+    class="categories__btn categories__other-list"
+    id="categories-other"
+  >
+    Categories
+    <svg class="categories__other-icon" width="14" height="14">
+      <use href="./images/categories/sprite.svg#arrow"></use>
+    </svg>
+  </button>
+  <div class="categories__other-box"></div>
+</div>

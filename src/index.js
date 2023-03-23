@@ -1,5 +1,7 @@
 import './js/adaptive-devices';
-// import './js/newCalendar';
+// import './js/API/fetchAPI';
+// import './js/mobile-menu';
+
 import './js/API/api-data-normalaizer';
 import './js/input-actions';
 import './js/switch-theme';

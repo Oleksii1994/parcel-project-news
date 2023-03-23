@@ -1,3 +1,76 @@
-.test{
-  color: var(--blue-main-color);
+.pagination {
+  display: flex;
+  gap: 8px;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 60px;
+    margin-bottom: 150px;
+    gap: 8px;
+    // background-color: #f4f4f4;
+    // // висоту я потім видалю
+    // height: 80px;
+  }
+  &__page-number-btn {
+    cursor: pointer;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    padding: 5px 12px;
+    gap: 10px;
+    border: 1px solid #4440f6;
+    border-radius: 2px;
+    color: #111321;
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
+      background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+      color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover,
+    &:focus {
+      background-color: #4440f6;
+      color: #f4f4f4;
+      transform: scale(1.1);
+    }
+  }
+  &__prev-btn,
+  &__next-btn {
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    padding: 5px 10px;
+    gap: 10px;
+    border: 1px solid #4440f6;
+    border-radius: 2px;
+    color: #111321;
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
+      background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+      color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover,
+    &:focus {
+      background-color: #4440f6;
+      color: #f4f4f4;
+      transform: scale(1.1);
+    }
+  }
+  &__icon-prev,
+  &__icon-next {
+    fill: #111321;
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  &__prev-btn:hover &__icon-prev,
+  &__prev-btn:focus &__icon-prev {
+    fill: #f4f4f4;
+  }
+  &__next-btn:hover &__icon-next,
+  &__next-btn:focus &__icon-next {
+    fill: #f4f4f4;
+  }
 }

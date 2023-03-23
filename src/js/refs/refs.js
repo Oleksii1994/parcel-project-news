@@ -4,4 +4,5 @@ export const refs = {
   lightThemeBox: document.querySelector('.light-theme-box'),
   darkThemeBox: document.querySelector('.dark-theme-box'),
   formSearch: document.querySelector('.form-search'),
+  galleryEl: document.querySelector('#news-gallery'),
 };

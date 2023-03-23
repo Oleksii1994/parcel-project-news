@@ -12,3 +12,4 @@ import './js/add-to-read';
 // import './js/add-to-favorite';
 import './js/pagination';
 import './js/header';
+import './js/render news gallery/render-news-gallery';

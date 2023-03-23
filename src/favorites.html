@@ -5,6 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Favorite</title>
+    <link
+      rel="icon"
+      href="./images/world-news.png"
+      type="image/png"
+      width="35"
+      height="35"
+    />
     <link rel="stylesheet" href="./sass/index.scss" />
   </head>
   <body>
@@ -33,18 +40,18 @@
             </svg>
           </button>
         </form>
-        <include src="./partials/switch-theme.html"></include> 
+        <include src="./partials/switch-theme.html"></include>
       </div>
     </header>
 
     <main>
-    <section>
-      <div class="favorite container">
-        <ul class="news-list list">
-          <h2 class="favorite-notfound hidden">
-            You haven't added anything to favorite!
-          </h2>
-          <!-- <picture>
+      <section>
+        <div class="favorite container">
+          <ul class="news-list list">
+            <h2 class="favorite-notfound hidden">
+              You haven't added anything to favorite!
+            </h2>
+            <!-- <picture>
             <source
               media="(min-width: 1280px)"
               srcset="./images/desktop/nofound-des-1x 1x, ./images/# 2x"
@@ -63,12 +70,11 @@
               class="not-found__image hidden"
             />
           </picture> -->
-        </ul>
-      </div>
-    </section>
-  </main>
-        <include src="./partials/footer.html"></include>
+          </ul>
+        </div>
+      </section>
+    </main>
+    <include src="./partials/footer.html"></include>
     <script type="module" src="./js/add-to-favorite.js"></script>
   </body>
 </html>
-

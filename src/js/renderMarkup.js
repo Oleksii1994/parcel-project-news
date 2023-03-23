@@ -6,20 +6,20 @@ function renderMarkupGalleryCard({ img, title, text, date, id, categorie }) {
       <p class="box__already">
         Already read
         <svg width="18" height="18">
-          <use src="./images/icon-card.svg#icon-like-icon"></use>
+          <use href="./images/icon-card.svg#icon-check"></use>
         </svg>
       </p>
     <button type="button" class="box__btn">
       <span class="box__text" 
         >Add to favorite
         <svg width="16" height="16" class="box__icon favorite-icon">
-          <use src="./images/icon-card.svg#icon-like-icon"></use>
+          <use href="./images/icon-card.svg#icon-like-icon"></use>
         </svg>
       </span>
       <span class="box__text"
         >Remove from favorite
         <svg width="16" height="16" class="box__icon remove-icon">
-          <use src="./images/icon-card.svg#icon-like-icon"></use>
+          <use href="./images/icon-card.svg#icon-like-icon"></use>
         </svg>
       </span>
     </button>

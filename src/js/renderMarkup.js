@@ -1,8 +1,18 @@
-function renderMarkupGalleryCard({ img, title, text, date, id, categorie }) {
-  return `<li id="${id}" class="gallery__item">
+export function renderMarkupGalleryCard(arr) {
+  return arr
+    .map(
+      ({
+        img,
+        title,
+        text,
+        date,
+        id,
+        category,
+        url,
+      }) => `<li id="${id}" class="gallery__item">
   <div class="box">
     <img src="${img}" class="box__img"/>
-      <p class="box__subtitle">${categorie}</p>
+      <p class="box__subtitle">${category}</p>
       <p class="box__already">
         Already read
         <svg width="18" height="18">
@@ -28,9 +38,11 @@ function renderMarkupGalleryCard({ img, title, text, date, id, categorie }) {
     <p class="gallery__text">${text}</p>
       <div class="thumb">
         <p class="thumb__text">${date}</p>
-        <a class="thumb__link" href="" target="_blank">Read more</a>
+        <a class="thumb__link" href="${url}" target="_blank">Read more</a>
       </div>
-</li>`;
+</li>`
+    )
+    .join('');
 }
 
 // export { renderMarkupGalleryCard }

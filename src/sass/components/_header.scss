@@ -19,24 +19,43 @@
   font-family: 'Manrope';
   font-style: normal;
   font-weight: 700;
-  font-size: 24px;
-  line-height: 33px;
+  font-size: 42px;
+  line-height: 57px;
   color: var(--black-main-color);
   .dark-theme & {
     color: var(--body-color-light-theme);
+    display: block;
+    padding-top: 55px;
+    padding-bottom: 33px;
   }
 }
-.nav {
-  display: none;
-}
+// .nav {
+//   // поки приберу
+//   // display: none;
+// }
 
 .nav__list {
+  display: flex;
+  list-style: none;
+  margin-left: 120px;
 }
 
+// .nav__item:last-child {
+//   margin-right: 0;
+// }
+
 .nav__item {
+  margin-right: 69px;
 }
 
 .nav__link {
+  font-family: $main-font;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: var(--black-main-color);
+  text-decoration: none;
 }
 
 .form-search {
@@ -60,7 +79,7 @@
     border: 1px solid var(--body-color-light-theme);
   }
   .screen-tablet &,
-  .screen-default & {
+  .screen-desktop & {
     transform: scale(1);
   }
 }
@@ -99,7 +118,8 @@
 
 .header .switch__wrapper {
   display: none;
-  .screen-tablet & {
+  .screen-tablet &,
+  screen-desktop {
     display: block;
   }
 }

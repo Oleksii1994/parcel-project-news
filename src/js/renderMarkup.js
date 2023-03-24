@@ -1,37 +1,37 @@
-export function renderMarkupGalleryCard(arr) {
-  return arr
-    .map(
-      ({
-        img,
-        title,
-        text,
-        date,
-        id,
-        category,
-        url,
-      }) => `<li id="${id}" class="gallery__item">
-  <div class="box">
-    <img src="${img}" class="box__img"/>
-      <p class="box__subtitle">${category}</p>
-      <p class="box__already">
+export const markup = {
+  createGalleryCardMarkup(arr) {
+    return arr
+      .map(
+        ({
+          img,
+          title,
+          text,
+          date,
+          id,
+          category,
+          url,
+        }) => `<li id="${id}" class="gallery__item">
+  <div class="gallery-thumb" style="background-image: url('${img}')">
+      <p class="gallery-thumb__subtitle">${category}</p>
+      <p class="gallery-thumb__already">
         Already read
         <svg width="18" height="18">
           <use href="./images/icon-card.svg#icon-check"></use>
         </svg>
       </p>
-    <button type="button" class="box__btn">
-      <span class="box__text" 
+    <button type="button" class="gallery-thumb__btn">
+      <p class="gallery-thumb__name add" 
         >Add to favorite
-        <svg width="16" height="16" class="box__icon favorite-icon">
+        <svg width="16" height="16">
           <use href="./images/icon-card.svg#icon-like-icon"></use>
         </svg>
-      </span>
-      <span class="box__text"
+      </p>
+      <p class="gallery-thumb__name remove"
         >Remove from favorite
-        <svg width="16" height="16" class="box__icon remove-icon">
+        <svg width="16" height="16">
           <use href="./images/icon-card.svg#icon-like-icon"></use>
         </svg>
-      </span>
+      </p>
     </button>
   </div>
     <h3 class="gallery__title">${title}</h3>
@@ -41,9 +41,18 @@ export function renderMarkupGalleryCard(arr) {
         <a class="thumb__link" href="${url}" target="_blank">Read more</a>
       </div>
 </li>`
-    )
-    .join('');
-}
+      )
+      .join('');
+  },
+
+  clearMarkup(ref) {
+    ref.innerHTML = '';
+  },
+
+  renderMarkup(ref, markup) {
+    ref.insertAdjacentHTML('beforeend', markup);
+  },
+};
 
 // export { renderMarkupGalleryCard }
 // function renderMarkupGalleryCard({ img, title, text, date, id, categorie }) {

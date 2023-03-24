@@ -40,6 +40,9 @@
             </svg>
           </button>
         </form>
+        <!-- Budna Elvira. Додана іконка-бургер для відкриття мобільного меню  -->
+        <include src="./partials/burger-btn.html"></include>
+        <!-- світчер теми -->
         <include src="./partials/switch-theme.html"></include>
       </div>
     </header>
@@ -47,7 +50,9 @@
     <main>
       <section>
         <div class="favorite container">
-          <ul class="news-list list">
+
+          <ul class="news-list list" id="news-list">
+
 
             <h2 class="not-found-title hidden">
               You haven't added anything to favorite!
@@ -85,12 +90,13 @@
                 class="not-found__image hidden"
               />
             </picture>
-
           </ul>
         </div>
       </section>
     </main>
     <include src="./partials/footer.html"></include>
     <script type="module" src="./js/add-to-favorite.js"></script>
+    <script type="module" src="./js/mobile-menu-favorites.js"></script>
+    <include src="./partials/mobile-menu-favorites.html"></include>
   </body>
 </html>

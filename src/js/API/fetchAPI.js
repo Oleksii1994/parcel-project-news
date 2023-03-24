@@ -5,7 +5,6 @@ class NewsAPIService {
   #BASE_URL = 'https://api.nytimes.com/svc/';
   #SEARCH_NEWS_PATH = 'search/v2/articlesearch.json?';
   #API_KEY = 'kkEdLmiWAben4vvAV9iKuhykdEAlksXW';
-  #MOST_POPULAR_NEWS_PATH = `mostpopular/v2/viewed/7.json?`;
 
   constructor() {
     this.searchQuery = '';
@@ -44,8 +43,8 @@ class NewsAPIService {
     console.log(URL);
     const response = await fetch(URL);
     this.errorHandle(response, response.statusText);
-    const { results } = await response.json();
-    return results;
+    const { results, num_results } = await response.json();
+    return { results, num_results };
   }
 
   async fetchArticlesByCategory() {
@@ -56,7 +55,6 @@ class NewsAPIService {
     const response = await fetch(URL);
     this.errorHandle(response, response.statusText);
     const { results } = await response.json();
-    console.log(selectedDate);
     return results;
   }
 

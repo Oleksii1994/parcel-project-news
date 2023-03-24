@@ -8,12 +8,14 @@ window.addEventListener('load', pageLoadHandler, { once: true });
 
 async function pageLoadHandler() {
   try {
-    const data = await newsApi.fetchPopularArticles();
-    markup.renderMarkup(
-      refs.galleryEl,
-      markup.createGalleryCardMarkup(NormalizeData.popularData(data))
+    const { results, num_results } = await newsApi.fetchPopularArticles();
+    console.log(results);
+    refs.galleryEl.insertAdjacentHTML(
+      'beforeend',
+      markup.createGalleryCardMarkup(NormalizeData.popularData(results))
     );
   } catch (error) {
+    console.log(error);
     Notify.failure(`${error}`);
   }
 }

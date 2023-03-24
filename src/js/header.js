@@ -34,6 +34,7 @@ async function onFormSearchSubmit(event) {
       markup.createGalleryCardMarkup(NormalizeData.searchData(docs))
     );
   } catch (error) {
+    console.log(error);
     Notify.failure(`${error}`);
   }
 }

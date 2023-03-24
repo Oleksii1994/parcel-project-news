@@ -266,6 +266,10 @@ function onWindowsResize(e) {
   }
   if (window.innerWidth > 1279) {
     // console.log(categoriesBtnListRef.innerHTML);
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     if (categoriesBtnListRef.children.length === visibleOtherBtn.desktop) {
       return;
     }
@@ -303,7 +307,10 @@ function onOtherBtnClick(e) {
 
 function onLoadPage(categories) {
   if (window.innerWidth < 768) {
+<<<<<<< Updated upstream
     //  console.log(window.matchMedia('(max-width: 767px)'));
+=======
+>>>>>>> Stashed changes
     categoriesOtherTextRef.textContent = 'Categories';
     const markup = categories
       .map(
@@ -333,6 +340,10 @@ function onLoadPage(categories) {
     otherBoxRef.innerHTML = markupOther.join('');
   }
   if (window.innerWidth > 1279) {
+<<<<<<< Updated upstream
+=======
+    categoriesOtherTextRef.textContent = 'Other';
+>>>>>>> Stashed changes
     // console.log(categoriesBtnListRef.innerHTML);
     if (categoriesBtnListRef.children.length === visibleOtherBtn.desktop) {
       return;

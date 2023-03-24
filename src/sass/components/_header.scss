@@ -1,4 +1,8 @@
 .header {
+  .screen-tablet & {
+    padding: 32px 0;
+  }
+
   padding: 24px 0;
 }
 
@@ -6,9 +10,12 @@
   width: 320px;
   padding: 0 16px;
   margin: 0 auto;
+  .screen-tablet & {
+    width: 768px;
+  }
 }
 
-.header__container {
+.header__container.container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,7 +23,7 @@
   position: relative;
 }
 
-.header__link {
+.header__logo {
   text-decoration: none;
   font-family: 'Manrope';
   font-style: normal;
@@ -30,6 +37,9 @@
     padding-top: 55px;
     padding-bottom: 33px;
   }
+  .screen-tablet & {
+    margin-right: 48px;
+  }
 }
 .screen-mobile .nav {
   display: none;
@@ -37,8 +47,9 @@
 
 .nav__list {
   display: flex;
-  margin-left: 102px;
-  margin-right: 147px;
+  // margin-left: 102px;
+  margin-right: 32px;
+  gap: 44px;
 }
 
 // .nav__item:last-child {
@@ -47,7 +58,7 @@
 
 .nav__item {
   list-style: none;
-  margin-right: 69px;
+  // margin-right: 69px;
 }
 
 .nav__link {
@@ -82,6 +93,9 @@
   .screen-tablet &,
   .screen-desktop & {
     transform: scale(1);
+  }
+  .screen-tablet & {
+    width: 213px;
   }
 }
 .form-search__input::placeholder {
@@ -121,7 +135,7 @@
   display: none;
   .screen-tablet &,
   screen-desktop {
-    display: block;
+    display: flex;
   }
 }
 

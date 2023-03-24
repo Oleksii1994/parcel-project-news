@@ -17,8 +17,8 @@
 }
 
 /* Hide default HTML checkbox */
-.switch__input {
-}
+// .switch__input {
+// }
 
 .switch__icon {
   transition: fill 320ms linear;
@@ -41,17 +41,17 @@
 
 .light-theme .light-theme-box,
 .light-theme .dark-theme-box {
-  color: #5f6775;
+  color: var(--dark-grey-text-color);
 }
 
 .dark-theme .dark-theme-box,
 .dark-theme .light-theme-box {
-  color: #f4f4f4;
+  color: var(--body-color-light-theme);
 }
 
 .dark-theme-box.active,
 .light-theme-box.active {
-  color: #4440f7;
+  color: var(--blue-main-color);
 }
 
 .light-theme-box,
@@ -67,7 +67,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ffffff;
+  background-color: var(--white-main-color);
 
   transition: 0.4s;
 }
@@ -91,12 +91,12 @@
 }
 
 .switch__input:checked + .slider {
-  background-color: #4440f7;
+  background-color: var(--blue-main-color);
 }
 
 .switch__input:checked + .slider::before {
   transform: translateX(22px);
-  background: #ffffff;
+  background: var(--white-main-color);
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -116,5 +116,5 @@ body.dark-theme {
 }
 
 body.light-theme {
-  background-color: #f4f4f4;
+  background-color: var(--body-color-light-theme);
 }

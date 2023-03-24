@@ -1,17 +1,21 @@
-import { NewsAPIService } from '../API/fetchAPI';
+import { newsApi } from '../API/fetchAPI';
 import { NormalizeData } from '../API/api-data-normalaizer';
-import { renderMarkupGalleryCard } from '../renderMarkup';
 import { refs } from '../refs/refs';
+import { markup } from '../renderMarkup';
+import { Notify } from 'notiflix';
 
-const newsApi = new NewsAPIService();
-
-window.addEventListener('load', pageLoadHandler);
+window.addEventListener('load', pageLoadHandler, { once: true });
 
 async function pageLoadHandler() {
   try {
-    const data = await newsApi.fetchPopularArticles();
-    const markUp = renderMarkupGalleryCard(NormalizeData.popularData(data));
-    console.log(NormalizeData.popularData(data));
-    refs.galleryEl.innerHTML = markUp;
-  } catch (error) {}
+    const { results, num_results } = await newsApi.fetchPopularArticles();
+    console.log(results);
+    refs.galleryEl.insertAdjacentHTML(
+      'beforeend',
+      markup.createGalleryCardMarkup(NormalizeData.popularData(results))
+    );
+  } catch (error) {
+    console.log(error);
+    Notify.failure(`${error}`);
+  }
 }

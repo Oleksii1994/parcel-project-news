@@ -1,15 +1,16 @@
-export function renderMarkupGalleryCard(arr) {
-  return arr
-    .map(
-      ({
-        img,
-        title,
-        text,
-        date,
-        id,
-        category,
-        url,
-      }) => `<li id="${id}" class="gallery__item">
+export const markup = {
+  createGalleryCardMarkup(arr) {
+    return arr
+      .map(
+        ({
+          img,
+          title,
+          text,
+          date,
+          id,
+          category,
+          url,
+        }) => `<li id="${id}" class="gallery__item">
   <div class="gallery-thumb" style="background-image: url('${img}')">
       <p class="gallery-thumb__subtitle">${category}</p>
       <p class="gallery-thumb__already">
@@ -40,9 +41,18 @@ export function renderMarkupGalleryCard(arr) {
         <a class="thumb__link" href="${url}" target="_blank">Read more</a>
       </div>
 </li>`
-    )
-    .join('');
-}
+      )
+      .join('');
+  },
+
+  clearMarkup(ref) {
+    ref.innerHTML = '';
+  },
+
+  renderMarkup(ref, markup) {
+    ref.insertAdjacentHTML('beforeend', markup);
+  },
+};
 
 // export { renderMarkupGalleryCard }
 // function renderMarkupGalleryCard({ img, title, text, date, id, categorie }) {

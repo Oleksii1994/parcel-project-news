@@ -1,24 +1,37 @@
 .favorite {
-    @media screen and (max-width: $tablet) {
-      padding-top: 40px;
-      padding-bottom: 60px;
-    }
-  
-    @media screen and (min-width: $tablet) and (max-width: $desktop) {
-      padding-top: 48px;
-      padding-bottom: 100px;
-    }
-  
-    @media screen and (min-width: $desktop) {
-      padding-top: 60px;
-      padding-bottom: 300px;
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
+
+.screen-tablet {
+  .favorite {
+    padding-top: 48px;
+    padding-bottom: 100px;
   }
+}
+
+.screen-desktop {
+  .favorite {
+    padding-top: 60px;
+    padding-bottom: 300px;
   }
+}
+
+.not-found{
+  display: block;
+  margin-bottom: 40px;
+  // 36px 59px 36px;
+}
+
+.remove{
+opacity: 1;
+}
+
 //   .current::after {
 //     content: "";
-  
+
 //     position: absolute;
-  
+
 //     display: block;
 //     width: 69px;
 //     height: 8px;
@@ -31,3 +44,20 @@
 //       padding-bottom: 5px;
 //   }
 // };
+
+// .favorite {
+//   @media screen and (max-width: $tablet) {
+//     padding-top: 40px;
+//     padding-bottom: 60px;
+//   }
+
+//   @media screen and (min-width: $tablet) and (max-width: $desktop) {
+//     padding-top: 48px;
+//     padding-bottom: 100px;
+//   }
+
+//   @media screen and (min-width: $desktop) {
+//     padding-top: 60px;
+//     padding-bottom: 300px;
+// }
+// }

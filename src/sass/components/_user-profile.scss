@@ -1,0 +1,149 @@
+.profile-container {
+  width: 100%;
+  padding: 40px 10px;
+
+  @include for-size(tablet) {
+    padding: 40px 20px;
+  }
+  @include for-size(desktop) {
+    width: 1280px;
+  }
+}
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  @include for-size(tablet) {
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 30px;
+  }
+  @include for-size(desktop) {
+    gap: 40px;
+  }
+}
+.profile-img {
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  @include for-size(tablet) {
+    width: 150px;
+  }
+  @include for-size(desktop) {
+    width: 190px;
+  }
+
+  &__card {
+    box-shadow: 3px 7px 10px var(--body-color-dark-theme);
+    border-radius: 50%;
+  }
+}
+.profile-user {
+  height: 330px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+
+  background-color: var(--blured-card-backdrop-color);
+  @include for-size(tablet) {
+    width: 400px;
+    height: 390px;
+    padding: 20px 20px;
+  }
+  @include for-size(desktop) {
+    width: 480px;
+    height: 515px;
+  }
+
+  &__box {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    @include for-size(tablet) {
+      gap: 20px;
+    }
+  }
+
+  &__desc {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: var(--body-color-dark-theme);
+    font-family: font(_poppins);
+    @include text(600, 12, 16);
+
+    @include for-size(tablet) {
+      @include text(600, 16, 20);
+      gap: 20px;
+    }
+    @include for-size(desktop) {
+      @include text(600, 22, 32);
+    }
+  }
+
+  &__info {
+    color: var(--main-black-text-color);
+    font-family: font(_manrope);
+    @include text(500, 12, 20);
+
+    @include for-size(tablet) {
+      @include text(500, 16, 22);
+    }
+    @include for-size(desktop) {
+      @include text(500, 20, 26);
+    }
+  }
+  &__password {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+    margin-top: 30px;
+  }
+  &__input {
+    display: block;
+    padding: 4px;
+    width: 140px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    outline: none;
+
+    @include for-size(tablet) {
+      width: 165px;
+    }
+    @include for-size(desktop) {
+      width: 235px;
+    }
+  }
+}
+.profile-button {
+  padding: 5px 20px;
+  border-radius: 20px;
+  border: none;
+
+  color: var(--white-main-color);
+  background-color: var(--transparent-blue-color);
+  font-family: font(_poppins);
+  @include text(400, 11, 15);
+
+  @include for-size(tablet) {
+    @include text(400, 14, 18);
+  }
+  @include for-size(desktop) {
+    @include text(400, 22, 32);
+  }
+  &:hover,
+  &:focus {
+    background-color: var(--blue-secondary-color);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+      0px 2px 1px rgba(0, 0, 0, 0.2);
+  }
+}

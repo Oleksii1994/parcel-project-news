@@ -29,3 +29,21 @@ import { enableBodyScroll } from 'body-scroll-lock';
     bodyScrollLock.enableBodyScroll(document.body);
   });
 })();
+
+// import { THEMES } from './refs/const.js';
+
+// const mobileMenu = document.querySelector('.mobile-menu');
+
+// function changeTheme() {
+//   if (mobileMenu.classList.contains(THEMES.LIGHT_THEME)) {
+//     mobileMenu.classList.replace(THEMES.LIGHT_THEME, THEMES.DARK_THEME);
+//     refs.darkThemeBox.classList.add('active');
+//     refs.lightThemeBox.classList.remove('active');
+//     saveTheme(THEMES.DARK_THEME);
+//   } else {
+//     mobileMenu.classList.replace(THEMES.DARK_THEME, THEMES.LIGHT_THEME);
+//     refs.darkThemeBox.classList.remove('active');
+//     refs.lightThemeBox.classList.add('active');
+//     saveTheme(THEMES.LIGHT_THEME);
+//   }
+// }

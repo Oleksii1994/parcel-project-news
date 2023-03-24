@@ -8,10 +8,10 @@ window.addEventListener('load', pageLoadHandler, { once: true });
 
 async function pageLoadHandler() {
   try {
-    const data = await newsApi.fetchPopularArticles();
+    const { results, num_results } = await newsApi.fetchPopularArticles();
     markup.renderMarkup(
       refs.galleryEl,
-      markup.createGalleryCardMarkup(NormalizeData.popularData(data))
+      markup.createGalleryCardMarkup(NormalizeData.popularData(results))
     );
   } catch (error) {
     Notify.failure(`${error}`);

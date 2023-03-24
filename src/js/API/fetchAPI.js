@@ -44,8 +44,8 @@ class NewsAPIService {
     console.log(URL);
     const response = await fetch(URL);
     this.errorHandle(response, response.statusText);
-    const { results } = await response.json();
-    return results;
+    const { results, num_results } = await response.json();
+    return { results, num_results };
   }
 
   async fetchArticlesByCategory() {

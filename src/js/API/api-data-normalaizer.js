@@ -63,6 +63,29 @@ export class NormalizeData {
         };
       }
     );
-    s;
+  }
+
+  static categoryData(arr) {
+    return arr.map(
+      ({ abstract, title, published_date, uri, multimedia, section, url }) => {
+        let imgUrl = '';
+        if (multimedia.length !== 0) {
+          imgUrl = multimedia[2].url;
+        } else {
+          imgUrl =
+            'https://media.tenor.com/_3uPSgb8o5gAAAAC/ukraine-ukraine-flag.gif';
+        }
+
+        return {
+          title: title,
+          text: abstract,
+          date: this.formatDate(published_date),
+          img: imgUrl,
+          category: section,
+          id: uri,
+          url: url,
+        };
+      }
+    );
   }
 }

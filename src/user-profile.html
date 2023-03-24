@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page title</title>
+    <link
+      rel="icon"
+      href="./images/world-news.png"
+      type="image/png"
+      width="35"
+      height="35"
+    />
+    <link rel="stylesheet" href="./sass/index.scss" />
+    <script type="module" src="./index.js"></script>
+  </head>
+  <body>
+    <!-- <include src="./partials/header.html"></include> -->
+    <main>
+      <div class="profile-container">
+        <div class="profile">
+          <div class="profile-img">
+            <img
+              src="./images/user-icon.png"
+              alt="#"
+              class="profile-img__card"
+            />
+            <button type="button" class="profile-button">Edit</button>
+          </div>
+          <div class="profile-user">
+            <div class="profile-user__box">
+              <p class="user-name profile-user__desc">Name:</p>
+              <p class="user-profile-name profile-user__info">Qweqweqwe</p>
+            </div>
+            <div class="profile-user__box">
+              <p class="user-email profile-user__desc">Email:</p>
+              <p class="user-profile-email profile-user__info">
+                qweqwe@gmail.com
+              </p>
+            </div>
+            <div class="favorite-news-box">
+              <p class="favorite-news profile-user__desc">
+                Favorite news:
+                <span class="favorite-news-render profile-user__info">15</span>
+              </p>
+            </div>
+            <div class="read-news-box">
+              <p class="favorite-news profile-user__desc">
+                Read news:
+                <span class="favorite-news-render profile-user__info">20</span>
+              </p>
+            </div>
+            <form class="change-password profile-user__password">
+              <p class="change-password--prg profile-user__desc">
+                Old password:
+              </p>
+              <input
+                type="text"
+                id="changePassword"
+                class="change-password-input profile-user__input"
+              />
+              <button type="submit" class="profile-button">
+                Change password
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <include src="./partials/footer.html"></include>
+  </body>
+</html>

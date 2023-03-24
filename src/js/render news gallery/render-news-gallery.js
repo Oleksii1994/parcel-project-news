@@ -9,7 +9,6 @@ window.addEventListener('load', pageLoadHandler, { once: true });
 async function pageLoadHandler() {
   try {
     const { results, num_results } = await newsApi.fetchPopularArticles();
-    console.log(results);
     refs.galleryEl.insertAdjacentHTML(
       'beforeend',
       markup.createGalleryCardMarkup(NormalizeData.popularData(results))

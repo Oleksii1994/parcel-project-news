@@ -28,7 +28,6 @@ async function onFormSearchSubmit(event) {
     return Notify.failure('Type search query, please');
   try {
     const { docs, meta } = await newsApi.fetchSearchArticles();
-    console.log(meta);
     markup.renderMarkup(
       refs.galleryEl,
       markup.createGalleryCardMarkup(NormalizeData.searchData(docs))

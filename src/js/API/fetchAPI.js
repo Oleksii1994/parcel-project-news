@@ -40,7 +40,6 @@ class NewsAPIService {
     const URL = `${this.#BASE_URL}mostpopular/v2/viewed/${
       this.period
     }.json?api-key=${this.#API_KEY}`;
-    console.log(URL);
     const response = await fetch(URL);
     this.errorHandle(response, response.statusText);
     const { results, num_results } = await response.json();

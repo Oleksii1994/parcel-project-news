@@ -1,4 +1,4 @@
-class FavoriteButton {
+export class FavoriteButton {
   constructor(buttonElement) {
     this.button = buttonElement;
     this.button.classList.add('favorite-btn');
@@ -25,9 +25,9 @@ class FavoriteButton {
   }
 }
 
-export function initFavoriteButton(buttonElement) {
-  return new FavoriteButton(buttonElement);
-}
+// export function initFavoriteButton(buttonElement) {
+//   return new FavoriteButton(buttonElement);
+// }
 
 
 // import { initFavoriteButton } from "../js/changeBtn";

@@ -7,6 +7,23 @@ export class NormalizeData {
     return `${day}/${month}/${year}`;
   }
 
+  static convertDates(input) {
+    if (input.length === 10) {
+      let dateArray = input.split('-');
+      let date = dateArray[0] + dateArray[1] + dateArray[2];
+      return [date, ''];
+    } else if (
+      input.match(/^\d{4}-\d{2}-\d{2}\b to \d{4}-\d{2}-\d{2}\b/) !== null
+    ) {
+      let dates = input.split(' to ');
+      let date1Array = dates[0].split('-');
+      let date2Array = dates[1].split('-');
+      let date1 = date1Array[0] + date1Array[1] + date1Array[2];
+      let date2 = date2Array[0] + date2Array[1] + date2Array[2];
+      return [date1, date2];
+    }
+  }
+
   static searchData(arr) {
     return arr.map(
       ({

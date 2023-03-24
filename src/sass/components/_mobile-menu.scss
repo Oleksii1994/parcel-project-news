@@ -8,7 +8,7 @@
   height: 100%;
   transform: translateY(-100%);
 
-  background-color: inherit;
+  background-color: currentColor;
 
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -38,7 +38,7 @@
     margin: 0;
 
     border: none;
-    color: inherit;
+    color: currentColor;
     background-color: transparent;
 
     transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -120,11 +120,11 @@
     line-height: calc(22 / 16);
     border: none;
 
-    // color: var(--main-black-text-color);
+    color: currentColor;
 
     &--accent {
       @extend %button;
-      background-color: inherit;
+      background-color: currentColor;
     }
   }
 

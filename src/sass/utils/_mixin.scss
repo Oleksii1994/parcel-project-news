@@ -1,10 +1,9 @@
 // міксин для стилізації тексту
 // для додавання в стилі: @include text(700, 32px, 44px, -0.01em);
-@mixin text($font-weight, $font-size, $line-height, $letter-spacing) {
+@mixin text($font-weight, $font-size, $line-height) {
   font-weight: $font-weight;
   font-size: $font-size;
   line-height: calc($line-height/$font-size);
-  letter-spacing: $letter-spacing;
 }
 //  міксини для медіа запитів
 //  для використання в коді

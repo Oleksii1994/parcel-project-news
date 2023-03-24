@@ -23,7 +23,7 @@
     }
   }
 }
-.thumb {
+.footer-thumb {
   display: grid;
   position: relative;
   top: 35%;
@@ -33,10 +33,10 @@
   &__text {
     // color: var(--blured-card-backdrop-color);
     font-family: font(_poppins);
-    @include text(600, 10, 16, -0.01em);
+    @include text(600, 10, 16);
 
     @include for-size(tablet) {
-      @include text(600, 16, 22, -0.01em);
+      @include text(600, 16, 22);
     }
   }
 
@@ -44,11 +44,11 @@
     cursor: url(../images/touch.svg), pointer;
     text-decoration: none;
     color: var(--blue-main-color);
-    @include text(600, 16, 26, -0.01em);
+    @include text(600, 16, 26);
     text-shadow: 3px 6px 3px var(--body-color-dark-theme);
 
     @include for-size(tablet) {
-      @include text(600, 22, 32, -0.01em);
+      @include text(600, 22, 32);
     }
   }
 }

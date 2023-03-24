@@ -5,40 +5,92 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Favorite</title>
+    <link
+      rel="icon"
+      href="./images/world-news.png"
+      type="image/png"
+      width="35"
+      height="35"
+    />
     <link rel="stylesheet" href="./sass/index.scss" />
   </head>
   <body>
-    <section class="container">
-      <div class="favorite">
-        <ul class="news-list list">
-          <h2 class="favorite-notfound hidden">
-            You haven't added anything to favorite!
-          </h2>
-          <!-- <picture>
-            <source
-              media="(min-width: 1280px)"
-              srcset="./images/# 1x, ./images/# 2x"
-            />
-            <source
-              media="(min-width: 768px)"
-              srcset="./images/# 1x, ./images/# 2x"
-            />
-            <source
-              media="(max-width: 767px)"
-              srcset="./images/# 1x, ./images/# 2x"
-            />
-            <img
-              src="./images/#"
-              alt="Not Found Picture"
-              class="not-found__image hidden"
-            />
-          </picture> -->
-        </ul>
+    <header class="header">
+      <div class="container header__container">
+        <a class="header__link" href="./index.html">News</a>
+        <nav class="nav">
+          <ul class="nav__list">
+            <li class="nav__item"><a class="nav__link" href="#">Home</a></li>
+            <li class="nav__item">
+              <a class="nav__link current" href="#">Favorite</a>
+            </li>
+            <li class="nav__item"><a class="nav__link" href="#">Read</a></li>
+          </ul>
+        </nav>
+        <form class="form-search">
+          <input
+            class="form-search__input"
+            type="text"
+            placeholder="Search"
+            name="searchValue"
+          />
+          <button class="form-search__button" type="submit" name="button">
+            <svg class="form-search__icon" width="20" height="20">
+              <use href="./images/header/header.svg#icon-search"></use>
+            </svg>
+          </button>
+        </form>
+        <include src="./partials/switch-theme.html"></include>
       </div>
-    </section>
-    <include src="./partials/header.html"></include>
+    </header>
+
+    <main>
+      <section>
+        <div class="favorite container">
+          <ul class="news-list list">
+
+            <h2 class="not-found-title hidden">
+              You haven't added anything to favorite!
+            </h2>
+
+            <picture>
+              <source
+                srcset="
+                  ./images/desktop/nofound-des-1x.jpeg 1x,
+                  ./images/desktop/nofound-des-2x.jpeg 2x
+                "
+                type="image/jpeg"
+                media="(min-width: 1280px)"
+              />
+              <source
+                srcset="
+                  ./images/tablet/nofound-tab-1x.jpeg 1x,
+                  ./images/tablet/nofound-tab-2x.jpeg 2x
+                "
+                type="image/jpeg"
+                media="(min-width: 768px)"
+              />
+              <source
+                srcset="
+                  ./images/mobile/nofound-mob-1x.jpeg 1x,
+                  ./images/mobile/nofound-mob-2x.jpeg 2x
+                "
+                type="image/jpeg"
+                media="(max-width: 767px)"
+              />
+              <img
+                src="./images/mobile/nofound-mob-1x.jpeg"
+                type="image/jpeg"
+                alt="Not Found Picture"
+                class="not-found__image hidden"
+              />
+            </picture>
+
+          </ul>
+        </div>
+      </section>
+    </main>
     <include src="./partials/footer.html"></include>
-    <script type="module" src="./index.js"></script>
+    <script type="module" src="./js/add-to-favorite.js"></script>
   </body>
 </html>
-

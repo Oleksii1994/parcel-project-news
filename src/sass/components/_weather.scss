@@ -1,5 +1,5 @@
 .weather {
-  background-color: #4440f6;
+  background-color: var(--blue-main-color);
   width: 288px;
   height: 469px;
   padding: 35px 37px 35px 37px;
@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #fff;
+  color: var(--white-main-color);
 
   @media screen and (min-width: 768px) {
     width: 353px;
@@ -29,6 +29,7 @@
 
 .weather__main {
   display: flex;
+  align-items: center;
 }
 
 .main-temp {
@@ -45,7 +46,7 @@
 }
 
 .wheather__icon-position {
-  fill: #fff;
+  fill: var(--white-main-color);
   width: 12px;
   height: 16px;
 
@@ -58,11 +59,11 @@
 .weather-line {
   width: 1px;
   height: 63px;
-  background-color: #fff;
+  background-color: var(--white-main-color);
   margin-left: 8px;
 
   @media screen and (min-width: 768px) {
-    height: 63px;
+    height: 81px;
   }
 }
 
@@ -81,7 +82,7 @@
 
 .weather__main-position--name-icon {
   display: flex;
-  background-color: rgba(254, 254, 255, 0.3);
+  background-color: var(--transparent-backdrop-location-weather-card);
   width: 121px;
   height: 34px;
   border-radius: 10px;

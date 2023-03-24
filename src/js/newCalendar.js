@@ -36,7 +36,7 @@ const fp = flatpickr(input, options);
 
 function arrowToggle(deg) {
   const arrow = document.querySelector('.calendar__arrow');
-  arrow.style.transform = `rotate(${deg}deg)`;
+  arrow.style.transform = rotate(${deg}deg);
 
   const calendarInput = document.querySelector('.calendar__input');
   if (calendar.classList.contains('opened')) {

@@ -1,9 +1,9 @@
 import { NormalizeData } from './api-data-normalaizer';
+import { selectedDate } from '../newCalendar';
 
 export class NewsAPIService {
   #BASE_URL = 'https://api.nytimes.com/svc/';
   #SEARCH_NEWS_PATH = 'search/v2/articlesearch.json?';
-  #CATEGORIES_PATH = 'news/v3/content/section-list.json?';
   #API_KEY = 'kkEdLmiWAben4vvAV9iKuhykdEAlksXW';
   #MOST_POPULAR_NEWS_PATH = `mostpopular/v2/viewed/7.json?`;
 
@@ -12,7 +12,8 @@ export class NewsAPIService {
     this.filterQuery = '';
     this.category = 'all';
     this.currentPage = 1;
-    this.selectedData = '';
+    this.selectedDate = '';
+    this.period = '7';
   }
 
   async fetchSearchArticles() {
@@ -30,26 +31,13 @@ export class NewsAPIService {
     const {
       response: { docs, meta },
     } = await response.json();
-    // тут виводжу в консоль нормалізовані дані
     return { docs, meta };
   }
 
-  //не знаю чи потрібно
-
-  // async fetchCategories() {
-  //   const URL = `${this.#BASE_URL}${this.#CATEGORIES_PATH}api-key=${
-  //     this.#API_KEY
-  //   }`;
-  //   const response = await fetch(URL);
-  //   this.errorHandle(response, response.statusText);
-  //   const { results } = await response.json();
-  //   return results;
-  // }
-
   async fetchPopularArticles() {
-    const URL = `${this.#BASE_URL}${this.#MOST_POPULAR_NEWS_PATH}api-key=${
-      this.#API_KEY
-    }`;
+    const URL = `${this.#BASE_URL}mostpopular/v2/viewed/${
+      this.period
+    }.json?api-key=${this.#API_KEY}`;
     const response = await fetch(URL);
     this.errorHandle(response, response.statusText);
     const { results } = await response.json();
@@ -64,6 +52,7 @@ export class NewsAPIService {
     const response = await fetch(URL);
     this.errorHandle(response, response.statusText);
     const { results } = await response.json();
+    console.log(selectedDate);
     return results;
   }
 
@@ -91,10 +80,10 @@ export class NewsAPIService {
 }
 
 // tests
-
+console.log(selectedDate);
 const testNewsApi = new NewsAPIService();
 testNewsApi.query = 'covid';
-testNewsApi.fetchSearchArticles();
+// testNewsApi.fetchSearchArticles();
 // testNewsApi.fetchCategories();
-testNewsApi.fetchPopularArticles();
-// testNewsApi.fetchArticlesByCategory();
+// testNewsApi.fetchPopularArticles();
+testNewsApi.fetchArticlesByCategory();

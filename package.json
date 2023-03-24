@@ -22,6 +22,7 @@
     "body-scroll-lock": "^4.0.0-beta.0",
     "calendar-dates": "^2.7.2",
     "date-fns": "^2.29.3",
+    "debounce": "^1.2.1",
     "firebase": "^9.18.0",
     "flatpickr": "^4.6.13",
     "modern-normalize": "^1.1.0",

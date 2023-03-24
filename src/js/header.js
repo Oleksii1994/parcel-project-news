@@ -29,7 +29,6 @@ async function onFormSearchSubmit(event) {
 
   try {
     let { docs } = await newsApi.fetchSearchArticles();
-    console.log(NormalizeData.searchData(docs));
     markup.renderMarkup(
       refs.galleryEl,
       markup.createGalleryCardMarkup(NormalizeData.searchData(docs))
@@ -65,6 +64,11 @@ function checkDate() {
   if (!selectedDate) {
     return;
   } else {
-    newsApi.date = selectedDate;
+    if (selectedDate[1] === '') {
+      newsApi.startDate = selectedDate[0];
+    } else {
+      newsApi.startDate = selectedDate[0];
+      newsApi.finishDate = selectedDate[1];
+    }
   }
 }

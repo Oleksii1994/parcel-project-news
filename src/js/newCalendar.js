@@ -1,10 +1,12 @@
 import format from 'date-fns/format';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
+import { NormalizeData } from './API/api-data-normalaizer';
+
 export let selectedDate = '';
 let open = false;
 let inputOpen = false;
-const input = document.querySelector('#calendar');
+export const input = document.querySelector('#calendar');
 const calendar = document.querySelector('.calendar__icon');
 
 const options = {
@@ -22,8 +24,7 @@ const options = {
     // selectedDate = format(new Date(selectedDates[0]), 'yyyyMMdd');
     // console.log(selectedDate);
     arrowToggle(deg);
-    selectedDate = input.value;
-    console.log(input.value);
+    selectedDate = NormalizeData.convertDates(input.value);
     // console.log(selectedDate);
   },
   onOpen() {
@@ -51,21 +52,11 @@ function arrowToggle(deg) {
 input.addEventListener('click', () => {
   if (open === false) {
     open = true;
-    console.log(open);
+    // console.log(open);
     return;
   } else {
     fp.close();
     open = false;
-    console.log(open);
-  }
-});
-
-input.addEventListener('change', e => {
-  if (inputOpen === false) {
-    inputOpen = true;
-    return;
-  } else {
-    console.log(e);
-    inputOpen = false;
+    // console.log(open);
   }
 });

@@ -26,7 +26,6 @@ class NewsAPIService {
     const URL = `${this.#BASE_URL}${
       this.#SEARCH_NEWS_PATH
     }${new URLSearchParams(this.#searchParams)}`;
-    console.log(URL);
     const response = await fetch(URL);
     this.errorHandle(response);
     this.incrementPage();
@@ -78,6 +77,7 @@ class NewsAPIService {
         q: this.searchQuery,
         page: this.currentPage,
         begin_date: this.beginDate,
+        end_date: this.endDate,
       });
     } else {
       Object.assign(this.#searchParams, {
@@ -103,12 +103,20 @@ class NewsAPIService {
     this.currentPage = newPage;
   }
 
-  get date() {
-    return this.beginDate, this.endDate;
+  get startDate() {
+    return this.beginDate;
   }
 
-  set date(newDate) {
+  set startDate(newDate) {
     this.beginDate = newDate;
+  }
+
+  get finishDate() {
+    return this.endDate;
+  }
+
+  set finishDate(newDate) {
+    this.endDate = newDate;
   }
 
   get newsDataArr() {

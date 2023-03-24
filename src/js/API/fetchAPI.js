@@ -1,45 +1,46 @@
 import { NormalizeData } from './api-data-normalaizer';
-import { selectedDate } from '../newCalendar';
 
 class NewsAPIService {
   #BASE_URL = 'https://api.nytimes.com/svc/';
   #SEARCH_NEWS_PATH = 'search/v2/articlesearch.json?';
   #API_KEY = 'kkEdLmiWAben4vvAV9iKuhykdEAlksXW';
+  #searchParams = {
+    q: this.searchQuery,
+    'api-key': this.#API_KEY,
+    page: this.currentPage,
+  };
+  #newsDataArr = [];
 
   constructor() {
     this.searchQuery = '';
-    this.filterQuery = '';
     this.category = 'all';
-    this.currentPage = 1;
-    this.selectedDate = '';
-    this.period = '7';
-    this.date = selectedDate;
+    this.currentPage = 0;
+    this.beginDate = '';
+    this.endDate = '';
+    this.updateSearchParams = true;
   }
 
   async fetchSearchArticles() {
-    const searchParams = new URLSearchParams({
-      q: this.searchQuery,
-      'api-key': this.#API_KEY,
-      page: this.currentPage,
-      // begin_date: this.date,
-    });
+    this.updateParams();
 
     const URL = `${this.#BASE_URL}${
       this.#SEARCH_NEWS_PATH
-    }${new URLSearchParams(searchParams)}`;
+    }${new URLSearchParams(this.#searchParams)}`;
+    console.log(URL);
     const response = await fetch(URL);
     this.errorHandle(response);
     this.incrementPage();
     const {
       response: { docs, meta },
     } = await response.json();
+    this.#newsDataArr = NormalizeData.searchData(docs);
     return { docs, meta };
   }
 
   async fetchPopularArticles() {
-    const URL = `${this.#BASE_URL}mostpopular/v2/viewed/${
-      this.period
-    }.json?api-key=${this.#API_KEY}`;
+    const URL = `${this.#BASE_URL}mostpopular/v2/viewed/30.json?api-key=${
+      this.#API_KEY
+    }`;
     const response = await fetch(URL);
     this.errorHandle(response, response.statusText);
     const { results, num_results } = await response.json();
@@ -71,6 +72,21 @@ class NewsAPIService {
     this.currentPage = 1;
   }
 
+  updateParams() {
+    if (this.beginDate !== '') {
+      Object.assign(this.#searchParams, {
+        q: this.searchQuery,
+        page: this.currentPage,
+        begin_date: this.beginDate,
+      });
+    } else {
+      Object.assign(this.#searchParams, {
+        q: this.searchQuery,
+        page: this.currentPage,
+      });
+    }
+  }
+
   set query(newQuery) {
     this.searchQuery = newQuery;
   }
@@ -86,13 +102,42 @@ class NewsAPIService {
   set page(newPage) {
     this.currentPage = newPage;
   }
+
+  get date() {
+    return this.beginDate, this.endDate;
+  }
+
+  set date(newDate) {
+    this.beginDate = newDate;
+  }
+
+  get newsDataArr() {
+    return this.#newsDataArr;
+  }
+
+  set newsDataArr(arr) {
+    this.#newsDataArr = arr;
+  }
 }
+
+export const newsApi = new NewsAPIService();
 
 // tests
 // console.log(selectedDate);
-export const newsApi = new NewsAPIService();
 // newsApi.query = 'covid';
 // newsApi.fetchSearchArticles();
 // newsApi.fetchCategories();
 // newsApi.fetchPopularArticles();
 // newsApi.fetchArticlesByCategory();
+
+// get interval() {
+//   return this.period;
+// }
+
+// set interval(date) {
+//   const currentDate = new Date();
+//   const formattedDate = `${currentDate.getFullYear()}${String(
+//     currentDate.getMonth() + 1
+//   ).padStart(2, '0')}${String(currentDate.getDay() + 1).padStart(2, '0')}`;
+//   this.period = formattedDate - date;
+// }

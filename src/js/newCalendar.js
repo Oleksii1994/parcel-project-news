@@ -1,7 +1,7 @@
 import format from 'date-fns/format';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
-export let selectedDate;
+export let selectedDate = '';
 let open = false;
 
 const options = {
@@ -16,7 +16,6 @@ const options = {
       return;
     }
     selectedDate = format(new Date(selectedDates[0]), 'yyyyMMdd');
-    console.log(selectedDate);
     arrowToggle(deg);
   },
   onOpen() {

@@ -3,6 +3,7 @@ import { newsApi } from './API/fetchAPI';
 import { Notify } from 'notiflix';
 import { markup } from './renderMarkup';
 import { NormalizeData } from './API/api-data-normalaizer';
+import { selectedDate } from './newCalendar';
 
 const notifyOptions = {
   width: '450px',
@@ -24,10 +25,11 @@ async function onFormSearchSubmit(event) {
   markup.clearMarkup(refs.galleryEl);
   newsApi.resetPage();
   newsApi.query = event.target.elements.searchQuery.value.trim();
-  if (newsApi.searchQuery === '')
-    return Notify.failure('Type search query, please');
+  checkDate();
+
   try {
-    const { docs, meta } = await newsApi.fetchSearchArticles();
+    let { docs } = await newsApi.fetchSearchArticles();
+    console.log(NormalizeData.searchData(docs));
     markup.renderMarkup(
       refs.galleryEl,
       markup.createGalleryCardMarkup(NormalizeData.searchData(docs))
@@ -57,4 +59,12 @@ function onDocumentClick(event) {
   target.elements.searchValue.style.transform = 'scale(1)';
   target.elements.button.style.left = '14px';
   target.elements.button.style.right = '';
+}
+
+function checkDate() {
+  if (!selectedDate) {
+    return;
+  } else {
+    newsApi.date = selectedDate;
+  }
 }

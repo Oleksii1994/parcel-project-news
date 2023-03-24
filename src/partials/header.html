@@ -1,40 +1,39 @@
+<header class="header">
+  <div class="container header__container">
+    <a class="header__link" href="./index.html">News</a>
+    <nav class="nav">
+      <ul class="nav__list">
+        <li class="nav__item"><a class="nav__link" href="#">Home</a></li>
+        <li class="nav__item">
+          <a class="nav__link" href="#">Favorite</a>
+        </li>
+        <li class="nav__item"><a class="nav__link" href="#">Read</a></li>
+      </ul>
+    </nav>
 
-  <header class="header">
-    <div class="container header__container">
-      <a class="header__link" href="./index.html">News</a>
-      <nav class="nav">
-        <ul class="nav__list">
-          <li class="nav__item"><a class="nav__link" href="#">Home</a></li>
-          <li class="nav__item">
-            <a class="nav__link" href="#">Favorite</a>
-          </li>
-          <li class="nav__item"><a class="nav__link" href="#">Read</a></li>
-        </ul>
-      </nav>
+    <form class="form-search">
+      <input
+        class="form-search__input"
+        type="text"
+        placeholder="Search"
+        name="searchQuery"
+        autocomplete="off"
+      />
+      <button class="form-search__button" type="submit" name="button">
+        <svg class="form-search__icon" width="20" height="20">
+          <use href="./images/header/header.svg#icon-search"></use>
+        </svg>
+      </button>
+    </form>
+    <!-- Budna Elvira. Додана іконка-бургер для відкриття мобільного меню  -->
+    <include src="./partials/burger-btn.html"></include>
+    <!-- світчер теми -->
+    <include src="./partials/switch-theme.html"></include>
+  </div>
+</header>
 
-      <button class="auth-button" id="authButton">
+<button class="auth-button" id="authButton">
   <svg class="auth-icon">
     <use href="./images/header/header.svg#icon-Vojtisvg"></use>
   </svg>
 </button>
-      <form class="form-search">
-        <input
-          class="form-search__input"
-          type="text"
-          placeholder="Search"
-          name="searchQuery"
-          autocomplete="off"
-        />
-        <button class="form-search__button" type="submit" name="button">
-          <svg class="form-search__icon" width="20" height="20">
-            <use href="./images/header/header.svg#icon-search"></use>
-          </svg>
-        </button>
-      </form>
-<!-- Budna Elvira. Додана іконка-бургер для відкриття мобільного меню  -->
-      <include src="./partials/burger-btn.html"></include>
-<!-- світчер теми -->
-      <include src="./partials/switch-theme.html"></include> 
-    </div>
-  </header>
-</body> 

@@ -12,6 +12,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-right: 38px;
+  position: relative;
 }
 
 .header__link {
@@ -19,8 +21,8 @@
   font-family: 'Manrope';
   font-style: normal;
   font-weight: 700;
-  font-size: 42px;
-  line-height: 57px;
+  font-size: 24px;
+  line-height: 33px;
   color: var(--black-main-color);
   .dark-theme & {
     color: var(--body-color-light-theme);

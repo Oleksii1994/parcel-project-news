@@ -4,7 +4,6 @@
 На мобільній версії всі категорії повинні відображатись у випадаючому списку, що відкривається по кліку на кнопку Categories
 Клік по обраній категорії повинен робити запит на бекенд для отримання відповідного списку новин" -->
 
-
 <div class="categories">
   <div class="categories__btn-list"></div>
   <button
@@ -16,9 +15,9 @@
     <svg class="categories__other-icon" width="14" height="14">
       <use href="./images/categories/sprite.svg#arrow"></use>
     </svg>
+    <div class="categories__other-box"></div>
   </button>
-  <div class="categories__other-box"></div>
-  <!-- Паршал для подключения календаря -->
-<include src="./partials/newCalendar.html"></include>
-</div>
 
+  <!-- Паршал для подключения календаря -->
+  <include src="./partials/newCalendar.html"></include>
+</div>

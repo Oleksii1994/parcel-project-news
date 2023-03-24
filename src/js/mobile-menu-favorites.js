@@ -1,11 +1,10 @@
-// Budna Elvira
 import { disableBodyScroll } from 'body-scroll-lock';
 import { enableBodyScroll } from 'body-scroll-lock';
 
 (() => {
-  const mobileMenu = document.querySelector('.js-menu-container');
-  const openMenuBtn = document.querySelector('.js-open-menu');
-  const closeMenuBtn = document.querySelector('.js-close-menu');
+  const mobileMenu = document.querySelector('.js-menu-container-favorites');
+  const openMenuBtn = document.querySelector('.js-open-menu-favorites');
+  const closeMenuBtn = document.querySelector('.js-close-menu-favorites');
 
   const toggleMenu = () => {
     const isMenuOpen =

@@ -25,24 +25,27 @@
 //   },
 // };
 
-// const input = document.querySelector('#calendar');
-// const calendar = document.querySelector('.calendar_icon');
-// const fp = flatpickr(input, options);
+
+const input = document.querySelector('#calendar');
+const calendar = document.querySelector('.calendar__icon');
+const fp = flatpickr(input, options);
+
 
 // function arrowToggle(deg) {
 //   const arrow = document.querySelector('.calendar__arrow');
 //   arrow.style.transform = `rotate(${deg}deg)`;
 
-//   const calendar = document.querySelector('.calendar__icon');
-//   const calendarInput = document.querySelector('.calendar__input');
-//   if (calendar.classList.contains('opened')) {
-//     calendar.classList.remove('opened');
-//     calendarInput.classList.remove('opened');
-//   } else {
-//     calendar.classList.add('opened');
-//     calendarInput.classList.add('opened');
-//   }
-// }
+
+  const calendarInput = document.querySelector('.calendar__input');
+  if (calendar.classList.contains('opened')) {
+    calendar.classList.remove('opened');
+    calendarInput.classList.remove('opened');
+  } else {
+    calendar.classList.add('opened');
+    calendarInput.classList.add('opened');
+  }
+}
+
 
 // input.addEventListener('click', () => {
 //   if (open === false) {

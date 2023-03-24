@@ -68,8 +68,8 @@ function onDocumentClick(event) {
   target.elements.button.style.right = '';
 }
 
-// document.body.classList.remove('screen-desktop', 'screen-tablete');
-// document.body.classList.add('screen-mobile');
+document.body.classList.remove('screen-desktop', 'screen-tablete');
+document.body.classList.add('screen-mobile');
 
 function checkDate() {
   if (!selectedDate) {

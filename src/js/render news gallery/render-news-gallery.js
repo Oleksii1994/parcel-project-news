@@ -9,11 +9,13 @@ window.addEventListener('load', pageLoadHandler, { once: true });
 async function pageLoadHandler() {
   try {
     const { results, num_results } = await newsApi.fetchPopularArticles();
-    markup.renderMarkup(
-      refs.galleryEl,
+    console.log(results);
+    refs.galleryEl.insertAdjacentHTML(
+      'beforeend',
       markup.createGalleryCardMarkup(NormalizeData.popularData(results))
     );
   } catch (error) {
+    console.log(error);
     Notify.failure(`${error}`);
   }
 }

@@ -1,10 +1,41 @@
 import { refs } from './refs/refs';
+import { newsApi } from './API/fetchAPI';
+import { Notify } from 'notiflix';
+import { markup } from './renderMarkup';
+import { NormalizeData } from './API/api-data-normalaizer';
+
+const notifyOptions = {
+  width: '450px',
+  position: 'right-top',
+  distance: '20px',
+  timeout: 2000,
+  clickToClose: true,
+  fontSize: '20px',
+  cssAnimationStyle: 'zoom',
+  showOnlyTheLastOne: true,
+};
+
+Notify.init(notifyOptions);
 
 refs.formSearch.addEventListener('submit', onFormSearchSubmit);
 
-function onFormSearchSubmit(event) {
+async function onFormSearchSubmit(event) {
   event.preventDefault();
-  console.log('submit');
+  markup.clearMarkup(refs.galleryEl);
+  newsApi.resetPage();
+  newsApi.query = event.target.elements.searchQuery.value.trim();
+  if (newsApi.searchQuery === '')
+    return Notify.failure('Type search query, please');
+  try {
+    const { docs, meta } = await newsApi.fetchSearchArticles();
+    console.log(meta);
+    markup.renderMarkup(
+      refs.galleryEl,
+      markup.createGalleryCardMarkup(NormalizeData.searchData(docs))
+    );
+  } catch (error) {
+    Notify.failure(`${error}`);
+  }
 }
 
 document.addEventListener('click', onDocumentClick);

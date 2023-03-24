@@ -214,11 +214,13 @@ const categoriesOtherTextRef = document.querySelector(
 );
 const categoriesOtherBtnRef = document.querySelector('.categories__other-btn');
 const categoriesBtnListRef = document.querySelector('.categories__btn-list');
-
 const otherBtn = categoriesRef.querySelector('#categories-other');
+
 window.addEventListener('resize', onWindowsResize);
 otherBtn.addEventListener('click', onOtherBtnClick);
+
 let visibleListStatus = false;
+
 setTimeout(() => {
   onLoadPage(categories);
 }, 0);
@@ -226,13 +228,14 @@ setTimeout(() => {
 otherBoxRef.addEventListener('click', onOtherBoxClick);
 
 function onWindowsResize(e) {
-  console.log(window.innerWidth);
+  // console.log(window.innerWidth);
   if (window.innerWidth < 768) {
+    categoriesOtherTextRef.textContent = 'Categories';
     categoriesBtnListRef.innerHTML = '';
     const markup = categories
       .map(
         elem =>
-          `<div class="categories__other-btn-box"><button class="categories__other-item" data-categoryName="${elem.section}" type="button">${elem.display_name}</button></div>`
+          `<div class="categories__other-btn-box"><button class="categories__other-box-item" data-categoryName="${elem.section}" type="button">${elem.display_name}</button></div>`
       )
       .join('');
     console.log(markup);
@@ -240,42 +243,45 @@ function onWindowsResize(e) {
     return;
   }
   if (window.innerWidth < 1280) {
-    console.log(categoriesBtnListRef.innerHTML);
+    // console.log(categoriesBtnListRef.innerHTML);
     if (categoriesBtnListRef.children.length === visibleOtherBtn.tablet) {
       return;
     }
+    categoriesOtherTextRef.textContent = 'Other';
     let markupBtns = [];
     for (let index = 0; index < visibleOtherBtn.tablet; index++) {
       markupBtns.push(
-        `<div class="categories__other-btn-box"><button class="categories__other-item" data-categoryName="${categories[index].section}" type="button">${categories[index].display_name}</button></div>`
+        `<div class="categories__other-btn"><button class="categories__other-item" data-categoryName="${categories[index].section}" type="button">${categories[index].display_name}</button></div>`
       );
     }
     categoriesBtnListRef.innerHTML = markupBtns.join('');
     let markupOther = [];
     for (let i = visibleOtherBtn.tablet; i < categories.length; i++) {
       markupOther.push(
-        `<div class="categories__other-btn-box"><button class="categories__other-item" data-categoryName="${categories[i].section}" type="button">${categories[i].display_name}</button></div>`
+        `<div class="categories__other-btn-box"><button class="categories__other-box-item" data-categoryName="${categories[i].section}" type="button">${categories[i].display_name}</button></div>`
       );
     }
     otherBoxRef.innerHTML = markupOther.join('');
     return;
   }
   if (window.innerWidth > 1279) {
-    console.log(categoriesBtnListRef.innerHTML);
+    // console.log(categoriesBtnListRef.innerHTML);
+
     if (categoriesBtnListRef.children.length === visibleOtherBtn.desktop) {
       return;
     }
+    categoriesOtherTextRef.textContent = 'Other';
     let markupBtns = [];
     for (let index = 0; index < visibleOtherBtn.desktop; index++) {
       markupBtns.push(
-        `<div class="categories__other-btn-box"><button class="categories__other-item" data-categoryName="${categories[index].section}" type="button">${categories[index].display_name}</button></div>`
+        `<div class="categories__other-btn"><button class="categories__other-item" data-categoryName="${categories[index].section}" type="button">${categories[index].display_name}</button></div>`
       );
     }
     categoriesBtnListRef.innerHTML = markupBtns.join('');
     let markupOther = [];
     for (let i = visibleOtherBtn.desktop; i < categories.length; i++) {
       markupOther.push(
-        `<div class="categories__other-btn-box"><button class="categories__other-item" data-categoryName="${categories[i].section}" type="button">${categories[i].display_name}</button></div>`
+        `<div class="categories__other-btn-box"><button class="categories__other-box-item" data-categoryName="${categories[i].section}" type="button">${categories[i].display_name}</button></div>`
       );
     }
     otherBoxRef.innerHTML = markupOther.join('');
@@ -299,10 +305,12 @@ function onOtherBtnClick(e) {
 function onLoadPage(categories) {
   if (window.innerWidth < 768) {
     //  console.log(window.matchMedia('(max-width: 767px)'));
+
+    categoriesOtherTextRef.textContent = 'Categories';
     const markup = categories
       .map(
         elem =>
-          `<div class="categories__other-btn-box"><button class="categories__other-item" data-categoryName="${elem.section}" type="button">${elem.display_name}</button></div>`
+          `<div class="categories__other-btn-box"><button class="categories__other-box-item" data-categoryName="${elem.section}" type="button">${elem.display_name}</button></div>`
       )
       .join('');
     // console.log(markup);
@@ -310,37 +318,41 @@ function onLoadPage(categories) {
     return;
   }
   if (window.innerWidth < 1280) {
+    categoriesOtherTextRef.textContent = 'Other';
     let markupBtns = [];
     for (let index = 0; index < visibleOtherBtn.tablet; index++) {
       markupBtns.push(
-        `<div class="categories__other-btn-box"><button class="categories__other-item" data-categoryName="${categories[index].section}" type="button">${categories[index].display_name}</button></div>`
+        `<div class="categories__other-btn"><button class="categories__other-item" data-categoryName="${categories[index].section}" type="button">${categories[index].display_name}</button></div>`
       );
     }
     categoriesBtnListRef.innerHTML = markupBtns.join('');
     let markupOther = [];
     for (let i = visibleOtherBtn.tablet; i < categories.length; i++) {
       markupOther.push(
-        `<div class="categories__other-btn-box"><button class="categories__other-item" data-categoryName="${categories[i].section}" type="button">${categories[i].display_name}</button></div>`
+        `<div class="categories__other-btn-box"><button class="categories__other-box-item" data-categoryName="${categories[i].section}" type="button">${categories[i].display_name}</button></div>`
       );
     }
     otherBoxRef.innerHTML = markupOther.join('');
   }
   if (window.innerWidth > 1279) {
-    console.log(categoriesBtnListRef.innerHTML);
+    categoriesOtherTextRef.textContent = 'Other';
+
+    // console.log(categoriesBtnListRef.innerHTML);
     if (categoriesBtnListRef.children.length === visibleOtherBtn.desktop) {
       return;
     }
+    categoriesOtherTextRef.textContent = 'Other';
     let markupBtns = [];
     for (let index = 0; index < visibleOtherBtn.desktop; index++) {
       markupBtns.push(
-        `<div class="categories__other-btn-box"><button class="categories__other-item" data-categoryName="${categories[index].section}" type="button">${categories[index].display_name}</button></div>`
+        `<div class="categories__other-btn"><button class="categories__other-item" data-categoryName="${categories[index].section}" type="button">${categories[index].display_name}</button></div>`
       );
     }
     categoriesBtnListRef.innerHTML = markupBtns.join('');
     let markupOther = [];
     for (let i = visibleOtherBtn.desktop; i < categories.length; i++) {
       markupOther.push(
-        `<div class="categories__other-btn-box"><button class="categories__other-item" data-categoryName="${categories[i].section}" type="button">${categories[i].display_name}</button></div>`
+        `<div class="categories__other-btn-box"><button class="categories__other-box-item" data-categoryName="${categories[i].section}" type="button">${categories[i].display_name}</button></div>`
       );
     }
     otherBoxRef.innerHTML = markupOther.join('');

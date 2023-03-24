@@ -1,5 +1,6 @@
 export const refs = {
-    newList: document.querySelector('.news-list'),
+    newBtn: document.querySelector('.gallery-thumb__btn'),
+    newsList: document.querySelector('#news-gallery'),
     text: document.querySelector('.favorite-notfound'),
   };
   

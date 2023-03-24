@@ -1,0 +1,167 @@
+.gallery {
+  width: 100%;
+  padding: 0 16px;
+
+  @include for-size(tablet) {
+    width: 320px;
+  }
+  @include for-size(tablet) {
+    width: 768px;
+  }
+  @include for-size(desktop) {
+    width: 1280px;
+  }
+
+  &__list {
+    @extend %list;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+
+    @include for-size(tablet) {
+      flex-wrap: wrap;
+      flex-direction: row;
+    }
+    @include for-size(desktop) {
+      gap: 31px;
+    }
+  }
+
+  &__item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    @include for-size(mobile) {
+      width: 288px;
+    }
+    @include for-size(tablet) {
+      width: 353px;
+    }
+    @include for-size(desktop) {
+      width: 393px;
+    }
+  }
+
+  &__title {
+    width: 287px;
+    margin-bottom: 20px;
+
+    font-family: font(_manrope);
+    @include text(700, 24, 33);
+    letter-spacing: -0.01em;
+
+    @include for-size(tablet) {
+      width: 351px;
+      @include text(700, 32, 44);
+    }
+  }
+  &__text {
+    width: 287px;
+    margin-bottom: 20px;
+
+    font-family: font(_manrope);
+    @include text(400, 14, 19);
+
+    @include for-size(tablet) {
+      width: 351px;
+      @include text(400, 16, 22);
+    }
+  }
+}
+
+.gallery-thumb {
+  width: 100%;
+  height: 395px;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  position: relative;
+
+  @include for-size(mobile) {
+    width: 288px;
+  }
+
+  @include for-size(tablet) {
+    width: 353px;
+  }
+  @include for-size(desktop) {
+    width: 395px;
+  }
+
+  &__subtitle {
+    position: absolute;
+    top: 40px;
+    border-radius: 0px 4px 4px 0px;
+    padding: 4px 8px;
+
+    color: var(--white-text-color);
+    background-color: var(--transparent-blue-color);
+    font-family: font(_manrope);
+    @include text(500, 12, 16);
+  }
+
+  &__already {
+    position: absolute;
+    top: 14px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+
+    color: var(--green-color);
+    font-family: font(_manrope);
+    @include text(700, 14, 19);
+  }
+  &__btn {
+    position: absolute;
+    right: 8px;
+    bottom: 10px;
+    padding: 6 12;
+    border-radius: 20px;
+    cursor: pointer;
+    border: none;
+
+    background-color: var(--white-main-color);
+  }
+
+  &__name {
+    display: flex;
+    align-items: center;
+
+    font-family: font(_manrope);
+    @include text(500, 12, 15);
+  }
+}
+.remove {
+  display: none;
+}
+
+.thumb {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  flex-grow: 1;
+
+  &__text {
+    font-family: font(_manrope);
+    color: var(--light-grey-text-color);
+    @include text(400, 14, 19);
+
+    @include for-size(tablet) {
+      @include text(400, 16, 22);
+    }
+  }
+
+  &__link {
+    @extend %link;
+    cursor: url(../images/touch.svg), pointer;
+    color: var(--blue-main-color);
+    font-family: font(_manrope);
+    @include text(400, 14, 19);
+
+    @include for-size(tablet) {
+      @include text(400, 16, 22);
+    }
+  }
+}

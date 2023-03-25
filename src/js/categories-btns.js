@@ -313,7 +313,7 @@ function onLoadPage(categories) {
           `<div class="categories__other-btn-box"><button class="categories__other-box-item" data-categoryName="${elem.section}" type="button">${elem.display_name}</button></div>`
       )
       .join('');
-    console.log(markup);
+    // console.log(markup);
     otherBoxRef.innerHTML = markup;
     return;
   }

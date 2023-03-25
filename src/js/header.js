@@ -22,13 +22,20 @@ refs.formSearch.addEventListener('submit', onFormSearchSubmit);
 
 async function onFormSearchSubmit(event) {
   event.preventDefault();
-  markup.clearMarkup(refs.galleryEl);
+  const value = event.currentTarget.elements.searchQuery.value.trim();
+  // markup.clearMarkup(refs.galleryEl);
   newsApi.resetPage();
-  newsApi.query = event.target.elements.searchQuery.value.trim();
+
+  newsApi.query = value;
+  if (!newsApi.searchQuery) {
+    return Notify.failure('Type search query, please');
+  }
+
   checkDate();
 
   try {
     let { docs } = await newsApi.fetchSearchArticles();
+
     markup.renderMarkup(
       refs.galleryEl,
       markup.createGalleryCardMarkup(NormalizeData.searchData(docs))
@@ -46,19 +53,23 @@ function onDocumentClick(event) {
     return;
   }
   const target = event.target.closest('.form-search');
+  console.log(target);
   if (!target) {
-    if (refs.formSearch.elements.searchValue.value.trim()) {
+    if (refs.formSearch.elements.searchQuery.value.trim()) {
       return;
     }
-    refs.formSearch.elements.searchValue.style.transform = 'scale(0)';
+    refs.formSearch.elements.searchQuery.style.transform = 'scale(0)';
     refs.formSearch.elements.button.style.left = '';
     refs.formSearch.elements.button.style.right = '14px';
     return;
   }
-  target.elements.searchValue.style.transform = 'scale(1)';
+  target.elements.searchQuery.style.transform = 'scale(1)';
   target.elements.button.style.left = '14px';
   target.elements.button.style.right = '';
 }
+
+document.body.classList.remove('screen-desktop', 'screen-tablete');
+document.body.classList.add('screen-mobile');
 
 function checkDate() {
   if (!selectedDate) {

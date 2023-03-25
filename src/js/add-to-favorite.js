@@ -47,6 +47,7 @@ export function onLoadHomePage() {
     const url = targetItem.querySelector('.thumb__link').href;
     const article = { img: img(), title, text, date, id, category, url };
     const dataFromLS = getFromLS(FAVORITE_KEY);
+    // добавляємо в localStorage
     const present = dataFromLS.find(article => article.id === id);
     if (present) {
       const newData = dataFromLS.filter(article => article.id !== id);
@@ -73,14 +74,19 @@ export function checkPresentArticle(id) {
 
 function onLoadFavoritesPage() {
   const dataFromLS = getFromLS(FAVORITE_KEY);
-  if (!dataFromLS.length) {
+  if (!dataFromLS.length && notFoundRef !== null) {
     notFoundRef.innerHTML = `<h2 class="not-found-title hidden">You haven't added anything to favorite!</h2><img src="https://live.staticflickr.com/65535/52770181328_d91f5366f0_z.jpg">`;
     return;
   }
 
   const newMarkup = markup.createGalleryCardMarkup(dataFromLS);
 
+  if (listArticlesRef === null) return;
+    
+
+
   listArticlesRef.innerHTML = newMarkup;
+
   listArticlesRef.addEventListener('click', onListArticlesClick);
 }
 

@@ -53,8 +53,7 @@
       background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
       color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-    &:hover,
-    &:focus {
+    &:hover {
       background-color: #4440f6;
       color: #f4f4f4;
       transform: scale(1.1);
@@ -65,12 +64,20 @@
     fill: #111321;
     transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
-  &__prev-btn:hover &__icon-prev,
-  &__prev-btn:focus &__icon-prev {
+  &__prev-btn:hover &__icon-prev {
     fill: #f4f4f4;
   }
-  &__next-btn:hover &__icon-next,
-  &__next-btn:focus &__icon-next {
+  &__next-btn:hover &__icon-next {
     fill: #f4f4f4;
   }
+}
+.active {
+  background-color: #4440f6;
+  color: #f4f4f4;
+  transform: scale(1.1);
+}
+button:disabled {
+  background: #dddddd;
+  color: #838388;
+  pointer-events: none;
 }

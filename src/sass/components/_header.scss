@@ -1,4 +1,11 @@
 .header {
+  .screen-tablet & {
+    padding: 32px 0;
+  }
+  .screen-desktop & {
+    padding: 28px 0;
+  }
+  border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 24px 0;
 }
 
@@ -6,37 +13,60 @@
   width: 320px;
   padding: 0 16px;
   margin: 0 auto;
+  .screen-tablet & {
+    width: 768px;
+  }
+  .screen-desktop & {
+    width: 1280px;
+  }
 }
 
-.header__container {
+.header__container.container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-right: 38px;
+  position: relative;
+  .screen-tablet & {
+    padding-right: 0;
+  }
 }
 
-.header__link {
+.header__logo {
   text-decoration: none;
   font-family: 'Manrope';
   font-style: normal;
   font-weight: 700;
-  font-size: 42px;
-  line-height: 57px;
+  font-size: 24px;
+  line-height: 33px;
   color: var(--black-main-color);
   .dark-theme & {
     color: var(--body-color-light-theme);
     display: block;
-    padding-top: 55px;
-    padding-bottom: 33px;
+  }
+  .screen-tablet & {
+    margin-right: 48px;
+  }
+  .screen-desktop & {
+    font-size: 42px;
+    line-height: 57px;
+    margin-right: 102px;
   }
 }
-// .nav {
-//   display: none;
-// }
+.screen-mobile .nav {
+  display: none;
+}
 
 .nav__list {
   display: flex;
-  margin-left: 102px;
-  margin-right: 147px;
+  // margin-left: 102px;
+  margin-right: 32px;
+  gap: 44px;
+
+  .screen-desktop & {
+    gap: 69px;
+    margin-right: 147px;
+  }
 }
 
 // .nav__item:last-child {
@@ -45,20 +75,31 @@
 
 .nav__item {
   list-style: none;
-  margin-right: 69px;
+  // margin-right: 69px;
 }
 
 .nav__link {
   text-decoration: none;
   font-family: $main-font;
   font-weight: 700;
-  font-size: 18px;
-  line-height: 25px;
+  font-size: 16px;
+  line-height: 22px;
   color: var(--black-main-color);
+  .dark-theme & {
+    color: var(--body-color-light-theme);
+  }
+
+  .screen-desktop & {
+    font-size: 18px;
+    line-height: 25px;
+  }
 }
 
 .form-search {
   position: relative;
+  .screen-desktop & {
+    margin-right: 147px;
+  }
 }
 
 .form-search__input {
@@ -80,6 +121,12 @@
   .screen-tablet &,
   .screen-desktop & {
     transform: scale(1);
+  }
+  .screen-tablet & {
+    width: 213px;
+  }
+  .screen-desktop & {
+    width: 288px;
   }
 }
 .form-search__input::placeholder {
@@ -118,8 +165,8 @@
 .header .switch__wrapper {
   display: none;
   .screen-tablet &,
-  screen-desktop {
-    display: block;
+  .screen-desktop & {
+    display: flex;
   }
 }
 

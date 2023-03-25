@@ -103,4 +103,4 @@ function onListArticlesClick(event) {
     return;
   }
 }
-// onLoadFavoritesPage(); /////треба викликати цю функцію при клікі на посилання Favorite
+onLoadFavoritesPage(); /////треба викликати цю функцію при клікі на посилання Favorite

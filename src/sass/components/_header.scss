@@ -43,8 +43,6 @@
   .dark-theme & {
     color: var(--body-color-light-theme);
     display: block;
-    padding-top: 55px;
-    padding-bottom: 33px;
   }
   .screen-tablet & {
     margin-right: 48px;
@@ -87,6 +85,9 @@
   font-size: 16px;
   line-height: 22px;
   color: var(--black-main-color);
+  .dark-theme & {
+    color: var(--body-color-light-theme);
+  }
 
   .screen-desktop & {
     font-size: 18px;

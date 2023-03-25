@@ -393,7 +393,6 @@ async function onOtherBoxClick(e) {
 }
 
 async function onBtnsClick(e) {
-  console.log('click');
   if (e.target.nodeName !== 'BUTTON') {
     return;
   }

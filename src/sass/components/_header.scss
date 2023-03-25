@@ -2,7 +2,10 @@
   .screen-tablet & {
     padding: 32px 0;
   }
-
+  .screen-desktop & {
+    padding: 28px 0;
+  }
+  border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 24px 0;
 }
 

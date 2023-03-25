@@ -23,14 +23,12 @@ refs.formSearch.addEventListener('submit', onFormSearchSubmit);
 async function onFormSearchSubmit(event) {
   event.preventDefault();
   const value = event.currentTarget.elements.searchQuery.value.trim();
-  // markup.clearMarkup(refs.galleryEl);
   newsApi.resetPage();
-
   newsApi.query = value;
   if (!newsApi.searchQuery) {
     return Notify.failure('Type search query, please');
   }
-
+  markup.clearMarkup(refs.galleryEl);
   checkDate();
 
   try {

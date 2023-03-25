@@ -16,5 +16,5 @@ async function onFormSubmit(event) {
   const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${value}&api-key=${API_KEY}`;
 
   const response = await fetch(url, options).then(r => r.json());
-  console.log(response);
+  // console.log(response);
 }

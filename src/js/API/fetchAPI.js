@@ -126,6 +126,14 @@ class NewsAPIService {
   set newsDataArr(arr) {
     this.#newsDataArr = arr;
   }
+
+  get currentCategory() {
+    return this.category;
+  }
+
+  set currentCategory(newCategory) {
+    this.category = newCategory;
+  }
 }
 
 export const newsApi = new NewsAPIService();

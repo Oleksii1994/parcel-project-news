@@ -16,8 +16,8 @@ async function pageLoadHandler() {
   try {
     const { results, num_results } = await newsApi.fetchPopularArticles();
     newsApi.newsDataArr = NormalizeData.popularData(results);
-    refs.galleryEl.insertAdjacentHTML(
-      'beforeend',
+    markup.renderMarkup(
+      refs.galleryEl,
       markup.createGalleryCardMarkup(NormalizeData.popularData(results))
     );
     onLoadHomePage(); /////////////////////////////////
@@ -42,8 +42,6 @@ function onCalendarChange(e) {
     markup.createGalleryCardMarkup(filteredNews)
   );
 }
-
-
 
 // import { newsApi } from '../API/fetchAPI';
 // import { NormalizeData } from '../API/api-data-normalaizer';

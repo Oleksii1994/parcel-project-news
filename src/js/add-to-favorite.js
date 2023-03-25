@@ -6,7 +6,7 @@ import { markup } from './renderMarkup';
 import { setToLS, getFromLS } from './local-storage-logic';
 
 const notFoundRef = document.querySelector('.not-found');
-const listArticlesRef = document.querySelector('.news-list');
+const listArticlesRef = document.querySelector('#news-list');
 
 // document.body.classList.remove('screen-tablet');
 // document.body.classList.add('screen-mobile');
@@ -74,16 +74,13 @@ export function checkPresentArticle(id) {
 
 function onLoadFavoritesPage() {
   const dataFromLS = getFromLS(FAVORITE_KEY);
+
   if (!dataFromLS.length && notFoundRef !== null) {
     notFoundRef.innerHTML = `<h2 class="not-found-title hidden">You haven't added anything to favorite!</h2><img src="https://live.staticflickr.com/65535/52770181328_d91f5366f0_z.jpg">`;
     return;
   }
 
   const newMarkup = markup.createGalleryCardMarkup(dataFromLS);
-
-  if (listArticlesRef === null) return;
-    
-
 
   listArticlesRef.innerHTML = newMarkup;
 

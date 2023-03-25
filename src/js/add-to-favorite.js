@@ -79,7 +79,7 @@ function onLoadFavoritesPage() {
   }
 
   const newMarkup = markup.createGalleryCardMarkup(dataFromLS);
-  
+
   listArticlesRef.innerHTML = newMarkup;
   listArticlesRef.addEventListener('click', onListArticlesClick);
 }
@@ -103,4 +103,4 @@ function onListArticlesClick(event) {
     return;
   }
 }
-onLoadFavoritesPage(); /////треба викликати цю функцію при клікі на посилання Favorite
+// onLoadFavoritesPage(); /////треба викликати цю функцію при клікі на посилання Favorite

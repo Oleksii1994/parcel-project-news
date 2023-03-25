@@ -1,3 +1,9 @@
+import { newsApi } from './API/fetchAPI';
+import { refs } from './refs/refs';
+import { NormalizeData } from './API/api-data-normalaizer';
+import { markup } from './renderMarkup';
+import { Notify } from 'notiflix';
+
 const categories = [
   {
     section: 'admin',
@@ -218,6 +224,7 @@ const otherBtn = categoriesRef.querySelector('#categories-other');
 
 window.addEventListener('resize', onWindowsResize);
 otherBtn.addEventListener('click', onOtherBtnClick);
+categoriesBtnListRef.addEventListener('click', onBtnsClick);
 
 let visibleListStatus = false;
 
@@ -359,7 +366,7 @@ function onLoadPage(categories) {
   }
 }
 
-function onOtherBoxClick(e) {
+async function onOtherBoxClick(e) {
   if (e.target.nodeName !== 'BUTTON') {
     return;
   }
@@ -369,4 +376,40 @@ function onOtherBoxClick(e) {
   otherBoxRef.classList.remove('visible');
   categoriesOtherTextRef.textContent = e.target.textContent;
   categoriesOtherBtnRef.classList.remove('visible');
+
+  newsApi.currentCategory = e.target.textContent.toLowerCase();
+  try {
+    const data = await newsApi.fetchArticlesByCategory();
+    newsApi.newsDataArr = NormalizeData.categoryData(data);
+    markup.clearMarkup(refs.galleryEl);
+    markup.renderMarkup(
+      refs.galleryEl,
+      markup.createGalleryCardMarkup(NormalizeData.categoryData(data))
+    );
+  } catch (error) {
+    console.log(error);
+    Notify.failure(`${error}`);
+  }
+}
+
+async function onBtnsClick(e) {
+  console.log('click');
+  if (e.target.nodeName !== 'BUTTON') {
+    return;
+  }
+  e.target.classList.add('active');
+
+  newsApi.currentCategory = e.target.textContent.toLowerCase();
+  try {
+    const data = await newsApi.fetchArticlesByCategory();
+    newsApi.newsDataArr = NormalizeData.categoryData(data);
+    markup.clearMarkup(refs.galleryEl);
+    markup.renderMarkup(
+      refs.galleryEl,
+      markup.createGalleryCardMarkup(NormalizeData.categoryData(data))
+    );
+  } catch (error) {
+    console.log(error);
+    Notify.failure(`${error}`);
+  }
 }

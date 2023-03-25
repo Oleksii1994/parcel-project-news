@@ -23,7 +23,7 @@ refs.formSearch.addEventListener('submit', onFormSearchSubmit);
 async function onFormSearchSubmit(event) {
   event.preventDefault();
   const value = event.currentTarget.elements.searchQuery.value.trim();
-  // markup.clearMarkup(refs.galleryEl);
+  markup.clearMarkup(refs.galleryEl);
   newsApi.resetPage();
 
   newsApi.query = value;

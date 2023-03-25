@@ -40,6 +40,9 @@
     @include for-size(desktop) {
       width: 393px;
     }
+    &--background {
+      opacity: 0.8;
+    }
   }
 
   &__title {
@@ -108,10 +111,15 @@
     right: 15px;
     display: flex;
     align-items: center;
+    opacity: 0;
 
     color: var(--green-color);
     font-family: font(_manrope);
     @include text(700, 14, 19);
+
+    &--show {
+      opacity: 1;
+    }
   }
   &__btn {
     position: absolute;

@@ -80,8 +80,13 @@ function onLoadFavoritesPage() {
   }
 
   const newMarkup = markup.createGalleryCardMarkup(dataFromLS);
+
   if (listArticlesRef === null) return;
-    listArticlesRef.innerHTML = newMarkup;
+    
+
+
+  listArticlesRef.innerHTML = newMarkup;
+
   listArticlesRef.addEventListener('click', onListArticlesClick);
 }
 

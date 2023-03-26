@@ -11,9 +11,7 @@ const READ_KEY = 'read_news';
 
 class AddToRead {
   isHomePage() {
-    // const homePage = document.querySelector('#homepage');
-    console.dir(document)
-    console.log(homePage)
+    const homePage = document.querySelector('#homepage');
     if (homePage) {
       return true;
     }
@@ -62,14 +60,13 @@ class AddToRead {
 
 }
 
-export const instance = new AddToRead(); // створює об'єкт  AddToRead
+export const Atrinstance = new AddToRead(); // створює об'єкт  AddToRead
 
-if(instance.isHomePage()){ //перевірка чи знаходишся на homePage
-  instance.addListenersToHomePage(); //опрацьовую клік на readMore
-  console.log('test')
+if(Atrinstance.isHomePage()){ //перевірка чи знаходишся на homePage
+  Atrinstance.addListenersToHomePage(); //опрацьовую клік на readMore
 }
 else{
-  instance.renderReadPage(); //малюю readPage
+  Atrinstance.renderReadPage(); //малюю readPage
 }
 
 

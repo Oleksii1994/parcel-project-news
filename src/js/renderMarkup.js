@@ -63,3 +63,4 @@ export const markup = {
     ref.insertAdjacentHTML('beforeend', markup);
   },
 };
+

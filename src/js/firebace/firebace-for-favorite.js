@@ -16,7 +16,6 @@ import {
   onAuthStateChanged,
   signOut,
 } from 'firebase/auth';
-import { async } from '@firebase/util';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDD_Eh4tyvM30ivpTHWqfHo7r2h0gDev4Y',
@@ -38,7 +37,7 @@ const usersRef = ref(database, 'users');
 export function addOrDeleteFavoriteNews(article, userId, targetBtn) {
   const currentUser = auth.currentUser;
 
-  console.log(currentUser);
+  // console.log(currentUser);
 
   get(usersRef)
     .then(snapshot => {
@@ -46,7 +45,7 @@ export function addOrDeleteFavoriteNews(article, userId, targetBtn) {
       let articleExists = false;
       snapshot.forEach(childSnapshot => {
         const user = childSnapshot.val();
-        console.log(user);
+        // console.log(user);
         if (user.email === currentUser.email) {
           // check if email matches
           user.newsFavouriteData.forEach(item => {
@@ -57,7 +56,7 @@ export function addOrDeleteFavoriteNews(article, userId, targetBtn) {
           });
         }
       });
-      console.log(newsArr);
+      // console.log(newsArr);
 
       if (articleExists) {
         console.log('Article already exists');
@@ -66,17 +65,17 @@ export function addOrDeleteFavoriteNews(article, userId, targetBtn) {
           return item.id !== article.id;
         });
 
-        console.log(filteredNewsArr);
+        // console.log(filteredNewsArr);
 
         const finalNewsArr = filteredNewsArr.filter(Boolean); // remove empty strings
 
-        console.log(finalNewsArr);
+        // console.log(finalNewsArr);
 
         if (finalNewsArr.length === 0) {
           finalNewsArr.push('');
         }
 
-        console.log(finalNewsArr);
+        // console.log(finalNewsArr);
 
         return update(ref(database, `users/${userId}`), {
           newsFavouriteData: finalNewsArr,
@@ -94,11 +93,11 @@ export function addOrDeleteFavoriteNews(article, userId, targetBtn) {
         newsArr.push(article);
         const filteredNewsArr = newsArr.filter(Boolean);
 
-        console.log(filteredNewsArr);
+        // console.log(filteredNewsArr);
 
         const finalNewsArr = filteredNewsArr.filter(Boolean); // remove empty strings
 
-        console.log(finalNewsArr);
+        // console.log(finalNewsArr);
 
         return update(ref(database, `users/${userId}`), {
           newsFavouriteData: finalNewsArr,

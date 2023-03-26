@@ -8,8 +8,12 @@ class NewsAPIService {
     q: this.searchQuery,
     'api-key': this.#API_KEY,
     page: this.currentPage,
+    sort: 'newest',
   };
   #newsDataArr = [];
+  #hits;
+  #per_page = 10;
+  #totalHits = 0;
 
   constructor() {
     this.searchQuery = '';
@@ -28,10 +32,13 @@ class NewsAPIService {
     }${new URLSearchParams(this.#searchParams)}`;
     const response = await fetch(URL);
     this.errorHandle(response);
-    this.incrementPage();
     const {
       response: { docs, meta },
     } = await response.json();
+    console.log(URL);
+    console.log(meta);
+    this.#hits = meta.hits;
+    this.#totalHits = this.setTotalHits();
     this.#newsDataArr = NormalizeData.searchData(docs);
     return { docs, meta };
   }
@@ -68,7 +75,7 @@ class NewsAPIService {
   }
 
   resetPage() {
-    this.currentPage = 1;
+    this.currentPage = 0;
   }
 
   updateParams() {
@@ -84,6 +91,20 @@ class NewsAPIService {
         q: this.searchQuery,
         page: this.currentPage,
       });
+    }
+  }
+
+  resetHits() {
+    this.#hits = 0;
+  }
+
+  setTotalHits() {
+    let totalHits = Math.ceil(this.#hits / this.#per_page);
+    if (totalHits > 200) {
+      totalHits = 200;
+      return totalHits;
+    } else {
+      return totalHits;
     }
   }
 
@@ -133,6 +154,26 @@ class NewsAPIService {
 
   set currentCategory(newCategory) {
     this.category = newCategory;
+  }
+
+  get hits() {
+    return this.#hits;
+  }
+
+  set hits(newHits) {
+    this.#hits = newHits;
+  }
+
+  get perPage() {
+    return this.#per_page;
+  }
+
+  set perPage(newPage) {
+    this.perPage = newPage;
+  }
+
+  get totalHits() {
+    return this.#totalHits;
   }
 }
 

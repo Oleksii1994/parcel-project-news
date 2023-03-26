@@ -33,6 +33,11 @@ const firebaseConfig = {
   appId: '1:407142734195:web:6d45ec3cdde16415370d06',
   measurementId: 'G-VMY0EQ75TG',
 };
+
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const auth = getAuth();
+const usersRef = ref(database, 'users');
 // ===========================================================
 
 
@@ -80,9 +85,19 @@ export function onLoadHomePage() {
     const dataFromLS = getFromLS(FAVORITE_KEY);
     // добавляємо в localStorage
     const present = dataFromLS.find(article => article.id === id);
+
+    // ===========================================================
+    const user = auth.currentUser;
+    if (user) {
+      const userId = user.uid;
+      addOrDeleteFavoriteNews(article, userId, targetBtn);
+    }
+    // ===========================================================
+
     if (present) {
       const newData = dataFromLS.filter(article => article.id !== id);
       setToLS(FAVORITE_KEY, newData);
+
 // ===========================================================
 const user = auth.currentUser;
 if (user) {
@@ -90,6 +105,7 @@ if (user) {
   addOrDeleteFavoriteNews(article, userId, targetBtn);
 }
 // ===========================================================
+
       targetBtn.innerHTML =
         '<p class="gallery-thumb__name add">Add to favorite<span class="gallery-thumb__icon">&#9825;</span></p>';
       return;
@@ -119,7 +135,7 @@ function onLoadFavoritesPage() {
   }
 
   const newMarkup = markup.createGalleryCardMarkup(dataFromLS);
-if (listArticlesRef === null) return;
+  if (listArticlesRef === null) return;
   listArticlesRef.innerHTML = newMarkup;
 
   listArticlesRef.addEventListener('click', onListArticlesClick);

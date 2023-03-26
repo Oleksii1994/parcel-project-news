@@ -40,6 +40,7 @@ const auth = getAuth();
 const usersRef = ref(database, 'users');
 // ===========================================================
 
+
 const notFoundRef = document.querySelector('.not-found');
 const listArticlesRef = document.querySelector('#news-list');
 
@@ -96,6 +97,14 @@ export function onLoadHomePage() {
     if (present) {
       const newData = dataFromLS.filter(article => article.id !== id);
       setToLS(FAVORITE_KEY, newData);
+
+// ===========================================================
+const user = auth.currentUser;
+if (user) {
+  const userId = user.uid;
+  addOrDeleteFavoriteNews(article, userId, targetBtn);
+}
+// ===========================================================
 
       targetBtn.innerHTML =
         '<p class="gallery-thumb__name add">Add to favorite<span class="gallery-thumb__icon">&#9825;</span></p>';

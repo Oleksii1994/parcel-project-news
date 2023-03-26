@@ -219,6 +219,7 @@ const categoriesOtherTextRef = document.querySelector(
   '.categories__other-text'
 );
 const categoriesOtherBtnRef = document.querySelector('.categories__other-btn');
+const categoriesOtherBtn = document.querySelector('.categories__other-item');
 const categoriesBtnListRef = document.querySelector('.categories__btn-list');
 const otherBtn = categoriesRef.querySelector('#categories-other');
 
@@ -377,30 +378,34 @@ async function onOtherBoxClick(e) {
   categoriesOtherTextRef.textContent = e.target.textContent;
   categoriesOtherBtnRef.classList.remove('visible');
 
-  newsApi.currentCategory = e.target.textContent.toLowerCase();
-  try {
-    const data = await newsApi.fetchArticlesByCategory();
-    newsApi.newsDataArr = NormalizeData.categoryData(data);
-    markup.clearMarkup(refs.galleryEl);
-    markup.renderMarkup(
-      refs.galleryEl,
-      markup.createGalleryCardMarkup(NormalizeData.categoryData(data))
-    );
-  } catch (error) {
-    console.log(error);
-    Notify.failure(`${error}`);
-  }
+  categoriesFetch(e);
 }
 
 async function onBtnsClick(e) {
   if (e.target.nodeName !== 'BUTTON') {
     return;
   }
+
+  // for (let i = 0; i < categoriesBtnListRef.children.length; i++) {
+  //   categoriesOtherBtn[i].classList.remove('active');
+  // }
+
+  // categoriesOtherBtn.classList.remove('active');
   e.target.classList.add('active');
 
+  categoriesFetch(e);
+}
+
+async function categoriesFetch(e) {
+  e.preventDefault();
   newsApi.currentCategory = e.target.textContent.toLowerCase();
   try {
     const data = await newsApi.fetchArticlesByCategory();
+    if (data === '') {
+      refs.notFoundBox.innerHTML = `<h2 class="not-found-box__title">We haven’t found news from <br> this date</h2>
+      <img src="https://live.staticflickr.com/65535/52770181328_d91f5366f0_z.jpg">`;
+      return;
+    }
     newsApi.newsDataArr = NormalizeData.categoryData(data);
     markup.clearMarkup(refs.galleryEl);
     markup.renderMarkup(

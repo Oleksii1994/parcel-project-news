@@ -6,18 +6,19 @@
 
 <div class="categories">
   <div class="categories__btn-list"></div>
-  <button
-    type="button"
-    class="categories__btn categories__other-btn"
-    id="categories-other"
-  >
-    <span class="categories__other-text">Categories</span>
-    <svg class="categories__other-icon" width="14" height="14">
-      <use href="./images/categories/sprite.svg#arrow"></use>
-    </svg>
+  <div class="categories__btn-container">
+    <button
+      type="button"
+      class="categories__btn categories__other-btn"
+      id="categories-other"
+    >
+      <span class="categories__other-text">Categories</span>
+      <svg class="categories__other-icon" width="14" height="14">
+        <use href="./images/categories/sprite.svg#arrow"></use>
+      </svg>
+    </button>
     <div class="categories__other-box"></div>
-  </button>
-
+  </div>
   <!-- Паршал для подключения календаря -->
   <include src="./partials/newCalendar.html"></include>
 </div>

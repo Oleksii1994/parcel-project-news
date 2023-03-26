@@ -4,6 +4,7 @@ ul {
 
 
 .creator__container {
+  max-width: 100%;
   padding: 28px 16px;
   margin: 0 auto;
   border: 1px solid rgba(0, 0, 0, 0.2) ;
@@ -11,9 +12,16 @@ ul {
 
 .creator-header__container {
   display: flex;
-
+  max-width: 100%;
   align-items: center;
+  @include for-size(tablet) {
+     max-width: 100%;
+  }
+  @include for-size(desktop) {
+    max-width: 100%;
+  }
 }
+
 
 .creator-header__link {
   margin-left: 40px;
@@ -28,11 +36,21 @@ ul {
 }
 .creator__nav {
  margin-left: auto;
+ 
 }
 
 .creator-nav__list {
-  display: flex;
-  align-items: center;
+    display: block;
+    margin-left: 20px;
+    @include for-size(tablet) {
+        display: flex;
+        align-items: center;
+     }
+     @include for-size(desktop) {
+        display: flex;
+        align-items: center;
+     }
+ 
 }
 
 .creator-nav__item {
@@ -54,49 +72,103 @@ ul {
 }
 
 .hero__container {
-  max-width: 1200px;
+    display: block;
+    @include for-size(tablet) {
+        max-width: 768px;
   margin: auto;
-  display: flex;
   justify-content: space-around;
   column-gap: 30px;
   align-items: center;
+     }
+     @include for-size(desktop) {
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        justify-content: space-around;
+        column-gap: 30px;
+        align-items: center;
+     }
+  
 }
+.hero__img {
+    max-width: 100%;
+    margin: auto;
+}
+
 .hero-text__block {
-  margin-left: 50px;
+  margin: auto;
   max-width: 500px;
   line-height: 55px;
 }
 .hero__title {
+   text-align: center; 
   margin-bottom: 20px;
   font-size: 44px;
   font-weight: 600;
   font-family: 'Manrope';
+  @include for-size(tablet) {
+    text-align: left;
+ }
+ @include for-size(desktop) {
+    text-align: left;
+ }
 }
 .hero__text {
+  text-align: center;
   font-family: 'Manrope';
   font-size: 20px;
+  @include for-size(tablet) {
+    text-align: left;
+ }
+ @include for-size(desktop) {
+    text-align: left;
+ }
 }
 .developer {
-padding-top: 50px;
+padding-top: 60px;
 padding-bottom: 100px;
 }
 
 .developer__container {
+  
   max-width: 1200px;
   margin: auto;
 }
 .developer__list {
-  margin: auto;
+    display: block;
+    @include for-size(tablet) {
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+     }
+     @include for-size(desktop) {
+        margin: auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 30px;
+     }
+  
 }
 .developer__item {
-  align-items: center;
-  width: 100%;
-  width: calc((100% - 90px) / 4);
+    display: block;
+    margin: auto;
+    margin-bottom: 30px;
+    @include for-size(tablet) {
+        align-items: center;
+        width: 100%;
+        width: calc((100% - 40px) / 2);
+    }
+    @include for-size(desktop) {
+        align-items: center;
+        width: 100%;
+        width: calc((100% - 90px) / 4);
+    }
+  
 }
 .developer__line {
     position: relative;
@@ -104,6 +176,7 @@ padding-bottom: 100px;
 }
 .developer__img {
   max-width: 100%;
+  margin: auto;
   height: auto;
   border-radius: 50%;
   display: block;

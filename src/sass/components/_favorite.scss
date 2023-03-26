@@ -18,7 +18,11 @@
 }
 
 .not-found{
-  display: block;
+  display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  width: 100%;
   margin-bottom: 40px;
   // 36px 59px 36px;
 }

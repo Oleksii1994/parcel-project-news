@@ -8,7 +8,8 @@
   height: 100%;
   transform: translateY(-100%);
 
-  background-color: currentColor;
+  background-color: var(--body-color-light-theme);
+  // background-color: inherit;
 
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -22,21 +23,20 @@
     padding: 24px 0 24px 16px;
     margin-bottom: 44px;
 
-    // font-family: 'Manrope';
+    font-family: 'Manrope';
     font-weight: 700;
     font-size: 24px;
     line-height: calc(33 / 24);
 
-    color: var(--main-black-text-color);
+    color: currentColor;
   }
 
-  &__close-button {
+  &__burger-button {
     @extend %button;
     position: absolute;
 
     top: 4px;
     right: 0;
-    padding: 0;
 
     margin: 0;
 
@@ -56,6 +56,27 @@
     }
   }
 
+  &__close-button {
+    @extend %button;
+    position: absolute;
+
+    top: 28px;
+    right: 16px;
+
+    margin: 0;
+
+    border: none;
+    color: currentColor;
+    background-color: transparent;
+
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover,
+    &:focus {
+      color: var(--blue-main-color);
+    }
+  }
+
   &__icon {
     fill: var(--body-color-light-theme);
     stroke: var(--blue-main-color);
@@ -63,15 +84,6 @@
     &--close {
       stroke: currentColor;
     }
-
-    // &--accent {
-    //   stroke: var(--body-color-light-theme);
-    // }
-
-    // &--white {
-    //   stroke: var(--body-color-light-theme);
-    //   // fill: var(--body-color-light-theme);
-    // }
   }
 
   &__box-icon {
@@ -124,11 +136,6 @@
     border: none;
 
     color: currentColor;
-
-    &--accent {
-      @extend %button;
-      background-color: currentColor;
-    }
   }
 
   &__current-page {

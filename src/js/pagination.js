@@ -3,7 +3,7 @@ import { markup } from './renderMarkup';
 import { refs } from './refs/refs';
 import { NormalizeData } from './API/api-data-normalaizer';
 import { hideLoader, showLoader } from './loading';
-import { totalButtons } from './header';
+
 import { Notify } from 'notiflix';
 
 // логіка ще дуже неточна, поки зациклювався на стилях

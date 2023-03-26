@@ -49,8 +49,8 @@
   color: var(--body-color-light-theme);
 }
 
-.dark-theme-box.active,
-.light-theme-box.active {
+.dark-theme-box.active-tablet,
+.light-theme-box.active-tablet {
   color: var(--blue-color);
 }
 
@@ -90,11 +90,11 @@
   background-position: center;
 }
 
-.switch__input:checked+.slider {
+.switch__input:checked + .slider {
   background-color: var(--blue-color);
 }
 
-.switch__input:checked+.slider::before {
+.switch__input:checked + .slider::before {
   transform: translateX(22px);
   background: var(--white-text-color);
   background-repeat: no-repeat;

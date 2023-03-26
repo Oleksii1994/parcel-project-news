@@ -91,6 +91,27 @@
         </li>
       </ul>
     </nav>
-    <include src="./partials/switcher-mobile-menu.html"></include>
+    <div class="switch__wrapper--mobile-menu">
+      <div class="light-theme-box--mobile-menu">
+        <svg class="switch__icon--mobile-menu" width="20" height="20">
+          <use href="./images/switch/symbol-defs-switch.svg#icon-sun"></use>
+        </svg>
+        <!-- <p class="switch__text--mobile-menu">Light</p> -->
+      </div>
+      <label id="switch--mobile-menu" class="switch--mobile-menu">
+        <input
+          class="switch__input--mobile-menu visually-hidden"
+          type="checkbox"
+          id="theme-switch--mobile-menu"
+        />
+        <span class="slider--mobile-menu round--mobile-menu"></span>
+      </label>
+      <div class="dark-theme-box--mobile-menu">
+        <svg class="switch__icon--mobile-menu" width="20" height="20">
+          <use href="./images/switch/symbol-defs-switch.svg#icon-moon"></use>
+        </svg>
+        <!-- <p class="switch__text--mobile-menu">Dark</p> -->
+      </div>
+    </div>
   </div>
 </div>

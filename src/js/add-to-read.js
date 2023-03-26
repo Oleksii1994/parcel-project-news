@@ -1,10 +1,10 @@
+
 import { markup } from './renderMarkup';
 import { refs } from './refs/refs';
 import { pageLoadHandler } from './render news gallery/render-news-gallery';
 import { setToLS, getFromLS } from './local-storage-logic';
 import { sendEmailVerification } from 'firebase/auth';
 
-const notFoundRef = document.querySelector('.not-found');
 const listArticlesRef = document.querySelector('#accordion');
 
 const READ_KEY = 'read_news';
@@ -60,17 +60,14 @@ class AddToRead {
 
 }
 
-export const Atrinstance = new AddToRead(); // створює об'єкт  AddToRead
+export const instance = new AddToRead(); // створює об'єкт  AddToRead
 
-if(Atrinstance.isHomePage()){ //перевірка чи знаходишся на homePage
-  Atrinstance.addListenersToHomePage(); //опрацьовую клік на readMore
+if(instance.isHomePage()){ //перевірка чи знаходишся на homePage
+  instance.addListenersToHomePage(); //опрацьовую клік на readMore
 }
 else{
-  Atrinstance.renderReadPage(); //малюю readPage
+  instance.renderReadPage(); //малюю readPage
 }
-
-
-
 
 
 // if (!dataFromLS.length && notFoundRef !== null) {

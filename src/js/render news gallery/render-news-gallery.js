@@ -192,6 +192,7 @@ function onCalendarChange(e) {
       return dateString >= selectedDate[0] && dateString <= selectedDate[1];
     }
   });
+  // =================================тут можна прописати умову для виведення помилки========== if filteredNews === []
   markup.clearMarkup(refs.galleryEl);
   markup.renderMarkup(
     refs.galleryEl,

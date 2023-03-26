@@ -33,7 +33,7 @@ async function onFormSearchSubmit(event) {
 
   try {
     let { docs } = await newsApi.fetchSearchArticles();
-
+    // =================================тут можна прописати умову для виведення помилки========== if docs === [] .....
     markup.renderMarkup(
       refs.galleryEl,
       markup.createGalleryCardMarkup(NormalizeData.searchData(docs))

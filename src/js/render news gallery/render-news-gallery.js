@@ -110,7 +110,7 @@ function onWeatherForFive(data) {
   arrDate[0].dt_txt = 'Tooday';
   return arrDate;
 }
-
+import {instance} from '../add-to-read'
 async function pageLoadHandler() {
   try {
     location();
@@ -120,6 +120,14 @@ async function pageLoadHandler() {
       refs.galleryEl,
       markup.createGalleryCardMarkup(NormalizeData.popularData(results))
     );
+    if(instance.isHomePage()){ //перевірка чи знаходишся на homePage
+      instance.addListenersToHomePage(); //опрацьовую клік на readMore
+      console.log('test')
+    }
+    else{
+      instance.renderReadPage(); //малюю readPage
+    }
+    
     const refsWeather = {
       weatherContainer: document.querySelector('.weather'),
       weatherBox: document.querySelector('.weather-box'),

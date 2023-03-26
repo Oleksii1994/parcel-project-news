@@ -1,6 +1,8 @@
 import { markup } from './renderMarkup';
+import { refs } from './refs/refs';
 import { pageLoadHandler } from './render news gallery/render-news-gallery';
 import { setToLS, getFromLS } from './local-storage-logic';
+import { sendEmailVerification } from 'firebase/auth';
 
 const notFoundRef = document.querySelector('.not-found');
 const listArticlesRef = document.querySelector('#accordion');
@@ -9,19 +11,18 @@ const READ_KEY = 'read_news';
 
 class AddToRead {
   isHomePage() {
-    const homePage = document.querySelector('.homepage');
+    const homePage = document.querySelector('#homepage');
+    console.log(homePage)
     if (homePage) {
       return true;
     }
     return false;
   }
   addListenersToHomePage(){
-if(pageLoadHandler){
-  const linkReadMore = document.querySelector('.thumb__link');
-  linkReadMore.addEventListener('click', this.#onReadClick(evant))
-  //(ev) => this.#onReadClick(ev);
-}
-
+      const linkReadMore = document.querySelectorAll('.thumb__link');
+      
+      linkReadMore.forEach(link => link.addEventListener('click', this.#onReadClick, {once:true}));
+      console.log(linkReadMore)
   }
   renderReadPage(){ //рендер маркапу
   const dataFromLS = getFromLS(READ_KEY)
@@ -60,14 +61,15 @@ if(pageLoadHandler){
 
 }
 
-const instance = new AddToRead(); // створює об'єкт  AddToRead
+export const instance = new AddToRead(); // створює об'єкт  AddToRead
 
-if(instance.isHomePage()){ //перевірка чи знаходишся на homePage
-  instance.addListenersToHomePage(); //опрацьовую клік на readMore
-}
-else{
-  instance.renderReadPage(); //малюю readPage
-}
+// if(instance.isHomePage()){ //перевірка чи знаходишся на homePage
+//   instance.addListenersToHomePage(); //опрацьовую клік на readMore
+//   console.log('test')
+// }
+// else{
+//   instance.renderReadPage(); //малюю readPage
+// }
 
 
 

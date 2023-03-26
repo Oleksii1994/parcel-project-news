@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Favorite</title>
     <link
       rel="icon"
       href="./images/world-news.png"
@@ -16,22 +16,20 @@
     <link rel="stylesheet" href="../node_modules/jqueryui/jquery-ui.min.css">
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/jqueryui/jquery-ui.min.js"></script>
-    <script type="module" src="./index.js"></script>
   </head>
   <body>
     <include src="./partials/header.html"></include>
-    <section class="read">
-      <div class="container">
+    <main>
+      <section>
         <div id="accordion">
           <h3>Section 1</h3>
-
           <div>
             <p>
-              <section class="favorite">
                 <div class="not-found">
-            <ul class="news-list list gallery__list" id="news-list"></ul>
+            <ul class="news-list list gallery__list" id="news-list">
+
+            </ul>
             </div>
-            </section>
             </p>
           </div>
           <h3>Section 2</h3>
@@ -67,12 +65,11 @@
             </p>
           </div>
         </div>
-      </div>
-    </section>
-    <script type="module" src="./js/add-to-read.js"></script>
-    <script src="./js/accordion.js"></script>
+      </section>
+    </main>
     <include src="./partials/footer.html"></include>
-    <include src="./partials/mobile-menu-read.html"></include>
-    <script type="module" src="./js/mobile-menu-read.js"></script>
+    <script type="module" src="./js/add-to-read.js"></script>
+    <script type="module" src="./js/accordion.js"></script>
   </body>
 </html>
+

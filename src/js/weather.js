@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { format } from 'date-fns';
 import { API_KEY } from './API/weatherAPI';
-import { refs } from './refs/weather-refs';
+import { refsWeather } from './refs/weather-refs';
 
 let latitude = 50.431;
 let longitude = 30.532;
 
-refs.weatherButton.addEventListener('click', changeButtonWheater);
+refsWeather.weatherButton.addEventListener('click', changeButtonWheater);
 
 location();
 
@@ -16,7 +16,7 @@ async function weather(latitude = 50.431, longitude = 30.532) {
       `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
     );
     const data = response.data;
-    refs.weatherBox.innerHTML = renderWeather(data);
+    refsWeather.weatherBox.innerHTML = renderWeather(data);
   } catch (error) {
     console.error(error);
   }
@@ -80,7 +80,7 @@ async function weatherForFive(latitude = 50.431, longitude = 30.532) {
       weaterArrayForWeek,
       data.city.name
     );
-    refs.weatherBox.innerHTML = stringToRender;
+    refsWeather.weatherBox.innerHTML = stringToRender;
   } catch (error) {
     console.error(error);
   }
@@ -134,16 +134,16 @@ function onWeatherForFive(data) {
 }
 
 function changeButtonWheater(e) {
-  if (refs.weatherButton.textContent === 'Weather for Week') {
-    refs.weatherButton.textContent = 'Weather for Day';
-    refs.weatherContainer.style.padding = '15px 10px 15px 10px';
-    refs.weatherBox.style.alignItems = 'flex-start';
+  if (refsWeather.weatherButton.textContent === 'Weather for Week') {
+    refsWeather.weatherButton.textContent = 'Weather for Day';
+    refsWeather.weatherContainer.style.padding = '15px 10px 15px 10px';
+    refsWeather.weatherBox.style.alignItems = 'flex-start';
 
     weatherForFive(latitude, longitude);
     return;
   }
-  refs.weatherContainer.style.padding = '45px 53px 45px 53px';
-  refs.weatherButton.textContent = 'Weather for Week';
-  refs.weatherBox.style.alignItems = 'center';
+  refsWeather.weatherContainer.style.padding = '45px 53px 45px 53px';
+  refsWeather.weatherButton.textContent = 'Weather for Week';
+  refsWeather.weatherBox.style.alignItems = 'center';
   location();
 }

@@ -27,6 +27,10 @@ refs.formSearch.addEventListener('submit', onFormSearchSubmit);
 async function onFormSearchSubmit(event) {
   event.preventDefault();
   const value = event.currentTarget.elements.searchQuery.value.trim();
+  // markup.clearMarkup(refs.galleryEl);
+  if (!value) {
+    return;
+  }
   newsApi.resetPage();
   newsApi.resetHits();
   newsApi.query = value;
@@ -92,4 +96,12 @@ function checkDate() {
       newsApi.finishDate = selectedDate[1];
     }
   }
+}
+
+const galleryRef = document.querySelector('.gallery');
+
+if (galleryRef) {
+  document
+    .querySelector('.nav__link[href="/index.html"]')
+    .classList.add('current__page');
 }

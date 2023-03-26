@@ -1,72 +1,63 @@
 .favorite {
-  padding-top: 40px;
-  padding-bottom: 60px;
+  padding: 40px 16px 60px 16px;
 }
 
 .screen-tablet {
   .favorite {
-    padding-top: 48px;
-    padding-bottom: 100px;
+    padding: 49px 16px 100px 16px;
   }
 }
 
 .screen-desktop {
   .favorite {
-    padding-top: 60px;
-    padding-bottom: 300px;
+    padding: 60px 16px 300px 16px;
   }
 }
 
-.not-found{
+.not-found {
   display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
   margin-bottom: 40px;
   // 36px 59px 36px;
 }
 
-// .remove{
-// opacity: 1;
-// }
-
-.gallery-thumb__icon {
-  margin-left: 4px;
-  font-size: 26px;
-  color: var(--blue-color);
+.not-found__image {
+  padding: 40px 36px 0px 36px;
 }
-//   .current::after {
-//     content: "";
 
-//     position: absolute;
+.screen-tablet {
+  .not-found__image {
+    padding: 40px 104px 0px 104px;
+  }
+}
 
-//     display: block;
-//     width: 69px;
-//     height: 8px;
-//     bottom: 0;
-//     left: 0;
-//     background-color: var(--blue-color);
-//     border-radius: 2px;
+.screen-desktop {
+  .not-found__image {
+    padding: 40px 340px 372px 340px;
+  }
+}
 
-//         @media screen and (min-width: $desktop) {
-//       padding-bottom: 5px;
-//   }
-// };
+.not-found-title {
+  padding: 40px 22px 0px 22px;
 
-// .favorite {
-//   @media screen and (max-width: $tablet) {
-//     padding-top: 40px;
-//     padding-bottom: 60px;
-//   }
+  color: var(--main-black-text-color);
+  font-family: font(_manrope);
+  @include text(700, 20, 27.32);
+  text-align: center;
+}
 
-//   @media screen and (min-width: $tablet) and (max-width: $desktop) {
-//     padding-top: 48px;
-//     padding-bottom: 100px;
-//   }
+.screen-tablet {
+  .not-found-title {
+    @include text(700, 40, 54.64);
+    padding: 88px 110px 0px 110px;
+  }
+}
 
-//   @media screen and (min-width: $desktop) {
-//     padding-top: 60px;
-//     padding-bottom: 300px;
-// }
-// }
+.screen-desktop {
+  .not-found-title {
+    padding: 121px 366px 0px 366px;
+  }
+}

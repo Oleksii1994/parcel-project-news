@@ -393,7 +393,11 @@ async function categoriesFetch(e) {
   newsApi.currentCategory = e.target.textContent.toLowerCase();
   try {
     const data = await newsApi.fetchArticlesByCategory();
-    // =================================тут можна прописати умову для виведення помилки========== data
+    if (data === '') {
+      refs.notFoundBox.innerHTML = `<h2 class="not-found-box__title">We haven’t found news from <br> this date</h2>
+      <img src="https://live.staticflickr.com/65535/52770181328_d91f5366f0_z.jpg">`;
+      return;
+    }
     newsApi.newsDataArr = NormalizeData.categoryData(data);
     markup.clearMarkup(refs.galleryEl);
     markup.renderMarkup(

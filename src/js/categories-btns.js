@@ -219,6 +219,7 @@ const categoriesOtherTextRef = document.querySelector(
   '.categories__other-text'
 );
 const categoriesOtherBtnRef = document.querySelector('.categories__other-btn');
+const categoriesOtherBtn = document.querySelector('.categories__other-item');
 const categoriesBtnListRef = document.querySelector('.categories__btn-list');
 const otherBtn = categoriesRef.querySelector('#categories-other');
 
@@ -384,12 +385,19 @@ async function onBtnsClick(e) {
   if (e.target.nodeName !== 'BUTTON') {
     return;
   }
+
+  // for (let i = 0; i < categoriesBtnListRef.children.length; i++) {
+  //   categoriesOtherBtn[i].classList.remove('active');
+  // }
+
+  // categoriesOtherBtn.classList.remove('active');
   e.target.classList.add('active');
 
   categoriesFetch(e);
 }
 
 async function categoriesFetch(e) {
+  e.preventDefault();
   newsApi.currentCategory = e.target.textContent.toLowerCase();
   try {
     const data = await newsApi.fetchArticlesByCategory();

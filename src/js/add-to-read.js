@@ -1,5 +1,4 @@
 import { markup } from './renderMarkup';
-import { refs } from './refs/refs';
 import { pageLoadHandler } from './render news gallery/render-news-gallery';
 import { setToLS, getFromLS } from './local-storage-logic';
 

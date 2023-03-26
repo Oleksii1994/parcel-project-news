@@ -47,23 +47,6 @@ function renderWeather(data) {
     `;
 }
 
-async function weatherForFive(latitude = 50.431, longitude = 30.532) {
-  try {
-    const response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
-    );
-    const data = response.data;
-    const weaterArrayForWeek = onWeatherForFive(data);
-    const stringToRender = renderWeatherForWeek(
-      weaterArrayForWeek,
-      data.city.name
-    );
-    refsWeather.weatherBox.innerHTML = stringToRender;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 function renderWeatherForWeek(arr, city) {
   return arr
     .map(data => {
@@ -138,6 +121,23 @@ async function pageLoadHandler() {
       }
     }
 
+    async function weatherForFive(latitude = 50.431, longitude = 30.532) {
+      try {
+        const response = await axios.get(
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
+        );
+        const data = response.data;
+        const weaterArrayForWeek = onWeatherForFive(data);
+        const stringToRender = renderWeatherForWeek(
+          weaterArrayForWeek,
+          data.city.name
+        );
+        refsWeather.weatherBox.innerHTML = stringToRender;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
     function successCallback(position) {
       latitude = position.coords.latitude;
       longitude = position.coords.longitude;
@@ -192,6 +192,7 @@ function onCalendarChange(e) {
       return dateString >= selectedDate[0] && dateString <= selectedDate[1];
     }
   });
+  // =================================тут можна прописати умову для виведення помилки========== if filteredNews === []
   markup.clearMarkup(refs.galleryEl);
   markup.renderMarkup(
     refs.galleryEl,

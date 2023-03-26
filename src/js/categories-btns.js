@@ -377,19 +377,7 @@ async function onOtherBoxClick(e) {
   categoriesOtherTextRef.textContent = e.target.textContent;
   categoriesOtherBtnRef.classList.remove('visible');
 
-  newsApi.currentCategory = e.target.textContent.toLowerCase();
-  try {
-    const data = await newsApi.fetchArticlesByCategory();
-    newsApi.newsDataArr = NormalizeData.categoryData(data);
-    markup.clearMarkup(refs.galleryEl);
-    markup.renderMarkup(
-      refs.galleryEl,
-      markup.createGalleryCardMarkup(NormalizeData.categoryData(data))
-    );
-  } catch (error) {
-    console.log(error);
-    Notify.failure(`${error}`);
-  }
+  categoriesFetch(e);
 }
 
 async function onBtnsClick(e) {
@@ -398,9 +386,14 @@ async function onBtnsClick(e) {
   }
   e.target.classList.add('active');
 
+  categoriesFetch(e);
+}
+
+async function categoriesFetch(e) {
   newsApi.currentCategory = e.target.textContent.toLowerCase();
   try {
     const data = await newsApi.fetchArticlesByCategory();
+    // =================================тут можна прописати умову для виведення помилки========== data
     newsApi.newsDataArr = NormalizeData.categoryData(data);
     markup.clearMarkup(refs.galleryEl);
     markup.renderMarkup(

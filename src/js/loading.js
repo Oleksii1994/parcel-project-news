@@ -1,11 +1,12 @@
-const loader = document.querySelector('.loading');
+import { refs } from './refs/refs';
 
 const hideLoader = () => {
-  loader.classList.remove('show');
+  refs.loader.classList.remove('show');
 };
 
 const showLoader = () => {
-  loader.classList.add('show');
+  refs.loader.classList.add('show');
 };
 
 export { hideLoader, showLoader };
+

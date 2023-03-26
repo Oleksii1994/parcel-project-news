@@ -427,9 +427,9 @@ function getReadNews() {
   return readNewsArr;
 }
 
-console.log('fav', getFavNews());
+// console.log('fav', getFavNews());
 
-console.log('read', getReadNews());
+// console.log('read', getReadNews());
 
 // Перенаправление в личный
 

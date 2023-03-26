@@ -53,20 +53,22 @@ function getNameAndEmail() {
     .then(snapshot => {
       snapshot.forEach(childSnapshot => {
         const user = auth.currentUser;
+        if (!user) {
+          return;
+        }
         const userArr = childSnapshot.val();
         if (userArr.email === user.email) {
           //   console.log(userArr);
+          const newsFavourite = userArr.newsFavouriteData.filter(
+            item => item !== ''
+          );
+          const newsRead = userArr.newsReadData.filter(item => item !== '');
+
+          refs.userName.innerHTML = userArr.username;
+          refs.userEmail.innerHTML = userArr.email;
+          refs.favoriteNews.innerHTML = newsFavourite.length;
+          refs.readNews.innerHTML = newsRead.length;
         }
-
-        const newsFavourite = userArr.newsFavouriteData.filter(
-          item => item !== ''
-        );
-        const newsRead = userArr.newsReadData.filter(item => item !== '');
-
-        refs.userName.innerHTML = userArr.username;
-        refs.userEmail.innerHTML = userArr.email;
-        refs.favoriteNews.innerHTML = newsFavourite.length;
-        refs.readNews.innerHTML = newsRead.length;
       });
     })
     .catch(error => {

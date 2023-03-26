@@ -5,7 +5,28 @@ export const markup = {
   createGalleryCardMarkup(arr) {
     return arr
       .map(({ img, title, text, date, id, category, url }, index) => {
-        if (index === 2) {
+        if (
+          window.matchMedia('(min-width: 320px)').matches &&
+          window.matchMedia('(max-width: 767px)').matches &&
+          index === 0
+        ) {
+          return `<li class="weather">
+  <div class="weather-box"></div>
+  <button class="weather-button">Weather for Week</button>
+</li>`;
+        } else if (
+          window.matchMedia('(min-width: 768px)').matches &&
+          window.matchMedia('(max-width: 1279px)').matches &&
+          index === 1
+        ) {
+          return `<li class="weather">
+  <div class="weather-box"></div>
+  <button class="weather-button">Weather for Week</button>
+</li>`;
+        } else if (
+          window.matchMedia('(min-width: 1280px)').matches &&
+          index === 2
+        ) {
           return `<li class="weather">
   <div class="weather-box"></div>
   <button class="weather-button">Weather for Week</button>

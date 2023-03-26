@@ -5,4 +5,6 @@ export const refs = {
   darkThemeBox: document.querySelector('.dark-theme-box'),
   formSearch: document.querySelector('.form-search'),
   galleryEl: document.querySelector('#news-gallery'),
+  notFoundBox: document.querySelector('.not-found-box'),
+  loader: document.querySelector('.loading'),
 };

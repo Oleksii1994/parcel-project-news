@@ -8,12 +8,17 @@ import './js/switch-theme';
 import './js/newCalendar';
 // import './js/weather';
 import './js/categories-btns';
+import './js/render news gallery/render-news-gallery';
+// import './js/weather';
 import './js/add-to-read';
 // import './js/read';
 import './js/add-to-favorite';
 import './js/pagination';
 import './js/header';
-import './js/render news gallery/render-news-gallery';
-import './js/header-search-by-word-anna';
+
+
+
+
 import './js/firebace/firebace-main';
 import './js/switcher-mobile-menu';
+

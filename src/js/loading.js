@@ -7,3 +7,5 @@ const hideLoader = () => {
 const showLoader = () => {
   loader.classList.add('show');
 };
+
+export { hideLoader, showLoader };

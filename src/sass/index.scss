@@ -5,7 +5,7 @@
 @import './utils/variables';
 @import './utils/vissually-hidden';
 @import './utils/mixin';
-
+@import './components/loading';
 @import './components/header';
 @import './components/switch-theme';
 @import './components/mobile-menu';
@@ -20,3 +20,6 @@
 @import './components/read';
 @import './components/creators';
 @import './components/user-profile';
+@import './components/favorite';
+@import './components/modal-auth';
+@import './components/switcher-mobile-menu';

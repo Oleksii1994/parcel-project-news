@@ -12,9 +12,10 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity 320ms linear;
+
+  top: 33px;
+  left: -3px;
   position: absolute;
-  top: 31px;
-  left: 1px;
   z-index: 5;
 }
 
@@ -27,7 +28,7 @@
   background-color: var(--body-color-light-theme);
   border: 1px solid var(--blue-main-color);
   border-radius: 20px;
-  padding: 8px 21px;
+
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
@@ -53,9 +54,9 @@
 .categories__other-item {
   background-color: transparent;
   border: none;
-  height: 100%;
-  width: 100%;
   padding: 0;
+  padding: 8px 21px;
+  border-radius: 20px;
   color: var(--blue-main-color);
   cursor: pointer;
   font-family: inherit;
@@ -72,10 +73,10 @@
   display: block;
   white-space: nowrap;
 
-  &:active {
-    background-color: var(--blue-main-color);
-    color: var(--white-main-color);
-  }
+  // &:active {
+  //   background-color: var(--blue-main-color);
+  //   color: var(--white-main-color);
+  // }
   &-btn-box {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -118,11 +119,13 @@
 .categories__other-btn.active {
   background-color: var(--blue-main-color);
   color: var(--white-main-color);
+  border-radius: 20px;
 }
 
 .categories__other-item.active {
   background-color: var(--blue-main-color);
   color: var(--white-main-color);
+  border-radius: 20px;
 }
 
 .visible .categories__other-icon {
@@ -139,7 +142,7 @@
   opacity: 1;
   pointer-events: all;
 }
-.categories__btn {
+.categories__btn-container {
   position: relative;
 }
 
@@ -154,6 +157,23 @@
 .categories {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: baseline;
   gap: 14px;
+  .screen-mobile & {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+    padding: 18px;
+  }
+}
+
+.container-for-calendar {
+  .screen-mobile & {
+    padding: 0;
+  }
+}
+
+.categories__btn {
+  padding: 8px 21px;
 }

@@ -25,6 +25,8 @@
     "debounce": "^1.2.1",
     "firebase": "^9.18.0",
     "flatpickr": "^4.6.13",
+    "jquery": "^3.6.4",
+    "jqueryui": "^1.11.1",
     "modern-normalize": "^1.1.0",
     "notiflix": "^3.2.6",
     "vanilla-tilt": "^1.8.0"
@@ -34,7 +36,8 @@
     "buffer": "^6.0.3",
     "parcel": "^2.6.0",
     "parcel-reporter-clean-dist": "^1.0.4",
-    "posthtml-include": "^1.7.4"
+    "posthtml-include": "^1.7.4",
+    "process": "^0.11.10"
   },
   "browserslist": "> 0.5%, last 2 versions, not dead"
 }

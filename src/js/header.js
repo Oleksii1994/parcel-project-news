@@ -4,6 +4,10 @@ import { Notify } from 'notiflix';
 import { markup } from './renderMarkup';
 import { NormalizeData } from './API/api-data-normalaizer';
 import { selectedDate } from './newCalendar';
+import { makePaginationButtons } from './pagination';
+import { showLoader, hideLoader } from './loading';
+
+// export let totalButtons = Math.ceil(newsApi.hits / perPage);
 
 const notifyOptions = {
   width: '450px',
@@ -28,21 +32,28 @@ async function onFormSearchSubmit(event) {
     return;
   }
   newsApi.resetPage();
-
+  newsApi.resetHits();
   newsApi.query = value;
   if (!newsApi.searchQuery) {
     return Notify.failure('Type search query, please');
   }
-
+  markup.clearMarkup(refs.galleryEl);
+  showLoader();
   checkDate();
 
   try {
     let { docs } = await newsApi.fetchSearchArticles();
-
+    hideLoader();
+    if (!docs.length) {
+      refs.notFoundBox.innerHTML = `<h2 class="not-found-box__title">We haven’t found news from <br> this categories</h2>
+      <img src="https://live.staticflickr.com/65535/52770181328_d91f5366f0_z.jpg">`;
+      return;
+    }
     markup.renderMarkup(
       refs.galleryEl,
       markup.createGalleryCardMarkup(NormalizeData.searchData(docs))
     );
+    makePaginationButtons(newsApi.totalHits);
   } catch (error) {
     console.log(error);
     Notify.failure(`${error}`);

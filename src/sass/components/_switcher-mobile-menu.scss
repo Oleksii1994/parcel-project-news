@@ -1,0 +1,131 @@
+.switch__wrapper--mobile-menu {
+  display: flex;
+  // width: 100%;
+  // height: 100%;
+  gap: 10px;
+
+  // justify-content: center;
+  padding-left: 16px;
+  align-items: center;
+}
+
+/* The switch - the box around the slider */
+.switch--mobile-menu {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+/* Hide default HTML checkbox */
+
+.switch__icon--mobile-menu {
+  transition: fill 320ms linear;
+  fill: currentColor;
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+}
+
+// .switch__text--mobile-menu {
+//   display: none;
+//   transition: color 320ms linear;
+//   color: inherit;
+
+//   @media screen and (min-width: 768px) {
+//     display: block;
+//   }
+// }
+
+.light-theme--mobile-menu .light-theme-box--mobile-menu,
+.light-theme--mobile-menu .dark-theme-box--mobile-menu {
+  color: var(--dark-grey-text-color);
+}
+
+.dark-theme--mobile-menu .dark-theme-box--mobile-menu,
+.dark-theme--mobile-menu .light-theme-box--mobile-menu {
+  color: var(--body-color-light-theme);
+}
+
+.dark-theme-box--mobile-menu.mobile-menu--active,
+.light-theme-box--mobile-menu.mobile-menu--active {
+  color: var(--blue-color);
+}
+
+.light-theme-box--mobile-menu,
+.dark-theme-box--mobile-menu {
+  display: flex;
+}
+
+/* The slider */
+.slider--mobile-menu {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--white-text-color);
+
+  transition: 0.4s;
+}
+
+.slider--mobile-menu::before {
+  position: absolute;
+  content: '';
+  height: 16px;
+  width: 16px;
+  left: 0px;
+  bottom: 4px;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+
+  transition: 0.4s;
+
+  background: var(--blue-secondary-color);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.switch__input--mobile-menu:checked + .slider--mobile-menu {
+  background-color: var(--blue-color);
+}
+
+.switch__input--mobile-menu:checked + .slider--mobile-menu::before {
+  transform: translateX(22px);
+  background: var(--white-text-color);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Rounded sliders */
+.slider--mobile-menu.round--mobile-menu {
+  border-radius: 34px;
+  border: 1px solid var(--blue-secondary-color);
+}
+
+.slider--mobile-menu.round--mobile-menu::before {
+  border-radius: 50%;
+}
+
+.mobile-menu.dark-theme {
+  background-color: var(--dark-color);
+  color: var(--body-color-light-theme);
+}
+
+.mobile-menu.light-theme {
+  background-color: var(--body-color-light-theme);
+  color: var(--black-main-color);
+}
+
+body.dark-theme {
+  background-color: var(--dark-color);
+  color: var(--body-color-light-theme);
+}
+
+body.light-theme {
+  background-color: var(--body-color-light-theme);
+  color: var(--black-main-color);
+}

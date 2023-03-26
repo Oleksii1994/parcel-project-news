@@ -91,7 +91,7 @@ export class NormalizeData {
     return arr.map(
       ({ abstract, title, published_date, uri, multimedia, section, url }) => {
         let imgUrl = '';
-        if (multimedia.length !== 0) {
+        if (multimedia !== null && multimedia.length !== 0) {
           imgUrl = multimedia[2].url;
         } else {
           imgUrl =

@@ -10,4 +10,3 @@ const showLoader = () => {
 
 export { hideLoader, showLoader };
 
-showLoader();

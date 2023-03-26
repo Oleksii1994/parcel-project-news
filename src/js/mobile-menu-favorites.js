@@ -25,6 +25,6 @@ import { enableBodyScroll } from 'body-scroll-lock';
     if (!e.matches) return;
     mobileMenu.classList.remove('is-open');
     openMenuBtn.setAttribute('aria-expanded', false);
-    bodyScrollLock.enableBodyScroll(document.body);
+    enableBodyScroll(document.body);
   });
 })();

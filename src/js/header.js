@@ -33,7 +33,11 @@ async function onFormSearchSubmit(event) {
 
   try {
     let { docs } = await newsApi.fetchSearchArticles();
-    // =================================тут можна прописати умову для виведення помилки========== if docs === [] .....
+    if (!docs.length) {
+      refs.notFoundBox.innerHTML = `<h2 class="not-found-box__title">We haven’t found news from <br> this categories</h2>
+      <img src="https://live.staticflickr.com/65535/52770181328_d91f5366f0_z.jpg">`;
+      return;
+    }
     markup.renderMarkup(
       refs.galleryEl,
       markup.createGalleryCardMarkup(NormalizeData.searchData(docs))

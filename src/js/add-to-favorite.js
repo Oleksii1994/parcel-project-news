@@ -5,6 +5,37 @@ import { markup } from './renderMarkup';
 // import { pageLoadHandler } from './render news gallery/render-news-gallery';
 import { setToLS, getFromLS } from './local-storage-logic';
 
+// =====================================================Юра
+import Notiflix from 'notiflix';
+import { initializeApp, firebase } from 'firebase/app';
+import {
+  getDatabase,
+  set,
+  ref,
+  update,
+  get,
+  child,
+  userId,
+} from 'firebase/database';
+import { getAuth } from 'firebase/auth';
+import {
+  addOrDeleteFavoriteNews,
+  getFavNews,
+} from './firebace/firebace-for-favorite';
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyDD_Eh4tyvM30ivpTHWqfHo7r2h0gDev4Y',
+  authDomain: 'project-goit2023-js.firebaseapp.com',
+  databaseURL: 'https://project-goit2023-js-default-rtdb.firebaseio.com',
+  projectId: 'project-goit2023-js',
+  storageBucket: 'project-goit2023-js.appspot.com',
+  messagingSenderId: '407142734195',
+  appId: '1:407142734195:web:6d45ec3cdde16415370d06',
+  measurementId: 'G-VMY0EQ75TG',
+};
+// ===========================================================
+
+
 const notFoundRef = document.querySelector('.not-found');
 const listArticlesRef = document.querySelector('#news-list');
 
@@ -52,6 +83,13 @@ export function onLoadHomePage() {
     if (present) {
       const newData = dataFromLS.filter(article => article.id !== id);
       setToLS(FAVORITE_KEY, newData);
+// ===========================================================
+const user = auth.currentUser;
+if (user) {
+  const userId = user.uid;
+  addOrDeleteFavoriteNews(article, userId, targetBtn);
+}
+// ===========================================================
       targetBtn.innerHTML =
         '<p class="gallery-thumb__name add">Add to favorite<span class="gallery-thumb__icon">&#9825;</span></p>';
       return;

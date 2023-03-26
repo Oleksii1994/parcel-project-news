@@ -67,7 +67,7 @@ export const markup = {
 //         </svg>
 //       </p>
 //     <button type="button" class="gallery-thumb__btn">
-//       <p class="gallery-thumb__name add" 
+//       <p class="gallery-thumb__name add"
 //         >Add to favorite
 //         <svg width="16" height="16">
 //           <use href="./images/icon-card.svg#icon-like-icon"></use>
@@ -100,4 +100,3 @@ export const markup = {
 //     ref.insertAdjacentHTML('beforeend', markup);
 //   },
 // };
-

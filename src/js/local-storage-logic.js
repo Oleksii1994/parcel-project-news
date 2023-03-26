@@ -15,6 +15,9 @@ export function getFromLS(key) {
     console.error('Get state error: ', error.message);
   }
 }
+export function getReadingNews() {
+  return JSON.parse(localStorage.getItem('readingNews'));
+}
 
 // export function removeFromLS(key) {
 //   try {

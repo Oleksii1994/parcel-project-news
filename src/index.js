@@ -1,7 +1,7 @@
 import './js/adaptive-devices';
 import './js/API/fetchAPI';
 import './js/mobile-menu';
-
+import './js/loading';
 import './js/API/api-data-normalaizer';
 import './js/input-actions';
 import './js/switch-theme';
@@ -16,9 +16,5 @@ import './js/add-to-favorite';
 import './js/pagination';
 import './js/header';
 
-
-
-
 import './js/firebace/firebace-main';
 import './js/switcher-mobile-menu';
-

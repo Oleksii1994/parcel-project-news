@@ -1,63 +1,96 @@
-.favorite {
+.favorite{
+  width: 100%;
   padding: 40px 16px 60px 16px;
-}
 
-.screen-tablet {
-  .favorite {
+  @include for-size(tablet) {
+    width: 320px;
+  }
+  @include for-size(tablet) {
+    width: 768px;
     padding: 49px 16px 100px 16px;
   }
-}
-
-.screen-desktop {
-  .favorite {
+  @include for-size(desktop) {
+    width: 1280px;
     padding: 60px 16px 300px 16px;
   }
 }
 
-.not-found {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  margin-bottom: 40px;
-  // 36px 59px 36px;
-}
 
-.not-found__image {
-  padding: 40px 36px 0px 36px;
-}
 
-.screen-tablet {
-  .not-found__image {
-    padding: 40px 104px 0px 104px;
-  }
-}
 
-.screen-desktop {
-  .not-found__image {
-    padding: 40px 340px 372px 340px;
-  }
-}
+// .favorite {
+//   padding: 40px 16px 60px 16px;
+// }
 
-.not-found-title {
-  padding: 40px 22px 0px 22px;
+// .screen-tablet {
+//   .favorite {
+//     padding: 49px 16px 100px 16px;
+//   }
+// }
 
-  color: var(--main-black-text-color);
-  font-family: font(_manrope);
-  @include text(700, 20, 27.32);
-  text-align: center;
-}
+// .screen-desktop {
+//   .favorite {
+//     padding: 60px 16px 300px 16px;
+//   }
+// }
 
-.screen-tablet {
-  .not-found-title {
-    @include text(700, 40, 54.64);
-    padding: 88px 110px 0px 110px;
-  }
-}
+// .not-found {
+//   display: flex;
+//   align-items: center;
+//   flex-direction: column;
+//   justify-content: center;
+//   width: 100%;
+//   margin-bottom: 40px;
+//   // 36px 59px 36px;
+// }
 
-.screen-desktop {
-  .not-found-title {
-    padding: 121px 366px 0px 366px;
-  }
-}
+// .not-found__image {
+//   padding: 40px 36px 0px 36px;
+// }
+
+// .screen-tablet {
+//   .not-found__image {
+//     padding: 40px 104px 0px 104px;
+//   }
+// }
+
+// .screen-desktop {
+//   .not-found__image {
+//     padding: 40px 340px 372px 340px;
+//   }
+// }
+
+// .not-found-box {
+  
+//   &__title {
+//     font-family: font(_poppins);
+//     @include text(700, 20, 27);
+//     letter-spacing: -0.01em;
+//     text-align: center;
+//     margin-bottom: 40px;
+//     @include for-size(tablet) {
+//       @include text(700, 40, 55);
+//     }
+//   }
+// }
+
+// .not-found-title {
+//   padding: 40px 22px 0px 22px;
+
+//   font-family: font(_poppins);
+//   @include text(700, 20, 27.32);
+//   text-align: center;
+// }
+
+// .screen-tablet {
+//   .not-found-title {
+//     @include text(700, 40, 54.64);
+//     padding: 88px 110px 0px 110px;
+//   }
+// }
+
+// .screen-desktop {
+//   .not-found-title {
+//     padding: 121px 366px 0px 366px;
+//   }
+// }

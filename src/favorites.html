@@ -13,14 +13,38 @@
 
     <main>
       <section class="favorite">
-        <div class="not-found">
-          <ul class="news-list list gallery__list" id="news-list"></ul>
-        </div>
+        <div class="not-found-box">
+          <h2 class="not-found-box__title">You haven't added anything <br/> favorite!</h2>
+          <picture >
+              <source 
+                  srcset="./images/mobile-png/nofound-mob-1x.png 1x, ./images/mobile-png/nofound-mob-1x.png 2x" 
+                  type="image/png" 
+                  media="(max-width: 479px)"
+                  alt="underfined-picture"/>
+               <source 
+                  srcset="./images/tablet-png/nofound-tab-1x.png 1x, ./images/tablet-png/nofound-tab-1x.png 2x" 
+                  type="image/png" 
+                  media="(max-width:767px)" 
+                  alt="underfined-picture"/>
+              <source srcset="./images/desktop-png/nofound-des-1x.png 1x, ./images/desktop-png/nofound-des-1x.png 2x"  
+                  type="image/png" 
+                  media="(min-width: 1279px)"
+                  alt="underfined-picture"/>
+              <img 
+                  class="not-found-box___picture"
+                  src="./images/mobile-png/nofound-mob-1x.png" 
+                  alt="underfined-picture" 
+                  width="248" 
+                  height="198"/> 
+          </picture>
+      </div>
+        <ul class="news-list list gallery__list" id="news-list"></ul>
+       
       </section>
     </main>
     <include src="./partials/footer.html"></include>
     <include src="./partials/mobile-menu-favorites.html"></include>
-    <script type="module" src="./favorites.js"></script>
     <script type="module" src="./js/add-to-favorite.js"></script>
+    <script type="module" src="./favorites.js"></script>
   </body>
 </html>

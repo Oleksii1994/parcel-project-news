@@ -103,9 +103,10 @@ async function pageLoadHandler() {
       refs.galleryEl,
       markup.createGalleryCardMarkup(NormalizeData.popularData(results))
     );
-
+////////
     const event = new Event("build");
     refs.galleryEl.dispatchEvent(event);
+    /////////
 
     const refsWeather = {
       weatherContainer: document.querySelector('.weather'),

@@ -1,6 +1,6 @@
 import { newsApi } from '../API/fetchAPI';
 import { NormalizeData } from '../API/api-data-normalaizer';
-import { onLoadHomePage } from '../add-to-favorite'; //////////////
+import { onLoadHomePage } from '../add-to-favorite';
 // import { onLoadPageHomeForRead } from '../read';
 import { refs } from '../refs/refs';
 import { markup } from '../renderMarkup';
@@ -104,8 +104,9 @@ async function pageLoadHandler() {
       refs.galleryEl,
       markup.createGalleryCardMarkup(NormalizeData.popularData(results))
     );
+    onLoadHomePage();
     ////////////////////////////////////////////////////// Evant який додається коли генерується markup
-    const event = new Event("build");
+    const event = new Event('build');
     refs.galleryEl.dispatchEvent(event);
     //////////////////////////////////////////////////////
 
@@ -126,6 +127,7 @@ async function pageLoadHandler() {
         }, 1300);
       } catch (error) {
         console.error(error);
+        Notify.failure(`${error}`);
       }
     }
 

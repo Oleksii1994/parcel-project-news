@@ -6,7 +6,6 @@ import './js/API/api-data-normalaizer';
 import './js/input-actions';
 import './js/switch-theme';
 import './js/newCalendar';
-// import './js/weather';
 import './js/categories-btns';
 import './js/render news gallery/render-news-gallery';
 import './js/add-to-favorite';

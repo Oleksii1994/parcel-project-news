@@ -3,6 +3,7 @@ import { refs } from './refs/refs';
 import { NormalizeData } from './API/api-data-normalaizer';
 import { markup } from './renderMarkup';
 import { Notify } from 'notiflix';
+import { makePaginationButtons } from './pagination';
 
 const categories = [
   {
@@ -246,7 +247,7 @@ function onWindowsResize(e) {
           `<div class="categories__other-btn-box"><button class="categories__other-box-item" data-categoryName="${elem.section}" type="button">${elem.display_name}</button></div>`
       )
       .join('');
-    console.log(markup);
+    // console.log(markup);
     otherBoxRef.innerHTML = markup;
     return;
   }
@@ -398,7 +399,9 @@ async function onBtnsClick(e) {
 
 async function categoriesFetch(e) {
   e.preventDefault();
-  newsApi.currentCategory = e.target.textContent.toLowerCase();
+  newsApi.currentCategory = newsApi.encodeCategory(
+    e.target.textContent.toLowerCase()
+  );
   try {
     const data = await newsApi.fetchArticlesByCategory();
     if (data === '') {
@@ -412,6 +415,7 @@ async function categoriesFetch(e) {
       refs.galleryEl,
       markup.createGalleryCardMarkup(NormalizeData.categoryData(data))
     );
+    makePaginationButtons(newsApi.totalButtons);
   } catch (error) {
     console.log(error);
     Notify.failure(`${error}`);

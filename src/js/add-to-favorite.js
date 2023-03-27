@@ -166,7 +166,7 @@ function checkLS() {
   }
 }
 
-onLoadFavoritesPage(); /////треба викликати цю функцію при клікі на посилання Favorite
+// onLoadFavoritesPage(); /////треба викликати цю функцію при клікі на посилання Favorite
 
 // notFoundRef.classList.add('not-found-box-hidden');
 // if (!dataFromLS.length && notFoundRef !== null) {

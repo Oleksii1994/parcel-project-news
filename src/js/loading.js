@@ -9,4 +9,3 @@ const showLoader = () => {
 };
 
 export { hideLoader, showLoader };
-

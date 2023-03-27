@@ -107,3 +107,23 @@ if (galleryRef) {
   );
   currentPage.classList.add('current__page');
 }
+
+const galleryRefFev = document.querySelector('.gallery');
+
+if (galleryRefFev) {
+  const currentPage = document.querySelector(
+    '.nav__link',
+    '[href="/favorite.html"]'
+  );
+  currentPage.classList.add('current__fav');
+}
+
+// function setCurrentPage() {
+//   const galleryRef = document.querySelector('.gallery');
+//   const currentPage = document.querySelector('.nav__link','[href="${}"]');
+//   if (currentPage) {
+//     currentPage.classList.add('current__page');
+//   }
+//   }
+
+// setCurrentPage();

@@ -101,7 +101,9 @@ function checkDate() {
 const galleryRef = document.querySelector('.gallery');
 
 if (galleryRef) {
-  document
-    .querySelector('.nav__link[href="/index.html"]')
-    .classList.add('current__page');
+  const currentPage = document.querySelector(
+    '.nav__link',
+    '[href="/index.html"]'
+  );
+  currentPage.classList.add('current__page');
 }

@@ -20,9 +20,63 @@ let longitude = 30.532;
 window.addEventListener('load', pageLoadHandler, { once: true });
 input.addEventListener('change', _debounce(onCalendarChange, 1500));
 
-function renderWeather(data) {
-  const weather = data.weather[0];
-  return `
+async function pageLoadHandler() {
+  try {
+    location();
+    const { results, num_results } = await newsApi.fetchPopularArticles();
+    newsApi.newsDataArr = NormalizeData.popularData(results);
+    markup.renderMarkup(
+      refs.galleryEl,
+      markup.createGalleryCardMarkup(NormalizeData.popularData(results))
+    );
+    onLoadHomePage();
+    ////////////////////////////////////////////////////// Evant який додається коли генерується markup
+    const event = new Event('build');
+    refs.galleryEl.dispatchEvent(event);
+    //////////////////////////////////////////////////////
+
+    const refsWeather = {
+      weatherContainer: document.querySelector('.weather'),
+      weatherBox: document.querySelector('.weather-box'),
+      weatherButton: document.querySelector('.weather-button'),
+    };
+    refsWeather.weatherButton.addEventListener('click', changeButtonWheater);
+
+    async function weather(latitude = 50.431, longitude = 30.532) {
+      try {
+        const response = await axios.get(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
+        );
+        const data = response.data;
+        setTimeout(() => {
+          refsWeather.weatherBox.innerHTML = renderWeather(data);
+        }, 500);
+      } catch (error) {
+        console.error(error);
+        Notify.failure(`${error}`);
+      }
+    }
+
+    async function weatherForFive(latitude = 50.431, longitude = 30.532) {
+      try {
+        const response = await axios.get(
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
+        );
+        const data = response.data;
+        const weaterArrayForWeek = onWeatherForFive(data);
+        const stringToRender = renderWeatherForWeek(
+          weaterArrayForWeek,
+          data.city.name
+        );
+        refsWeather.weatherBox.innerHTML = stringToRender;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    function renderWeather(data) {
+      const weather = data.weather[0];
+      return `
   <div class="weather__main">
     <p class="main-temp">${Math.round(data.main.temp - 273) + '&deg;'}</p>
     <div class="weather-line"></div>
@@ -46,18 +100,18 @@ function renderWeather(data) {
     <p class="weather__date-day">${format(new Date(), 'eee')}</p>
     <p class="weather__date-year">${format(new Date(), 'dd LLL y')}</p>
     `;
-}
+    }
 
-function renderWeatherForWeek(arr, city) {
-  return arr
-    .map(data => {
-      const weather = data.weather[0];
-      const dt = data.dt_txt.split(' ').splice(0, 1).join();
-      const temp = data.main.temp;
-      const weatherIcon = weather.icon;
-      const weatherDescription = weather.main;
+    function renderWeatherForWeek(arr, city) {
+      return arr
+        .map(data => {
+          const weather = data.weather[0];
+          const dt = data.dt_txt.split(' ').splice(0, 1).join();
+          const temp = data.main.temp;
+          const weatherIcon = weather.icon;
+          const weatherDescription = weather.main;
 
-      return `
+          return `
     <div class="weather-day">
       <p class="weather-day__temp">${Math.round(temp - 273) + '&deg;'}</p>
       <div class="weather-day__icon-box">
@@ -77,75 +131,22 @@ function renderWeatherForWeek(arr, city) {
         </div>
       </div>
     </div>`;
-    })
-    .join('');
-}
-
-function onWeatherForFive(data) {
-  const arrDate = [];
-  arrDate.push(data.list[0]);
-
-  data.list.map(obj => {
-    const dt = obj.dt_txt.split(' ').splice(1).join();
-    if (dt === '12:00:00') {
-      arrDate.push(obj);
-    }
-  });
-  arrDate[0].dt_txt = 'Today';
-  return arrDate;
-}
-
-async function pageLoadHandler() {
-  try {
-    location();
-    const { results, num_results } = await newsApi.fetchPopularArticles();
-    newsApi.newsDataArr = NormalizeData.popularData(results);
-    markup.renderMarkup(
-      refs.galleryEl,
-      markup.createGalleryCardMarkup(NormalizeData.popularData(results))
-    );
-    onLoadHomePage();
-    ////////////////////////////////////////////////////// Evant який додається коли генерується markup
-    const event = new Event('build');
-    refs.galleryEl.dispatchEvent(event);
-    //////////////////////////////////////////////////////
-
-    const refsWeather = {
-      weatherContainer: document.querySelector('.weather'),
-      weatherBox: document.querySelector('.weather-box'),
-      weatherButton: document.querySelector('.weather-button'),
-    };
-    refsWeather.weatherButton.addEventListener('click', changeButtonWheater);
-    async function weather(latitude = 50.431, longitude = 30.532) {
-      try {
-        const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
-        );
-        const data = response.data;
-        setTimeout(() => {
-          refsWeather.weatherBox.innerHTML = renderWeather(data);
-        }, 1300);
-      } catch (error) {
-        console.error(error);
-        Notify.failure(`${error}`);
-      }
+        })
+        .join('');
     }
 
-    async function weatherForFive(latitude = 50.431, longitude = 30.532) {
-      try {
-        const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
-        );
-        const data = response.data;
-        const weaterArrayForWeek = onWeatherForFive(data);
-        const stringToRender = renderWeatherForWeek(
-          weaterArrayForWeek,
-          data.city.name
-        );
-        refsWeather.weatherBox.innerHTML = stringToRender;
-      } catch (error) {
-        console.error(error);
-      }
+    function onWeatherForFive(data) {
+      const arrDate = [];
+      arrDate.push(data.list[0]);
+
+      data.list.map(obj => {
+        const dt = obj.dt_txt.split(' ').splice(1).join();
+        if (dt === '12:00:00') {
+          arrDate.push(obj);
+        }
+      });
+      arrDate[0].dt_txt = 'Today';
+      return arrDate;
     }
 
     function successCallback(position) {

@@ -2,6 +2,7 @@ import { newsApi } from './API/fetchAPI';
 import { refs } from './refs/refs';
 import { NormalizeData } from './API/api-data-normalaizer';
 import { markup } from './renderMarkup';
+import { markupForFavoritesAndRead } from './renderMarkup';
 import { Notify } from 'notiflix';
 
 const categories = [
@@ -246,7 +247,6 @@ function onWindowsResize(e) {
           `<div class="categories__other-btn-box"><button class="categories__other-box-item" data-categoryName="${elem.section}" type="button">${elem.display_name}</button></div>`
       )
       .join('');
-    console.log(markup);
     otherBoxRef.innerHTML = markup;
     return;
   }
@@ -401,16 +401,18 @@ async function categoriesFetch(e) {
   newsApi.currentCategory = e.target.textContent.toLowerCase();
   try {
     const data = await newsApi.fetchArticlesByCategory();
-    if (data === '') {
-      refs.notFoundBox.innerHTML = `<h2 class="not-found-box__title">We haven’t found news from <br> this date</h2>
-      <img src="https://live.staticflickr.com/65535/52770181328_d91f5366f0_z.jpg">`;
-      return;
-    }
+    // if (data === '') {
+    //   refs.notFoundBox.innerHTML = `<h2 class="not-found-box__title">We haven’t found news from <br> this date</h2>
+    //   <img src="https://live.staticflickr.com/65535/52770181328_d91f5366f0_z.jpg">`;
+    //   return;
+    // }
     newsApi.newsDataArr = NormalizeData.categoryData(data);
     markup.clearMarkup(refs.galleryEl);
     markup.renderMarkup(
       refs.galleryEl,
-      markup.createGalleryCardMarkup(NormalizeData.categoryData(data))
+      markupForFavoritesAndRead.createGalleryCardMarkup(
+        NormalizeData.categoryData(data)
+      )
     );
   } catch (error) {
     console.log(error);

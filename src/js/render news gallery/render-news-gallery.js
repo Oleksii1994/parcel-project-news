@@ -3,7 +3,7 @@ import { NormalizeData } from '../API/api-data-normalaizer';
 import { onLoadHomePage } from '../add-to-favorite';
 // import { onLoadPageHomeForRead } from '../read';
 import { refs } from '../refs/refs';
-import { markup } from '../renderMarkup';
+import { markup, markupForFavoritesAndRead } from '../renderMarkup';
 import { Notify } from 'notiflix';
 
 import axios from 'axios';
@@ -216,15 +216,15 @@ function onCalendarChange(e) {
       return dateString >= selectedDate[0] && dateString <= selectedDate[1];
     }
   });
-  if (filteredNews.length === 0) {
-    refs.notFoundBox.classList.add('not-found-box');
-    refs.notFoundBox.innerHTML = `<h2 class="not-found-box__title">We haven’t found news from <br> this date</h2>
-    <img src="https://live.staticflickr.com/65535/52770181328_d91f5366f0_z.jpg">`;
-    return;
-  }
+  // if (filteredNews.length === 0) {
+  //   refs.notFoundBox.classList.add('not-found-box');
+  //   refs.notFoundBox.innerHTML = `<h2 class="not-found-box__title">We haven’t found news from <br> this date</h2>
+  //   <img src="https://live.staticflickr.com/65535/52770181328_d91f5366f0_z.jpg">`;
+  //   return;
+  // }
   markup.clearMarkup(refs.galleryEl);
   markup.renderMarkup(
     refs.galleryEl,
-    markup.createGalleryCardMarkup(filteredNews)
+    markupForFavoritesAndRead.createGalleryCardMarkup(filteredNews)
   );
 }

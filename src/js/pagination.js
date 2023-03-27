@@ -10,8 +10,7 @@ import { Notify } from 'notiflix';
 // let totalItems = newsApi.totalHits;
 let currentPage = 1;
 
-// let totalButtons = newsApi.totalButtons;
-
+let totalButtons = newsApi.totalHits + 1;
 const pagWrap = document.querySelector('.pagination');
 const pagBtnPrev = document.querySelector('.pagination__prev-btn');
 const pagBtnNext = document.querySelector('.pagination__next-btn');
@@ -283,6 +282,8 @@ async function handlePaginationButtonNext() {
   ablePrevPaginationButton();
   // міняю поточну сторінку
   currentPage += 1;
+
+  //  тут ТОТАЛБАТОНС НЕ ПРИХОДИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   if (currentPage === totalButtons) {
     disableNextPaginationButton();
   }

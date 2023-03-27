@@ -207,6 +207,18 @@
   }
 }
 
+.nav__link.current__fav::after {
+  content: '';
+  transform: translateX(50%);
+  position: absolute;
+  bottom: -5px;
+  left: -55%;
+  width: 110%;
+  height: 1px;
+  background-color: var(--blue-main-color);
+
+}
+
 .screen-desktop .header__box {
   align-items: center;
 }

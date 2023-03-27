@@ -9,7 +9,7 @@ import { Notify } from 'notiflix';
 import axios from 'axios';
 import { format } from 'date-fns';
 import { API_KEY } from '../API/weatherAPI';
-import { onWindowResizeFoo } from '../onWindowResize';
+
 import { input } from '../newCalendar';
 import { selectedDate } from '../newCalendar';
 import _debounce from 'debounce';
@@ -23,7 +23,21 @@ input.addEventListener('change', _debounce(onCalendarChange, 1500));
 async function pageLoadHandler() {
   try {
     location();
-    onWindowResizeFoo();
+
+    let previousViewportWidth = window.innerWidth;
+
+    function onWindowResizeFoo() {
+      const currentViewportWidth = window.innerWidth;
+
+      if (currentViewportWidth !== previousViewportWidth) {
+        window.location.reload();
+      }
+
+      previousViewportWidth = currentViewportWidth;
+    }
+
+    window.addEventListener('resize', onWindowResizeFoo);
+
     const { results, num_results } = await newsApi.fetchPopularArticles();
     newsApi.newsDataArr = NormalizeData.popularData(results);
     markup.renderMarkup(
@@ -51,7 +65,7 @@ async function pageLoadHandler() {
         const data = response.data;
         setTimeout(() => {
           refsWeather.weatherBox.innerHTML = renderWeather(data);
-        }, 500);
+        }, 1000);
       } catch (error) {
         console.error(error);
         Notify.failure(`${error}`);

@@ -1,7 +1,6 @@
 
 import { markup } from './renderMarkup';
 import { refs } from './refs/refs';
-import { pageLoadHandler } from './render news gallery/render-news-gallery';
 import { setToLS, getFromLS } from './local-storage-logic';
 import { sendEmailVerification } from 'firebase/auth';
 
@@ -11,7 +10,7 @@ const READ_KEY = 'read_news';
 
 class AddToRead {
   isHomePage() {
-    const homePage = document.querySelector('#homepage');
+    const homePage = refs.galleryEl
     if (homePage) {
       return true;
     }
@@ -19,8 +18,7 @@ class AddToRead {
   }
   addListenersToHomePage(){
       const linkReadMore = document.querySelectorAll('.thumb__link');
-      
-      linkReadMore.forEach(link => link.addEventListener('click', this.#onReadClick, {once:true}));
+      linkReadMore.forEach(link => link.addEventListener('click', this.#onReadClick));
       console.log(linkReadMore)
   }
   renderReadPage(){ //рендер маркапу
@@ -57,13 +55,55 @@ class AddToRead {
       setToLS(READ_KEY, [...dataFromLS, article]);   // dataFromLS.push(article) // setToLS(READ_KEY, dataFromLS);
     }
   }
+#createAccordion(){
+  $('#accordion').accordion({
+    collapsible: true,
+    beforeActivate: function (event, ui) {
+      let currHeader, currContent, isPanelSelected;
+      if (ui.newHeader[0]) {
+        currHeader = ui.newHeader;
+        currContent = currHeader.next('.ui-accordion-content');
+      } else {
+        currHeader = ui.oldHeader;
+        currContent = currHeader.next('.ui-accordion-content');
+      }
 
+      isPanelSelected = currHeader.attr('aria-selected') === 'true';
+
+      currHeader
+        .toggleClass('ui-corner-all', isPanelSelected)
+        .toggleClass(
+          'accordion-header-active ui-state-active ui-corner-top',
+          !isPanelSelected
+        )
+        .attr('aria-selected', (!isPanelSelected).toString());
+
+      currHeader
+        .children('.ui-icon')
+        .toggleClass('ui-icon-triangle-1-e', isPanelSelected)
+        .toggleClass('ui-icon-triangle-1-s', !isPanelSelected);
+
+      currContent.toggleClass('accordion-content-active', !isPanelSelected);
+
+      if (isPanelSelected) {
+        currContent.slideUp();
+      } else {
+        currContent.slideDown();
+      }
+
+      return false;
+    },
+  });
+}
 }
 
-export const instance = new AddToRead(); // створює об'єкт  AddToRead
+const instance = new AddToRead(); // створює об'єкт  AddToRead
 
 if(instance.isHomePage()){ //перевірка чи знаходишся на homePage
-  instance.addListenersToHomePage(); //опрацьовую клік на readMore
+  refs.galleryEl.addEventListener('build', () =>{
+    instance.addListenersToHomePage(); //опрацьовую клік на readMore
+  });
+  
 }
 else{
   instance.renderReadPage(); //малюю readPage

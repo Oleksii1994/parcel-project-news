@@ -105,6 +105,11 @@ async function pageLoadHandler() {
       markup.createGalleryCardMarkup(NormalizeData.popularData(results))
     );
     onLoadHomePage();
+    ////////////////////////////////////////////////////// Evant який додається коли генерується markup
+    const event = new Event('build');
+    refs.galleryEl.dispatchEvent(event);
+    //////////////////////////////////////////////////////
+
     const refsWeather = {
       weatherContainer: document.querySelector('.weather'),
       weatherBox: document.querySelector('.weather-box'),

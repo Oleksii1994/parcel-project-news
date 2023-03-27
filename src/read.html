@@ -9,12 +9,13 @@
       rel="icon"
       href="./images/world-news.png"
       type="image/png"
+      width="35"
+      height="35"
     />
     <link rel="stylesheet" href="./sass/index.scss" />
     <link rel="stylesheet" href="../node_modules/jqueryui/jquery-ui.min.css">
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/jqueryui/jquery-ui.min.js"></script>
-
   </head>
   <body>
     <include src="./partials/header.html"></include>
@@ -24,9 +25,8 @@
           <h3>Section 1</h3>
           <div>
             <p>
-                <div class="not-found">
+            <div class="not-found">
             <ul class="news-list list gallery__list" id="news-list">
-
             </ul>
             </div>
             </p>
@@ -66,8 +66,10 @@
         </div>
       </section>
     </main>
-    <script src="./js/accordion.js"></script>
     <include src="./partials/footer.html"></include>
+    <include src="./partials/mobile-menu-read.html"></include>
+    <!-- <script type="module" src="./js/add-to-read.js"></script> -->
+    <!-- <script type="module" src="./js/accordion.js"></script> -->
   </body>
 </html>
 

@@ -2,15 +2,18 @@
   display: flex;
   justify-content: space-between;
 
-  padding: 24px 16px 40px 16px;
+  // padding: 28px 0px 60px 0px;
+  margin-left: 0px;
   position: relative;
 
   @media screen and (min-width: 768px) {
-    padding: 28px 16px 48px 16px;
+    padding: 28px 0px 48px 0px;
+    margin-left: 0px;
   }
 
   @media screen and (min-width: 1280px) {
-    padding: 28px 52px 60px 52px;
+    padding: 28px 0px 60px 0px;
+    margin-left: 290px;
   }
 }
 
@@ -61,7 +64,7 @@
   height: 31px;
   border: 1px solid var(--black-main-color);
   border-radius: 20px;
-  width: 250px;
+  width: 230px;
   font-family: $weather-font;
   font-weight: 400;
   font-size: 12px;
@@ -78,6 +81,7 @@
   @media screen and (min-width: 1280px) {
     // width: 168px;
     font-size: 14px;
+    width: 250px;
   }
 }
 

@@ -115,7 +115,9 @@ async function pageLoadHandler() {
           `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
         );
         const data = response.data;
-        refsWeather.weatherBox.innerHTML = renderWeather(data);
+        setTimeout(() => {
+          refsWeather.weatherBox.innerHTML = renderWeather(data);
+        }, 1300);
       } catch (error) {
         console.error(error);
       }

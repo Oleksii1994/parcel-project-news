@@ -9,7 +9,7 @@ import { showLoader, hideLoader } from '../loading';
 import axios from 'axios';
 import { format } from 'date-fns';
 import { API_KEY } from '../API/weatherAPI';
-
+import { addWeatherMarkup } from '../renderMarkup';
 import { input } from '../newCalendar';
 import { selectedDate } from '../newCalendar';
 import _debounce from 'debounce';
@@ -42,10 +42,11 @@ async function pageLoadHandler() {
     const { results, num_results } = await newsApi.fetchPopularArticles();
     hideLoader();
     newsApi.newsDataArr = NormalizeData.popularData(results);
-    markup.renderMarkup(
-      refs.galleryEl,
-      markup.createGalleryCardMarkup(NormalizeData.popularData(results))
+    const newsMarkup = markup.createGalleryCardMarkup(
+      NormalizeData.popularData(results)
     );
+    addWeatherMarkup(newsMarkup);
+    markup.renderMarkup(refs.galleryEl, newsMarkup.join(''));
     onLoadHomePage();
     ////////////////////////////////////////////////////// Evant який додається коли генерується markup
     const event = new Event('build');

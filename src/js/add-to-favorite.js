@@ -41,7 +41,7 @@ const usersRef = ref(database, 'users');
 // ===========================================================
 
 
-const notFoundRef = document.querySelector('.not-found');
+const notFoundRef = document.querySelector('.not-found-box');
 const listArticlesRef = document.querySelector('#news-list');
 
 // document.body.classList.remove('screen-tablet');
@@ -53,15 +53,15 @@ export function onLoadHomePage() {
   const refs = {
     galleryEl: document.querySelector('#news-gallery'),
   };
-
+  
   refs.galleryEl.addEventListener('click', onGalleryClick);
-
+ 
   function onGalleryClick(event) {
     const targetBtn = event.target.closest('.gallery-thumb__btn');
     if (!targetBtn) {
       return;
     }
-
+ 
     const targetItem = event.target.closest('.gallery__item');
 
     const img = () => {
@@ -71,6 +71,7 @@ export function onLoadHomePage() {
 
       resWithoutStart.splice(0, 5);
       resWithoutStart.splice(-2, 2);
+
       return resWithoutStart.join('');
     };
     const title = targetItem.querySelector('.gallery__title').textContent;
@@ -98,13 +99,13 @@ export function onLoadHomePage() {
       const newData = dataFromLS.filter(article => article.id !== id);
       setToLS(FAVORITE_KEY, newData);
 
-// ===========================================================
-const user = auth.currentUser;
-if (user) {
-  const userId = user.uid;
-  addOrDeleteFavoriteNews(article, userId, targetBtn);
-}
-// ===========================================================
+      // ===========================================================
+      const user = auth.currentUser;
+      if (user) {
+        const userId = user.uid;
+        addOrDeleteFavoriteNews(article, userId, targetBtn);
+      }
+      // ===========================================================
 
       targetBtn.innerHTML =
         '<p class="gallery-thumb__name add">Add to favorite<span class="gallery-thumb__icon">&#9825;</span></p>';
@@ -130,12 +131,14 @@ function onLoadFavoritesPage() {
   const dataFromLS = getFromLS(FAVORITE_KEY);
 
   if (!dataFromLS.length && notFoundRef !== null) {
-    notFoundRef.innerHTML = `<h2 class="not-found-title hidden">You haven't added anything to favorite!</h2><img src="https://live.staticflickr.com/65535/52770181328_d91f5366f0_z.jpg">`;
+    notFoundRef.classList.remove('not-found-box-hidden');
     return;
   }
 
   const newMarkup = markup.createGalleryCardMarkup(dataFromLS);
   if (listArticlesRef === null) return;
+
+  notFoundRef.classList.add('not-found-box-hidden');
   listArticlesRef.innerHTML = newMarkup;
 
   listArticlesRef.addEventListener('click', onListArticlesClick);
@@ -156,8 +159,40 @@ function onListArticlesClick(event) {
     setToLS(FAVORITE_KEY, newData);
     const newMarkup = markup.createGalleryCardMarkup(newData);
     listArticlesRef.innerHTML = newMarkup;
-
+   
     return;
   }
 }
 onLoadFavoritesPage(); /////треба викликати цю функцію при клікі на посилання Favorite
+
+
+
+
+
+// notFoundRef.classList.add('not-found-box-hidden');
+// if (!dataFromLS.length && notFoundRef !== null) {
+//   notFoundRef.innerHTML = `<h2 class="not-found-box__title hidden">You haven't added anything <br> to favorite!</h2>
+//  `;
+//   return;
+/* <picture><source 
+srcset="https://www.flickr.com/photos/197971475@N07/52773618182/in/dateposted-public/ 1x, https://www.flickr.com/photos/197971475@N07/52774411229/in/dateposted-public/" 2x" 
+type="image/png" 
+media="(max-width: 479.98px)"
+alt="underfined-picture"/>
+<source 
+srcset="https://www.flickr.com/photos/197971475@N07/52773621142/in/dateposted-public/, https://www.flickr.com/photos/197971475@N07/52774569180/in/dateposted-public/ 2x" 
+type="image/png" 
+media="(max-width:767.98px)" 
+alt="underfined-picture"/>
+<source 
+srcset="https://www.flickr.com/photos/197971475@N07/52774412304/in/dateposted-public/ 1x, https://www.flickr.com/photos/197971475@N07/52774150291/in/dateposted-public/ 2x" 
+type="image/png" 
+media="(min-width: 1279.98px)"
+alt="underfined-picture"/>
+<img 
+class="underfined___picture"
+src="https://www.flickr.com/photos/197971475@N07/52773618182/in/dateposted-public.png" 
+alt="underfined-picture" 
+width="248" 
+height="198"/>
+</picture> */

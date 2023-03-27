@@ -1,6 +1,7 @@
 import { newsApi } from '../API/fetchAPI';
 import { NormalizeData } from '../API/api-data-normalaizer';
 import { onLoadHomePage } from '../add-to-favorite'; //////////////
+// import { onLoadPageHomeForRead } from '../read';
 import { refs } from '../refs/refs';
 import { markup } from '../renderMarkup';
 import { Notify } from 'notiflix';
@@ -90,7 +91,7 @@ function onWeatherForFive(data) {
       arrDate.push(obj);
     }
   });
-  arrDate[0].dt_txt = 'Tooday';
+  arrDate[0].dt_txt = 'Today';
   return arrDate;
 }
 
@@ -176,9 +177,6 @@ async function pageLoadHandler() {
       refsWeather.weatherBox.style.alignItems = 'center';
       location();
     }
-
-    onLoadHomePage();
-    /////////////////////////////////
   } catch (error) {
     console.log(error);
     Notify.failure(`${error}`);
@@ -196,6 +194,7 @@ function onCalendarChange(e) {
     }
   });
   if (filteredNews.length === 0) {
+    refs.notFoundBox.classList.add('not-found-box');
     refs.notFoundBox.innerHTML = `<h2 class="not-found-box__title">We haven’t found news from <br> this date</h2>
     <img src="https://live.staticflickr.com/65535/52770181328_d91f5366f0_z.jpg">`;
     return;

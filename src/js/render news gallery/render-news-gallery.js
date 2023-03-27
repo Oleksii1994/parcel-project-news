@@ -1,6 +1,6 @@
 import { newsApi } from '../API/fetchAPI';
 import { NormalizeData } from '../API/api-data-normalaizer';
-import { onLoadHomePage } from '../add-to-favorite'; //////////////
+import { onLoadHomePage } from '../add-to-favorite';
 // import { onLoadPageHomeForRead } from '../read';
 import { refs } from '../refs/refs';
 import { markup } from '../renderMarkup';
@@ -104,6 +104,7 @@ async function pageLoadHandler() {
       refs.galleryEl,
       markup.createGalleryCardMarkup(NormalizeData.popularData(results))
     );
+    onLoadHomePage();
     const refsWeather = {
       weatherContainer: document.querySelector('.weather'),
       weatherBox: document.querySelector('.weather-box'),
@@ -121,6 +122,7 @@ async function pageLoadHandler() {
         }, 1300);
       } catch (error) {
         console.error(error);
+        Notify.failure(`${error}`);
       }
     }
 

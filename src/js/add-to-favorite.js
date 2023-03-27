@@ -1,10 +1,7 @@
-import { NewsAPIService } from './API/fetchAPI';
-import { NormalizeData } from './API/api-data-normalaizer';
 import { markup } from './renderMarkup';
-// import { refs } from './refs/refs';
 // import { pageLoadHandler } from './render news gallery/render-news-gallery';
 import { setToLS, getFromLS } from './local-storage-logic';
-
+import { refs } from './refs/refs';
 // =====================================================Юра
 import Notiflix from 'notiflix';
 import { initializeApp, firebase } from 'firebase/app';
@@ -40,7 +37,6 @@ const auth = getAuth();
 const usersRef = ref(database, 'users');
 // ===========================================================
 
-
 const notFoundRef = document.querySelector('.not-found-box');
 const listArticlesRef = document.querySelector('#news-list');
 
@@ -50,18 +46,15 @@ const FAVORITE_KEY = 'favorite_news';
 
 export function onLoadHomePage() {
   const FAVORITE_KEY = 'favorite_news';
-  const refs = {
-    galleryEl: document.querySelector('#news-gallery'),
-  };
-  
+
   refs.galleryEl.addEventListener('click', onGalleryClick);
- 
+
   function onGalleryClick(event) {
     const targetBtn = event.target.closest('.gallery-thumb__btn');
     if (!targetBtn) {
       return;
     }
- 
+
     const targetItem = event.target.closest('.gallery__item');
 
     const img = () => {
@@ -130,7 +123,7 @@ export function checkPresentArticle(id) {
 function onLoadFavoritesPage() {
   const dataFromLS = getFromLS(FAVORITE_KEY);
 
-  if (!dataFromLS.length && notFoundRef !== null) {
+  if (!dataFromLS.length) {
     notFoundRef.classList.remove('not-found-box-hidden');
     return;
   }
@@ -142,10 +135,12 @@ function onLoadFavoritesPage() {
   listArticlesRef.innerHTML = newMarkup;
 
   listArticlesRef.addEventListener('click', onListArticlesClick);
+  console.log('nfdbkhvgdj');
 }
 
 function onListArticlesClick(event) {
   const targetBtn = event.target.closest('.gallery-thumb__btn');
+  console.log('remove click');
   if (!targetBtn) {
     return;
   }
@@ -159,15 +154,13 @@ function onListArticlesClick(event) {
     setToLS(FAVORITE_KEY, newData);
     const newMarkup = markup.createGalleryCardMarkup(newData);
     listArticlesRef.innerHTML = newMarkup;
-   
     return;
+  } else {
+    notFoundRef.classList.remove('not-found-box-hidden');
   }
 }
+
 onLoadFavoritesPage(); /////треба викликати цю функцію при клікі на посилання Favorite
-
-
-
-
 
 // notFoundRef.classList.add('not-found-box-hidden');
 // if (!dataFromLS.length && notFoundRef !== null) {

@@ -139,8 +139,7 @@ function onLoadFavoritesPage() {
 
 function onListArticlesClick(event) {
   const targetBtn = event.target.closest('.gallery-thumb__btn');
-  console.log('remove click');
-  checkLS();
+   
   if (!targetBtn) {
     return;
   }
@@ -152,6 +151,10 @@ function onListArticlesClick(event) {
   if (present) {
     const newData = dataFromLS.filter(article => article.id !== id);
     setToLS(FAVORITE_KEY, newData);
+    if (!newData.length) {
+      checkLS();
+    }
+    
     const newMarkup = markupForFavoritesAndRead.createGalleryCardMarkup(newData);
     listArticlesRef.innerHTML = newMarkup;
     return;
@@ -159,11 +162,17 @@ function onListArticlesClick(event) {
 }
 
 function checkLS() {
-  const dataFromLS = getFromLS(FAVORITE_KEY);
+
+  setTimeout(() =>{
+    const dataFromLS = getFromLS(FAVORITE_KEY);
+
   if (!dataFromLS.length) {
-    notFoundRef.classList.add('not-found-box');
-    window.scrollTo(0, 0);
+    notFoundRef.classList.remove('not-found-box-hidden');
+    // notFoundRef.innerHTML = `<h2 class="not-found-box__title">We haven’t found news from <br> this date</h2>
+    //   <img src="https://www.flickr.com/photos/197971475@N07/52773618182/in/dateposted-public.png>`;
+    // window.scrollTo(0, 0);
   }
+  }, 100)
 }
 
 if (document.title === 'Favorite') {

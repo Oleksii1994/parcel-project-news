@@ -7,8 +7,6 @@ import { selectedDate } from './newCalendar';
 import { makePaginationButtons } from './pagination';
 import { showLoader, hideLoader } from './loading';
 
-// export let totalButtons = Math.ceil(newsApi.hits / perPage);
-
 const notifyOptions = {
   width: '450px',
   position: 'right-top',
@@ -89,7 +87,7 @@ function onDocumentClick(event) {
     return;
   }
   const target = event.target.closest('.form-search');
-  console.log(target);
+  // console.log(target);
   if (!target) {
     if (refs.formSearch.elements.searchQuery.value.trim()) {
       return;

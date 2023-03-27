@@ -5,7 +5,7 @@ import { onLoadHomePage } from '../add-to-favorite';
 import { refs } from '../refs/refs';
 import { markup, markupForFavoritesAndRead } from '../renderMarkup';
 import { Notify } from 'notiflix';
-
+import { showLoader, hideLoader } from '../loading';
 import axios from 'axios';
 import { format } from 'date-fns';
 import { API_KEY } from '../API/weatherAPI';
@@ -22,6 +22,7 @@ input.addEventListener('change', _debounce(onCalendarChange, 1500));
 
 async function pageLoadHandler() {
   try {
+    showLoader();
     location();
 
     let previousViewportWidth = window.innerWidth;
@@ -39,6 +40,7 @@ async function pageLoadHandler() {
     window.addEventListener('resize', onWindowResizeFoo);
 
     const { results, num_results } = await newsApi.fetchPopularArticles();
+    hideLoader();
     newsApi.newsDataArr = NormalizeData.popularData(results);
     markup.renderMarkup(
       refs.galleryEl,

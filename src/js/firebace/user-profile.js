@@ -42,9 +42,13 @@ const refs = {
   changePasswordPrg: document.querySelector('.change-password--prg'),
   favoriteNews: document.querySelector('.favorite-news-render'),
   readNews: document.querySelector('.read-news-render'),
+  profileImg: document.querySelector('.profile-img'),
+  editPhoto: document.querySelector('.profile-button'),
+  profileImgCard: document.querySelector('.profile-img__card'),
 };
 
 refs.chancgePassword.addEventListener('submit', changeUserPassword);
+refs.editPhoto.addEventListener('click', editPhotoFun);
 
 getNameAndEmail();
 
@@ -53,17 +57,21 @@ function getNameAndEmail() {
     .then(snapshot => {
       snapshot.forEach(childSnapshot => {
         const user = auth.currentUser;
+        // console.log(user);
         if (!user) {
           return;
         }
         const userArr = childSnapshot.val();
-        if (userArr.email === user.email) {
-          //   console.log(userArr);
+
+        if (userArr.email.toLowerCase() === user.email.toLowerCase()) {
           const newsFavourite = userArr.newsFavouriteData.filter(
             item => item !== ''
           );
           const newsRead = userArr.newsReadData.filter(item => item !== '');
 
+          console.log(userArr);
+
+          refs.profileImgCard.src = `${userArr.userPhoto}`;
           refs.userName.innerHTML = userArr.username;
           refs.userEmail.innerHTML = userArr.email;
           refs.favoriteNews.innerHTML = newsFavourite.length;
@@ -125,5 +133,71 @@ function changeUserPassword(e) {
         Notiflix.Notify.failure('Something went wrong, please try again');
         console.error(error);
       });
+  }
+}
+
+function editPhotoFun() {
+  refs.editPhoto.disabled = true;
+  const form = `
+  <div class="input__wrapper">
+    <input name="file" type="file" id="input__file" class="input input__file add-photo-in-data" multiple>
+    <label for="input__file" class="input__file-button">
+      <span class="input__file-icon-wrapper">
+        <svg class="img-download" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+          <path d="M61.88,93.12h0a3,3,0,0,0,.44.36l.24.13a1.74,1.74,0,0,0,.59.24l.25.07h0a3,3,0,0,0,1.16,0l.26-.08.3-.09a3,3,0,0,0,.3-.16l.21-.12a3,3,0,0,0,.46-.38L93,66.21A3,3,0,1,0,88.79,62L67,83.76V3a3,3,0,0,0-6,0V83.76L39.21,62A3,3,0,0,0,35,66.21Z"/>
+          <path d="M125,88a3,3,0,0,0-3,3v22a9,9,0,0,1-9,9H15a9,9,0,0,1-9-9V91a3,3,0,0,0-6,0v22a15,15,0,0,0,15,15h98a15,15,0,0,0,15-15V91A3,3,0,0,0,125,88Z"/>
+        </svg>
+      </span>
+      <span class="input__file-button-text">Select a file</span>
+    </label>
+  </div>`;
+  refs.profileImg.insertAdjacentHTML('beforeend', form);
+
+  const formPhoto = document.querySelector('.add-photo-in-data');
+  formPhoto.addEventListener('change', addUserPhotoInData);
+
+  function addUserPhotoInData(e) {
+    e.preventDefault();
+
+    // Читаем содержимое файла
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(formPhoto.files[0]);
+
+    // Создаем ссылку на фото после того, как содержимое файла будет прочитано
+    fileReader.onload = function () {
+      const photoData = fileReader.result;
+      refs.profileImgCard.src = `${photoData}`;
+
+      get(usersRef)
+        .then(snapshot => {
+          snapshot.forEach(childSnapshot => {
+            const user = auth.currentUser;
+            const userId = user.uid;
+            if (!user) {
+              return;
+            }
+            const userArr = childSnapshot.val();
+
+            if (userArr.email.toLowerCase() === user.email.toLowerCase()) {
+              return update(ref(database, `users/${userId}`), {
+                userPhoto: photoData,
+              })
+                .then(() => {
+                  // console.log('News added to favorites');
+                  Notiflix.Notify.success('News added to favorites');
+                })
+                .catch(error => {
+                  Notiflix.Notify.failure(
+                    'Something went wrong, please try again'
+                  );
+                  console.error(error);
+                });
+            }
+          });
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    };
   }
 }

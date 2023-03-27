@@ -16,6 +16,7 @@ import {
   onAuthStateChanged,
   signOut,
 } from 'firebase/auth';
+import { refs } from '../refs/refs';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDD_Eh4tyvM30ivpTHWqfHo7r2h0gDev4Y',
@@ -47,6 +48,7 @@ const refses = {
   modalAuth: document.querySelector('.modal-auth'),
   exitModal: document.querySelector('.exit-modal'),
   authButton: document.querySelector('#authButton'),
+  authButtonMobile: document.querySelector('#authButtonMobile'),
 };
 
 // Добавление в базу пользователя
@@ -118,7 +120,8 @@ export function logOutFun(e) {
   signOut(auth)
     .then(() => {
       alert('User loged out!');
-      location.reload();
+      // location.reload();
+      window.location.href = './index.html';
     })
     .catch(error => {
       const errorCode = error.code;
@@ -136,9 +139,11 @@ onAuthStateChanged(auth, user => {
   if (user) {
     refses.containerSignUp.style.display = 'none';
     refses.containerLogIn.style.display = 'none';
+    refses.authButton.textContent = 'Profile/LogOut';
 
     // console.log(user.uid);
   } else {
+    refses.authButton.textContent = 'LogIn';
     refses.containerLogOut.style.display = 'none';
   }
 });
@@ -163,6 +168,7 @@ get(usersRef)
 //  Открытие и закрытие модалки ...........................................
 
 refses.authButton.addEventListener('click', modalAuthOpen);
+// refses.authButtonMobile.addEventListener('click', modalAuthOpen);
 refses.modalAuth.addEventListener('click', onCloseModal);
 
 function modalAuthOpen() {

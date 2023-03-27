@@ -35,6 +35,7 @@ class NewsAPIService {
     const {
       response: { docs, meta },
     } = await response.json();
+    this.incrementPage();
     console.log(URL);
     console.log(meta);
     this.#hits = meta.hits;

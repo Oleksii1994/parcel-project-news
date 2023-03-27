@@ -128,11 +128,10 @@ function onLoadFavoritesPage() {
     return;
   }
 
-  const newMarkup = markup.createGalleryCardMarkup(dataFromLS);
+  notFoundRef.classList.add('not-found-box-hidden');
   if (listArticlesRef === null) return;
 
-  notFoundRef.classList.add('not-found-box-hidden');
-  listArticlesRef.innerHTML = newMarkup;
+  listArticlesRef.innerHTML = markup.createGalleryCardMarkup(dataFromLS);
 
   listArticlesRef.addEventListener('click', onListArticlesClick);
   console.log('nfdbkhvgdj');
@@ -141,6 +140,7 @@ function onLoadFavoritesPage() {
 function onListArticlesClick(event) {
   const targetBtn = event.target.closest('.gallery-thumb__btn');
   console.log('remove click');
+  checkLS();
   if (!targetBtn) {
     return;
   }
@@ -155,8 +155,14 @@ function onListArticlesClick(event) {
     const newMarkup = markup.createGalleryCardMarkup(newData);
     listArticlesRef.innerHTML = newMarkup;
     return;
-  } else {
+  }
+}
+
+function checkLS() {
+  const dataFromLS = getFromLS(FAVORITE_KEY);
+  if (dataFromLS !== [] && dataFromLS.length !== -1) {
     notFoundRef.classList.remove('not-found-box-hidden');
+    window.scrollTo(0, 0);
   }
 }
 

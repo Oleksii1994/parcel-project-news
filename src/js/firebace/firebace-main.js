@@ -50,6 +50,7 @@ const refses = {
   exitModal: document.querySelector('.exit-modal'),
   authButton: document.querySelector('#authButton'),
   authButtonMobile: document.querySelector('#authButtonMobile'),
+  authButtonMobileText: document.querySelector('#authButtonMobileText'),
 };
 
 // Добавление в базу пользователя
@@ -142,10 +143,12 @@ onAuthStateChanged(auth, user => {
     refses.containerSignUp.style.display = 'none';
     refses.containerLogIn.style.display = 'none';
     refses.authButton.textContent = 'Profile/LogOut';
+    refses.authButtonMobileText.textContent = `Profile/LogOut`;
 
     // console.log(user.uid);
   } else {
     refses.authButton.textContent = 'LogIn';
+    refses.authButtonMobileText.textContent = 'LogIn';
     refses.containerLogOut.style.display = 'none';
   }
 });
@@ -170,7 +173,7 @@ get(usersRef)
 //  Открытие и закрытие модалки ...........................................
 
 refses.authButton.addEventListener('click', modalAuthOpen);
-// refses.authButtonMobile.addEventListener('click', modalAuthOpen);
+refses.authButtonMobile.addEventListener('click', modalAuthOpen);
 refses.modalAuth.addEventListener('click', onCloseModal);
 
 function modalAuthOpen() {
@@ -441,14 +444,14 @@ function getReadNews() {
 
 // Перенаправление в личный
 
-const buttonInProfile = document.querySelector('#buttonInProfile');
+// const buttonInProfile = document.querySelector('#buttonInProfile');
 
-buttonInProfile.addEventListener('click', e => {
-  if (auth.currentUser) {
-    window.location.href = './auth-page.html';
-  } else {
-    Notiflix.Notify.info(
-      'To gain access to your personal account you need to log in or register'
-    );
-  }
-});
+// buttonInProfile.addEventListener('click', e => {
+//   if (auth.currentUser) {
+//     window.location.href = './auth-page.html';
+//   } else {
+//     Notiflix.Notify.info(
+//       'To gain access to your personal account you need to log in or register'
+//     );
+//   }
+// });

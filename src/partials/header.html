@@ -29,15 +29,33 @@
         </svg>
       </button>
     </form>
-    <!-- Budna Elvira. Додана іконка-бургер для відкриття мобільного меню  -->
-    <include src="./partials/burger-btn.html"></include>
+    <!-- Budna Elvira -->
+    <button
+      class="mobile-menu__burger-button js-open-menu js-open-menu-favorites js-open-menu-read"
+      type="button"
+    >
+      <svg
+        class="mobile-menu__icon mobile-menu__icon--close"
+        width="24"
+        height="24"
+        aria-label="Перемикач мобільного меню"
+      >
+        <use
+          class="mobile-menu__icon-cross"
+          href="./images/burger-menu/symbol-defs.svg#icon-burger-menu"
+        ></use>
+      </svg>
+    </button>
     <!-- світчер теми -->
-    <include src="./partials/switch-theme.html"></include>
+    <div class="header__box">
+      <include src="./partials/switch-theme.html"></include>
+      <button class="auth-button" id="authButton">LogIn</button>
+    </div>
   </div>
 </header>
 
-<button class="auth-button" id="authButton">
+<!-- <button class="auth-button" id="authButton">
   <svg class="auth-icon">
     <use href="./images/header/header.svg#icon-Vojtisvg"></use>
   </svg>
-</button>
+</button> -->

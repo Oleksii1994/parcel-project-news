@@ -6,13 +6,11 @@ import { hideLoader, showLoader } from './loading';
 
 import { Notify } from 'notiflix';
 
-// логіка ще дуже неточна, поки зациклювався на стилях
-let perPage = 8;
+// let perPage = 8;
 // let totalItems = newsApi.totalHits;
 let currentPage = 1;
 
-// let totalButtons = newsApi.totalButtons;
-
+let totalButtons = newsApi.totalHits + 1;
 const pagWrap = document.querySelector('.pagination');
 const pagBtnPrev = document.querySelector('.pagination__prev-btn');
 const pagBtnNext = document.querySelector('.pagination__next-btn');
@@ -30,7 +28,7 @@ if (currentPage === 1) {
 
 // з самого початку робимо активною першу кнопку
 if (currentPage === 1 && pagWrap.firstElementChild) {
-  pagWrap.firstElementChild.classList.add('active');
+  pagWrap.firstElementChild.classList.add('active-pag');
 }
 
 pagBtnPrev.addEventListener('click', handlePaginationButtonPrev);
@@ -47,7 +45,7 @@ export function makePaginationButtons(totalButtons) {
       pageNumberBtn.textContent = `${i}`;
       pageNumberBtn.className = 'pagination__page-number-btn';
       if (currentPage === i) {
-        pageNumberBtn.classList.add('active');
+        pageNumberBtn.classList.add('active-pag');
       }
 
       // ВІШАЄМО НА КОЖНУ КНОПКУ ЛІСЕНЕР
@@ -57,7 +55,7 @@ export function makePaginationButtons(totalButtons) {
         pagWrap
           .querySelectorAll('.pagination__page-number-btn')
           .forEach(btn =>
-            btn.classList.toggle('active', btn === e.currentTarget)
+            btn.classList.toggle('active-pag', btn === e.currentTarget)
           );
 
         // ЗАМІСТЬ КОНСОЛЯ ТУТ ТРЕБА ПРОПИСАТИ ФУНКЦІЮ, ЯКА БУДЕ РЕНДЕРИТИ СТОРНІКУ НОВИН ЗА ЇЇ НОМЕРОМ
@@ -97,7 +95,7 @@ export function makePaginationButtons(totalButtons) {
 
         pageNumberBtn.className = 'pagination__page-number-btn';
         if (currentPage === i) {
-          pageNumberBtn.classList.add('active');
+          pageNumberBtn.classList.add('active-pag');
         }
 
         // ВІШАЄМО НА КОЖНУ КНОПКУ ЛІСЕНЕР
@@ -107,7 +105,7 @@ export function makePaginationButtons(totalButtons) {
           pagWrap
             .querySelectorAll('.pagination__page-number-btn')
             .forEach(btn =>
-              btn.classList.toggle('active', btn === e.currentTarget)
+              btn.classList.toggle('active-pag', btn === e.currentTarget)
             );
 
           // ЗАМІСТЬ КОНСОЛЯ ТУТ ТРЕБА ПРОПИСАТИ ФУНКЦІЮ, ЯКА БУДЕ РЕНДЕРИТИ СТОРНІКУ НОВИН ЗА ЇЇ НОМЕРОМ
@@ -152,7 +150,7 @@ export function makePaginationButtons(totalButtons) {
 
         pageNumberBtn.className = 'pagination__page-number-btn';
         if (currentPage === i) {
-          pageNumberBtn.classList.add('active');
+          pageNumberBtn.classList.add('active-pag');
         }
 
         // ВІШАЄМО НА КОЖНУ КНОПКУ ЛІСЕНЕР
@@ -162,7 +160,7 @@ export function makePaginationButtons(totalButtons) {
           pagWrap
             .querySelectorAll('.pagination__page-number-btn')
             .forEach(btn =>
-              btn.classList.toggle('active', btn === e.currentTarget)
+              btn.classList.toggle('active-pag', btn === e.currentTarget)
             );
 
           // ЗАМІСТЬ КОНСОЛЯ ТУТ ТРЕБА ПРОПИСАТИ ФУНКЦІЮ, ЯКА БУДЕ РЕНДЕРИТИ СТОРНІКУ НОВИН ЗА ЇЇ НОМЕРОМ
@@ -202,7 +200,7 @@ export function makePaginationButtons(totalButtons) {
 
         pageNumberBtn.className = 'pagination__page-number-btn';
         if (currentPage === i) {
-          pageNumberBtn.classList.add('active');
+          pageNumberBtn.classList.add('active-pag');
         }
 
         // ВІШАЄМО НА КОЖНУ КНОПКУ ЛІСЕНЕР
@@ -212,7 +210,7 @@ export function makePaginationButtons(totalButtons) {
           pagWrap
             .querySelectorAll('.pagination__page-number-btn')
             .forEach(btn =>
-              btn.classList.toggle('active', btn === e.currentTarget)
+              btn.classList.toggle('active-pag', btn === e.currentTarget)
             );
 
           // ЗАМІСТЬ КОНСОЛЯ ТУТ ТРЕБА ПРОПИСАТИ ФУНКЦІЮ, ЯКА БУДЕ РЕНДЕРИТИ СТОРНІКУ НОВИН ЗА ЇЇ НОМЕРОМ
@@ -284,6 +282,8 @@ async function handlePaginationButtonNext() {
   ablePrevPaginationButton();
   // міняю поточну сторінку
   currentPage += 1;
+
+  //  тут ТОТАЛБАТОНС НЕ ПРИХОДИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   if (currentPage === totalButtons) {
     disableNextPaginationButton();
   }

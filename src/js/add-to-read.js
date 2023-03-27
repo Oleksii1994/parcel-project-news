@@ -1,4 +1,4 @@
-import { markup } from './renderMarkup';
+import { markupForFavoritesAndRead } from './renderMarkup';
 import { refs } from './refs/refs';
 import { setToLS, getFromLS } from './local-storage-logic';
 // import { sendEmailVerification } from 'firebase/auth';
@@ -29,17 +29,6 @@ const READ_KEY = 'read_news';
 //   {date: "23/5/2021", news: [{}]},
 //   {date: "15/3/2025", news: [{}]},
 //   ]
-// const test = document.querySelector('.test')
-// test.addEventListener('click', getDateLocalStorege())
-
-
-// function getDateLocalStorege(){
-//   const objects = getFromLS(READ_KEY); // замініть 'getFromLS' на змінну, що містить ваш масив об'єктів
-//   const dates = objects.map(obj => obj.date); // створюємо масив зі значеннями "date"
-//   const uniqueDates = dates.filter((date, index) => dates.indexOf(date) === index); // відбираємо унікальні значення
-//   console.log(uniqueDates)
-// }
-
 
 
 class AddToRead {
@@ -58,8 +47,25 @@ class AddToRead {
 
   renderReadPage(){ //рендер маркапу
   const dataFromLS = getFromLS(READ_KEY);
-  const newMarkup = markup.createGalleryCardMarkup(dataFromLS);
+  const newMarkup =  markupForFavoritesAndRead.createGalleryCardMarkup(dataFromLS);
   listArticlesRef.innerHTML = newMarkup;
+  }
+
+
+  getDateLocalStorege(){
+    const getLocalStorege = getFromLS(READ_KEY);
+    const objects = getLocalStorege; 
+    const dates = objects.map(obj => obj.date); 
+    const uniqueDates = dates.filter((date, index) => dates.indexOf(date) === index); 
+    const result = [];
+  
+    uniqueDates.forEach(date => {
+      const news = objects.filter(obj => obj.date === date)
+      console.log(news)
+      result.push({ date: date, news: news });
+    });
+  
+    console.log(result);
   }
 
   #onReadClick(event) {
@@ -142,5 +148,5 @@ if(instance.isHomePage()){ //перевірка чи знаходишся на h
 }
 else{
   instance.renderReadPage(); //малюю readPage
-
+  instance.getDateLocalStorege();
 }

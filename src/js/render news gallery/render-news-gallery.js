@@ -9,7 +9,7 @@ import { Notify } from 'notiflix';
 import axios from 'axios';
 import { format } from 'date-fns';
 import { API_KEY } from '../API/weatherAPI';
-
+import { onWindowResizeFoo } from '../onWindowResize';
 import { input } from '../newCalendar';
 import { selectedDate } from '../newCalendar';
 import _debounce from 'debounce';
@@ -23,6 +23,7 @@ input.addEventListener('change', _debounce(onCalendarChange, 1500));
 async function pageLoadHandler() {
   try {
     location();
+    onWindowResizeFoo();
     const { results, num_results } = await newsApi.fetchPopularArticles();
     newsApi.newsDataArr = NormalizeData.popularData(results);
     markup.renderMarkup(

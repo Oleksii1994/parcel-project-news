@@ -131,10 +131,10 @@ function onLoadFavoritesPage() {
   notFoundRef.classList.add('not-found-box-hidden');
   if (listArticlesRef === null) return;
 
-  listArticlesRef.innerHTML = markupForFavoritesAndRead.createGalleryCardMarkup(dataFromLS);
+  listArticlesRef.innerHTML =
+    markupForFavoritesAndRead.createGalleryCardMarkup(dataFromLS);
 
   listArticlesRef.addEventListener('click', onListArticlesClick);
-  
 }
 
 function onListArticlesClick(event) {
@@ -151,11 +151,13 @@ function onListArticlesClick(event) {
   if (present) {
     const newData = dataFromLS.filter(article => article.id !== id);
     setToLS(FAVORITE_KEY, newData);
+
     if (!newData.length) {
       checkLS();
     }
     
     const newMarkup = markupForFavoritesAndRead.createGalleryCardMarkup(newData);
+
     listArticlesRef.innerHTML = newMarkup;
     return;
   }

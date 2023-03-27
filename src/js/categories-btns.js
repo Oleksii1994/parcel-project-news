@@ -4,6 +4,7 @@ import { NormalizeData } from './API/api-data-normalaizer';
 import { markup } from './renderMarkup';
 import { markupForFavoritesAndRead } from './renderMarkup';
 import { Notify } from 'notiflix';
+import { makePaginationButtons } from './pagination';
 
 const categories = [
   {
@@ -398,7 +399,9 @@ async function onBtnsClick(e) {
 
 async function categoriesFetch(e) {
   e.preventDefault();
-  newsApi.currentCategory = e.target.textContent.toLowerCase();
+  newsApi.currentCategory = newsApi.encodeCategory(
+    e.target.textContent.toLowerCase()
+  );
   try {
     const data = await newsApi.fetchArticlesByCategory();
     // if (data === '') {
@@ -414,6 +417,7 @@ async function categoriesFetch(e) {
         NormalizeData.categoryData(data)
       )
     );
+    makePaginationButtons(newsApi.totalButtons);
   } catch (error) {
     console.log(error);
     Notify.failure(`${error}`);

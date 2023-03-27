@@ -7,4 +7,5 @@ export const refs = {
   galleryEl: document.querySelector('#news-gallery'),
   notFoundBox: document.querySelector('.not-found-box'),
   loader: document.querySelector('.loading'),
+  paginationContainerEL: document.querySelector('#pagination-container'),
 };

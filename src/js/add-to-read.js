@@ -11,7 +11,7 @@ const READ_KEY = 'read_news';
 
 class AddToRead {
   isHomePage() {
-    const homePage = document.querySelector('#homepage');
+    const homePage = refs.galleryEl
     if (homePage) {
       return true;
     }
@@ -19,8 +19,7 @@ class AddToRead {
   }
   addListenersToHomePage(){
       const linkReadMore = document.querySelectorAll('.thumb__link');
-      
-      linkReadMore.forEach(link => link.addEventListener('click', this.#onReadClick, {once:true}));
+      linkReadMore.forEach(link => link.addEventListener('click', this.#onReadClick));
       console.log(linkReadMore)
   }
   renderReadPage(){ //рендер маркапу
@@ -60,10 +59,13 @@ class AddToRead {
 
 }
 
-export const instance = new AddToRead(); // створює об'єкт  AddToRead
+const instance = new AddToRead(); // створює об'єкт  AddToRead
 
 if(instance.isHomePage()){ //перевірка чи знаходишся на homePage
-  instance.addListenersToHomePage(); //опрацьовую клік на readMore
+  refs.galleryEl.addEventListener('build', () =>{
+    instance.addListenersToHomePage(); //опрацьовую клік на readMore
+  });
+  
 }
 else{
   instance.renderReadPage(); //малюю readPage

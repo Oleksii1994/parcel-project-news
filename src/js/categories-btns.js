@@ -391,7 +391,7 @@ async function onBtnsClick(e) {
   // }
 
   // categoriesOtherBtn.classList.remove('active');
-  e.target.classList.add('active');
+  // e.target.classList.add('active');
 
   categoriesFetch(e);
 }

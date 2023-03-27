@@ -77,6 +77,11 @@
   //   background-color: var(--blue-main-color);
   //   color: var(--white-main-color);
   // }
+  &:focus {
+    background-color: var(--blue-main-color);
+    color: var(--white-main-color);
+    border-radius: 20px;
+  }
   &-btn-box {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -102,18 +107,22 @@
 
   &:hover {
     text-decoration: underline;
-
+    &:focus {
+      background-color: var(--blue-main-color);
+      color: var(--white-main-color);
+      border-radius: 20px;
+    }
     // color: var(--white-main-color);
   }
 
   display: block;
   white-space: nowrap;
 
-  &:active {
-    text-decoration: underline;
-    background-color: var(--blue-main-color);
-    color: var(--white-main-color);
-  }
+  // &:active {
+  //   text-decoration: underline;
+  //   background-color: var(--blue-main-color);
+  //   color: var(--white-main-color);
+  // }
 }
 
 .categories__other-btn.active {
@@ -122,11 +131,11 @@
   border-radius: 20px;
 }
 
-.categories__other-item.active {
-  background-color: var(--blue-main-color);
-  color: var(--white-main-color);
-  border-radius: 20px;
-}
+// .categories__other-item.active {
+//   background-color: var(--blue-main-color);
+//   color: var(--white-main-color);
+//   border-radius: 20px;
+// }
 
 .visible .categories__other-icon {
   // fill: var(--blue-main-color);

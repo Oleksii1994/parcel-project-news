@@ -131,8 +131,7 @@ h1 {
 
 .button-auth-submit {
   margin-top: 28px;
-  width: 120px;
-  height: 32px;
+
   background: #4440f6;
   border: none;
   border-radius: 2px;
@@ -142,6 +141,9 @@ h1 {
   text-transform: uppercase;
   transition: 0.1s ease;
   cursor: pointer;
+
+  padding: 10px 40px;
+  width: 200px;
 
   &:hover,
   &:focus {
@@ -162,8 +164,8 @@ h1 {
   justify-content: center;
 
   margin-top: 28px;
-  width: 120px;
-  height: 32px;
+  padding: 10px 40px;
+  width: 200px;
   background: #4440f6;
   border: none;
   border-radius: 2px;

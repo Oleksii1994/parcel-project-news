@@ -17,6 +17,7 @@ import {
   signOut,
 } from 'firebase/auth';
 import { refs } from '../refs/refs';
+import { profileIcon } from '../refs/profileIconURL';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDD_Eh4tyvM30ivpTHWqfHo7r2h0gDev4Y',
@@ -72,6 +73,7 @@ export function singUpFun(e) {
         password: password,
         newsFavouriteData: [''],
         newsReadData: [''],
+        userPhoto: profileIcon,
       });
 
       alert('user created');

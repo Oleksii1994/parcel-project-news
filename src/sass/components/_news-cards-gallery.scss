@@ -17,21 +17,21 @@
 
   &__picture {
     margin-top: 40px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 248px;
-  height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 248px;
+    height: auto;
 
-  @include for-size(tablet) {
-    width: 270px;
-  }
+    @include for-size(tablet) {
+      width: 270px;
+    }
 
-  @include for-size(desktop) {
-    width: 350px;
-  }
+    @include for-size(desktop) {
+      width: 350px;
+    }
   }
 
   &-hidden {
@@ -42,16 +42,20 @@
 .gallery {
   position: relative;
   width: 100%;
-  padding: 0 16px;
+  padding-right: 16px;
+  padding-bottom: 40px;
+  padding-left: 16px;
 
-  @include for-size(tablet) {
+  @include for-size(mobile) {
     width: 320px;
   }
   @include for-size(tablet) {
     width: 768px;
+    padding-bottom: 48px;
   }
   @include for-size(desktop) {
     width: 1280px;
+    padding-bottom: 60px;
   }
 
   &__list {
@@ -178,14 +182,10 @@
   &__name {
     display: flex;
     align-items: center;
+    gap: 5px;
 
     font-family: font(_manrope);
     @include text(500, 12, 15);
-  }
-
-  &__icon {
-    margin-left: 4px;
-    color: var(--blue-color);
   }
 }
 .remove {

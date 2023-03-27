@@ -1,4 +1,4 @@
-import { markup } from './renderMarkup';
+import { markupForFavoritesAndRead } from './renderMarkup';
 // import { pageLoadHandler } from './render news gallery/render-news-gallery';
 import { setToLS, getFromLS } from './local-storage-logic';
 import { refs } from './refs/refs';
@@ -131,10 +131,10 @@ function onLoadFavoritesPage() {
   notFoundRef.classList.add('not-found-box-hidden');
   if (listArticlesRef === null) return;
 
-  listArticlesRef.innerHTML = markup.createGalleryCardMarkup(dataFromLS);
+  listArticlesRef.innerHTML =
+    markupForFavoritesAndRead.createGalleryCardMarkup(dataFromLS);
 
   listArticlesRef.addEventListener('click', onListArticlesClick);
-  console.log('nfdbkhvgdj');
 }
 
 function onListArticlesClick(event) {
@@ -152,7 +152,8 @@ function onListArticlesClick(event) {
   if (present) {
     const newData = dataFromLS.filter(article => article.id !== id);
     setToLS(FAVORITE_KEY, newData);
-    const newMarkup = markup.createGalleryCardMarkup(newData);
+    const newMarkup =
+      markupForFavoritesAndRead.createGalleryCardMarkup(newData);
     listArticlesRef.innerHTML = newMarkup;
     return;
   }
@@ -160,10 +161,14 @@ function onListArticlesClick(event) {
 
 function checkLS() {
   const dataFromLS = getFromLS(FAVORITE_KEY);
-  if (dataFromLS !== [] && dataFromLS.length !== -1) {
-    notFoundRef.classList.remove('not-found-box-hidden');
+  if (!dataFromLS.length) {
+    notFoundRef.classList.add('not-found-box');
     window.scrollTo(0, 0);
   }
+}
+
+if (document.title === 'Favorite') {
+  onLoadFavoritesPage();
 }
 
 // onLoadFavoritesPage(); /////треба викликати цю функцію при клікі на посилання Favorite

@@ -404,6 +404,7 @@ async function categoriesFetch(e) {
   );
   try {
     const data = await newsApi.fetchArticlesByCategory();
+    newsApi.resetCatPage();
     // if (data === '') {
     //   refs.notFoundBox.innerHTML = `<h2 class="not-found-box__title">We haven’t found news from <br> this date</h2>
     //   <img src="https://live.staticflickr.com/65535/52770181328_d91f5366f0_z.jpg">`;
@@ -411,7 +412,7 @@ async function categoriesFetch(e) {
     // }
     newsApi.newsDataArr = NormalizeData.categoryData(data);
     markup.clearMarkup(refs.galleryEl);
-    markup.renderMarkup(
+    markupForFavoritesAndRead.renderMarkup(
       refs.galleryEl,
       markupForFavoritesAndRead.createGalleryCardMarkup(
         NormalizeData.categoryData(data)

@@ -312,7 +312,9 @@ async function fetchAndRendercategoryNews(i) {
     hideLoader();
     markupForFavoritesAndRead.renderMarkup(
       refs.galleryEl,
-      markup.createGalleryCardMarkup(NormalizeData.categoryData(results))
+      markupForFavoritesAndRead.createGalleryCardMarkup(
+        NormalizeData.categoryData(results)
+      )
     );
   } catch (error) {
     console.log(error);

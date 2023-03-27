@@ -7,6 +7,7 @@
   }
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding: 24px 0;
+  width: 100%;
 }
 
 .container {
@@ -53,8 +54,10 @@
     margin-right: 102px;
   }
 }
-.screen-mobile .nav {
-  display: none;
+.nav {
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 }
 
 .nav__list {
@@ -170,21 +173,22 @@
   }
 }
 
-.auth-button {
-}
+// .auth-button {
+// }
 
 .header__box {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.screen-mobile .auth-button {
-  display: none;
-}
+
 .screen-desktop .header__box {
   flex-direction: row;
 }
 .auth-button {
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
   width: auto;
   height: 31px;
   // left: 16px;

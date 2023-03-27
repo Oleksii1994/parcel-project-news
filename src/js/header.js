@@ -1,7 +1,7 @@
 import { refs } from './refs/refs';
 import { newsApi } from './API/fetchAPI';
 import { Notify } from 'notiflix';
-import { markup } from './renderMarkup';
+import { markup, markupForFavoritesAndRead } from './renderMarkup';
 import { NormalizeData } from './API/api-data-normalaizer';
 import { selectedDate } from './newCalendar';
 import { makePaginationButtons } from './pagination';
@@ -24,10 +24,28 @@ Notify.init(notifyOptions);
 
 refs.formSearch.addEventListener('submit', onFormSearchSubmit);
 
+//==========  скрол
+
+const sentinel = document.querySelector('#sentinel');
+
+const onEntry = entries => {
+  console.log('awdawd');
+  fetchAndRenderSearchNews();
+};
+const options = {
+  rootMargin: '300px',
+};
+const observer = new IntersectionObserver(onEntry, options);
+console.log(observer);
+
+//==========================================================
+
 async function onFormSearchSubmit(event) {
   event.preventDefault();
+  //отключение скрола
+  observer.unobserve(sentinel);
+  //========================================================
   const value = event.currentTarget.elements.searchQuery.value.trim();
-  // markup.clearMarkup(refs.galleryEl);
   if (!value) {
     return;
   }
@@ -42,6 +60,9 @@ async function onFormSearchSubmit(event) {
   checkDate();
 
   try {
+    // подключение скрола
+    observer.observe(sentinel);
+    //
     let { docs } = await newsApi.fetchSearchArticles();
     hideLoader();
     if (!docs.length) {
@@ -51,9 +72,10 @@ async function onFormSearchSubmit(event) {
     }
     markup.renderMarkup(
       refs.galleryEl,
-      markup.createGalleryCardMarkup(NormalizeData.searchData(docs))
+      markupForFavoritesAndRead.createGalleryCardMarkup(
+        NormalizeData.searchData(docs)
+      )
     );
-    makePaginationButtons(newsApi.totalHits);
   } catch (error) {
     console.log(error);
     Notify.failure(`${error}`);
@@ -106,4 +128,35 @@ if (galleryRef) {
     '[href="/index.html"]'
   );
   currentPage.classList.add('current__page');
+}
+
+// infinity scroll
+
+async function fetchAndRenderSearchNews() {
+  console.log(newsApi.page);
+
+  setTimeout(() => {
+    if (newsApi.page >= newsApi.totalHits) {
+      Notiflix.Notify.failure(
+        "We're sorry, but you've reached the end of search results."
+      );
+      observer.unobserve(sentinel);
+      return;
+    }
+  }, 1000);
+
+  try {
+    showLoader();
+    const { docs } = await newsApi.fetchSearchArticles();
+    hideLoader();
+    markup.renderMarkup(
+      refs.galleryEl,
+      markupForFavoritesAndRead.createGalleryCardMarkup(
+        NormalizeData.searchData(docs)
+      )
+    );
+  } catch (error) {
+    console.log(error);
+    Notify.failure(`${error}`);
+  }
 }

@@ -65,7 +65,7 @@ async function pageLoadHandler() {
         const data = response.data;
         setTimeout(() => {
           refsWeather.weatherBox.innerHTML = renderWeather(data);
-        }, 500);
+        }, 1000);
       } catch (error) {
         console.error(error);
         Notify.failure(`${error}`);

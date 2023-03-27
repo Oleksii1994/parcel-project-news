@@ -46,6 +46,9 @@ const FAVORITE_KEY = 'favorite_news';
 
 export function onLoadHomePage() {
   const FAVORITE_KEY = 'favorite_news';
+  const svgA = new URL('../images/icon-card.svg', import.meta.url);
+  const svgB = 'icon-like';
+  const svgC = 'icon-like-icon';
 
   refs.galleryEl.addEventListener('click', onGalleryClick);
 
@@ -100,15 +103,13 @@ export function onLoadHomePage() {
       }
       // ===========================================================
 
-      targetBtn.innerHTML =
-        '<p class="gallery-thumb__name add">Add to favorite<span class="gallery-thumb__icon">&#9825;</span></p>';
+      targetBtn.innerHTML = `<p class="gallery-thumb__name add">Add to favorite<svg width="16" height="16"><use href="${svgA}#${svgC}"></use></svg></p>`;
       return;
     }
 
     const newData = [...dataFromLS, { ...article }];
     setToLS(FAVORITE_KEY, newData);
-    targetBtn.innerHTML =
-      '<p class="gallery-thumb__name add">Remove from favorite<span class="gallery-thumb__icon">&#10084;</span></p>';
+    targetBtn.innerHTML = `<p class="gallery-thumb__name add">Remove from favorite<svg width="16" height="16"><use href="${svgA}#${svgB}"></svg></p>`;
   }
 }
 

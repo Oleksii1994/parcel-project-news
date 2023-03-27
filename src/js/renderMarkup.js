@@ -3,26 +3,32 @@ import { setToLS, getFromLS } from './local-storage-logic';
 
 export const markup = {
   createGalleryCardMarkup(arr) {
+    const svgA = new URL('../images/icon-card.svg', import.meta.url);
+    const svgB = 'icon-like';
+    const svgC = 'icon-like-icon';
+    const svgD = 'icon-check';
     return arr.map(({ img, title, text, date, id, category, url }, index) => {
-      return `<li id="${id}" class="gallery__item">
-  <div class="gallery-thumb" style="background-image: url('${img}')">
-      <p class="gallery-thumb__subtitle">${category}</p>
-      <p class="gallery-thumb__already">
-        Already read
-      </p>
-    ${
-      checkPresentArticle(id)
-        ? '<button type="button" class="gallery-thumb__btn"><p class="gallery-thumb__name add">Remove from favorite<span class="gallery-thumb__icon">&#10084;</span></p></button>'
-        : '<button type="button" class="gallery-thumb__btn"><p class="gallery-thumb__name add">Add to favorite<span class="gallery-thumb__icon">&#9825;</span></p></button>'
-    }
-  </div>
-    <h3 class="gallery__title">${title}</h3>
-    <p class="gallery__text">${text}</p>
-      <div class="thumb">
-        <p class="thumb__text">${date}</p>
-        <a class="thumb__link" href="${url}" target="_blank">Read more</a>
-      </div>
-</li>`;
+      return `
+      <li id="${id}" class="gallery__item">
+        <div class="gallery-thumb" style="background-image: url('${img}')">
+          <p class="gallery-thumb__subtitle">${category}</p>
+          <p class="gallery-thumb__already">
+            Already read
+            <svg width="18" height="18"><use href="${svgA}#${svgD}"></use></svg>
+          </p>
+          ${
+            checkPresentArticle(id)
+              ? `<button type="button" class="gallery-thumb__btn"><p class="gallery-thumb__name add">Remove from favorite<svg width="16" height="16"><use href="${svgA}#${svgB}"></use></svg></p></button>`
+              : `<button type="button" class="gallery-thumb__btn"><p class="gallery-thumb__name add">Add to favorite<svg width="16" height="16"><use href="${svgA}#${svgC}"></use></svg></p></button>`
+          }
+        </div>
+        <h3 class="gallery__title">${title}</h3>
+        <p class="gallery__text">${text}</p>
+          <div class="thumb">
+            <p class="thumb__text">${date}</p>
+            <a class="thumb__link" href="${url}" target="_blank">Read more</a>
+          </div>
+      </li>`;
     });
   },
 
@@ -37,8 +43,11 @@ export const markup = {
 
 export const markupForFavoritesAndRead = {
   createGalleryCardMarkup(arr) {
+    const svgA = new URL('../images/icon-card.svg', import.meta.url);
+    const svgB = 'icon-like';
+    const svgC = 'icon-like-icon';
     return arr
-      .map(({ img, title, text, date, id, category, url }, index) => {
+      .map(({ img, title, text, date, id, category, url }) => {
         return `<li id="${id}" class="gallery__item">
   <div class="gallery-thumb" style="background-image: url('${img}')">
       <p class="gallery-thumb__subtitle">${category}</p>
@@ -47,8 +56,8 @@ export const markupForFavoritesAndRead = {
       </p>
     ${
       checkPresentArticle(id)
-        ? '<button type="button" class="gallery-thumb__btn"><p class="gallery-thumb__name add">Remove from favorite<span class="gallery-thumb__icon">&#10084;</span></p></button>'
-        : '<button type="button" class="gallery-thumb__btn"><p class="gallery-thumb__name add">Add to favorite<span class="gallery-thumb__icon">&#9825;</span></p></button>'
+        ? `<button type="button" class="gallery-thumb__btn"><p class="gallery-thumb__name add">Remove from favorite<svg class="gallery-thumb__icon" width="16" height="16"><use href="${svgA}#${svgB}"></use></svg></p></button>`
+        : `<button type="button" class="gallery-thumb__btn"><p class="gallery-thumb__name add">Add to favorite<svg class="gallery-thumb__icon" width="16" height="16"><use href="${svgA}#${svgC}"></use></svg></p></button>`
     }
   </div>
     <h3 class="gallery__title">${title}</h3>

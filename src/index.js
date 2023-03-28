@@ -11,8 +11,6 @@ import './js/categories-btns';
 import './js/render news gallery/render-news-gallery';
 import './js/add-to-favorite';
 import './js/header';
-import './js/pagination';
-
 import './js/firebace/firebace-main';
 import './js/switcher-mobile-menu';
 import './js/btnToUp';

@@ -1,11 +1,14 @@
+import Pagination from 'tui-pagination';
 import { newsApi } from './API/fetchAPI';
 import { refs } from './refs/refs';
 import { NormalizeData } from './API/api-data-normalaizer';
 import { markup } from './renderMarkup';
 import { markupForFavoritesAndRead } from './renderMarkup';
 import { Notify } from 'notiflix';
-import { makePaginationButtons } from './pagination';
+import { smoothScrollToTop } from './render news gallery/render-news-gallery';
+import { showLoader, hideLoader } from './loading';
 
+const paginationBoxForCategories = `<li id="tuiPagCon"><div id="tui-pagination-container" class="tui-pagination"></div></li>`;
 const categories = [
   {
     section: 'admin',
@@ -402,9 +405,19 @@ async function categoriesFetch(e) {
   newsApi.currentCategory = newsApi.encodeCategory(
     e.target.textContent.toLowerCase()
   );
+  markup.clearMarkup(refs.galleryEl);
+  showLoader();
   try {
     const data = await newsApi.fetchArticlesByCategory();
     newsApi.resetCatPage();
+    hideLoader();
+    const paginationOptions = {
+      totalItems: newsApi.totalButtons,
+      page: 1,
+      itemsPerPage: newsApi.catPerPage,
+      visiblePages: newsApi.catPerPage,
+      centerAlign: true,
+    };
     // if (data === '') {
     //   refs.notFoundPage.classList.remove('not-found-page');
     //   refs.notFoundPage.classList.add('not-found-page--visually');
@@ -412,13 +425,66 @@ async function categoriesFetch(e) {
     // }
     newsApi.newsDataArr = NormalizeData.categoryData(data);
     markup.clearMarkup(refs.galleryEl);
-    markupForFavoritesAndRead.renderMarkup(
-      refs.galleryEl,
+    const categoryNewsMarkupArr = markupForFavoritesAndRead.getHtmlListItemsArr(
       markupForFavoritesAndRead.createGalleryCardMarkup(
         NormalizeData.categoryData(data)
       )
     );
-    makePaginationButtons(newsApi.totalButtons);
+    categoryNewsMarkupArr.push(paginationBoxForCategories);
+    markupForFavoritesAndRead.renderMarkup(
+      refs.galleryEl,
+      categoryNewsMarkupArr.join('')
+    );
+
+    const container = document.getElementById('tui-pagination-container');
+    const tuiPagCon = document.getElementById('tuiPagCon');
+
+    const categoryInstance = new Pagination(container, paginationOptions);
+    // // Обработчик события изменения текущей страницы
+    categoryInstance.on('beforeMove', async event => {
+      smoothScrollToTop();
+      newsApi.catCurrentPage = event.page - 1;
+
+      const elementsToDelete = refs.galleryEl.querySelectorAll(
+        ':scope > *:not(#tuiPagCon)'
+      );
+
+      for (let i = 0; i < elementsToDelete.length; i++) {
+        refs.galleryEl.removeChild(elementsToDelete[i]);
+      }
+
+      // ===========================================================================
+      // запит на бекенд
+      paginationCategoryFetch(tuiPagCon);
+    });
+  } catch (error) {
+    console.log(error);
+    Notify.failure(`${error}`);
+  }
+}
+
+async function paginationCategoryFetch(tuiPagCon) {
+  showLoader();
+  try {
+    const data = await newsApi.fetchArticlesByCategory();
+    hideLoader();
+    newsApi.newsDataArr = NormalizeData.categoryData(data);
+
+    markupForFavoritesAndRead.renderMarkupBefore(
+      tuiPagCon,
+      markupForFavoritesAndRead.createGalleryCardMarkup(
+        NormalizeData.categoryData(data)
+      )
+    );
+    if (
+      window.matchMedia('(min-width: 320px)').matches &&
+      window.matchMedia('(max-width: 767px)').matches
+    ) {
+      return;
+    } else {
+      document.querySelector('.tui-ico-prev').innerHTML = '< Prev';
+      document.querySelector('.tui-ico-next').innerHTML = 'Next >';
+    }
   } catch (error) {
     console.log(error);
     Notify.failure(`${error}`);

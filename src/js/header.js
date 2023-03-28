@@ -66,9 +66,13 @@ async function onFormSearchSubmit(event) {
     // //   refs.notFoundPage.classList.add('not-found-page--visually');
     // //   return;
     // }
+    console.log(markup.createGalleryCardMarkup(NormalizeData.searchData(docs)));
     markup.renderMarkup(
       refs.galleryEl,
-      markup.createGalleryCardMarkup(NormalizeData.searchData(docs))
+      markup
+        .createGalleryCardMarkup(NormalizeData.searchData(docs))
+        .splice(0, 9)
+        .join('')
     );
     makePaginationButtons(newsApi.totalHits);
   } catch (error) {

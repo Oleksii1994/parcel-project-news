@@ -13,7 +13,7 @@
       height="35"
     />
     <link rel="stylesheet" href="./sass/index.scss" />
-    <link rel="stylesheet" href="../node_modules/jqueryui/jquery-ui.min.css">
+    <link rel="stylesheet" href="../node_modules/jqueryui/jquery-ui.min.css" />
     <!-- <script type="module" src="./read.js"></script> -->
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/jqueryui/jquery-ui.min.js"></script>
@@ -22,47 +22,14 @@
     <include src="./partials/header.html"></include>
     <main>
       <section>
-        <div id="accordion">
-          <h3>Section 1</h3>
+        <div id="accordion"></div>
+
+        <div id="markup-template">
+          <h2>{{title}}</h2>
           <div>
-            <p>
-            <div class="not-found">
-            <ul class="news-list list gallery__list" id="news-list">
+            <ul class="news-list list gallery__list">
+              {{card}}
             </ul>
-            </div>
-            </p>
-          </div>
-          <h3>Section 2</h3>
-          <div>
-            <p>
-              <ul class="news-list list" id="news-list">
-
-              </ul>
-            </p>
-          </div>
-          <h3>Section 3</h3>
-          <div>
-            <p>
-              <ul class="news-list list" id="news-list">
-                
-              </ul>
-            </p>
-            <ul>
-
-            </ul>
-          </div>
-          <h3>Section 4</h3>
-          <div>
-            <p>
-              <ul>
-
-              </ul>
-            </p>
-            <p>
-              <ul>
-
-              </ul>
-            </p>
           </div>
         </div>
       </section>
@@ -73,4 +40,3 @@
     <script type="module" src="./read.js"></script>
   </body>
 </html>
-

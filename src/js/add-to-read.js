@@ -1,35 +1,9 @@
-import { markupForFavoritesAndRead } from './renderMarkup';
+import { markup } from './renderMarkup';
 import { refs } from './refs/refs';
 import { setToLS, getFromLS } from './local-storage-logic';
 // import { sendEmailVerification } from 'firebase/auth';
 
-const listArticlesRef = document.querySelector('#accordion');
-
 const READ_KEY = 'read_news';
-
-
-// const test = [
-//   {date: "17/3/2023", news: [{}]},
-//   {date: "25/3/2022", news: [{}]},
-// ]
-
-/*
-1. з localStorage витягнути унікальні даті "date" map
-2. перетворити цей масив з датами в об'єкти те що записано в test (news має бути пустим масивом)
-3. проходишся по масиву з датами date, фільтр по датам і записати в масив news.
-4. генеруєш розмітку для акордіону що є в read, генерую розмітку з масиву який вийшов, приклад test
-5. генерую картки функцією createMurcup(для кожної секції стільки раз скільки є дат,
-генерувати масив news (масив з картками))
-6. згенерувати акордіон.
-
-*/
-// const testt = [
-//    {date: "17/3/2023", news: [{}]},
-//   {date: "25/3/2022", news: [{}]},
-//   {date: "23/5/2021", news: [{}]},
-//   {date: "15/3/2025", news: [{}]},
-//   ]
-
 
 class AddToRead {
   isHomePage() {
@@ -47,26 +21,41 @@ class AddToRead {
 
   renderReadPage(){ //рендер маркапу
   const dataFromLS = getFromLS(READ_KEY);
-  const newMarkup =  markupForFavoritesAndRead.createGalleryCardMarkup(dataFromLS);
-  listArticlesRef.innerHTML = newMarkup;
+  const markupTemplate = document.querySelector('#markup-template');
+  const template = markupTemplate.innerHTML;
+  markupTemplate.remove();
+  const result = this.#getDateLocalStorege(dataFromLS);
+  this.#generateAccordionHTML(result, template)
+  this.#createAccordion();
   }
 
-
-  getDateLocalStorege(){
-    const getLocalStorege = getFromLS(READ_KEY);
-    const objects = getLocalStorege; 
-    const dates = objects.map(obj => obj.date); 
-    const uniqueDates = dates.filter((date, index) => dates.indexOf(date) === index); 
+#getDateLocalStorege(dataFromLS){
+    const objects = dataFromLS; 
+    const dates = objects.map(obj => obj.LSDate); 
+    const uniqueDates = dates.filter((LSDate, index) => dates.indexOf(LSDate) === index); 
     const result = [];
   
-    uniqueDates.forEach(date => {
-      const news = objects.filter(obj => obj.date === date)
-      console.log(news)
-      result.push({ date: date, news: news });
+    uniqueDates.forEach(LSDate => {
+      const news = objects.filter(obj => obj.LSDate === LSDate)
+      result.push({ LSDate: LSDate, news: news });
     });
-  
     console.log(result);
+    return result;
   }
+
+
+#generateAccordionHTML(result, template) {
+    const listArticlesRef = document.querySelector('#accordion');
+    result.forEach(el => {
+      const section = template.replaceAll('{{title}}', el.LSDate).replaceAll('{{card}}',
+      markup.createGalleryCardMarkup(el.news))
+
+      const div = document.createElement("div");
+      listArticlesRef.appendChild(div);
+      div.innerHTML = section
+    });
+  }
+
 
   #onReadClick(event) {
     const targetItem = event.target.closest('.gallery__item');
@@ -87,55 +76,20 @@ class AddToRead {
     const category = targetItem.querySelector(
       '.gallery-thumb__subtitle'
     ).textContent;
+    const LSDate = new Date().toLocaleDateString()
     const url = targetItem.querySelector('.thumb__link').href;
-    const article = { img: img(), title, text, date, id, category, url };
+    const article = { img: img(), title, text, date, id, category, url, LSDate};
     const dataFromLS = getFromLS(READ_KEY) || [];
+    console.log(LSDate)
     // добавляємо в localStorage
     const present = dataFromLS.find(article => article.id === id);
     if (!present) { 
-      setToLS(READ_KEY, [...dataFromLS, article]);   // dataFromLS.push(article) // setToLS(READ_KEY, dataFromLS);
+      setToLS(READ_KEY, [...dataFromLS, article], [LSDate]);   // dataFromLS.push(article) // setToLS(READ_KEY, dataFromLS);
     }
   }
-// #createAccordion(){
-//   $('#accordion').accordion({
-//     collapsible: true,
-//     beforeActivate: function (event, ui) {
-//       let currHeader, currContent, isPanelSelected;
-//       if (ui.newHeader[0]) {
-//         currHeader = ui.newHeader;
-//         currContent = currHeader.next('.ui-accordion-content');
-//       } else {
-//         currHeader = ui.oldHeader;
-//         currContent = currHeader.next('.ui-accordion-content');
-//       }
-
-//       isPanelSelected = currHeader.attr('aria-selected') === 'true';
-
-//       currHeader
-//         .toggleClass('ui-corner-all', isPanelSelected)
-//         .toggleClass(
-//           'accordion-header-active ui-state-active ui-corner-top',
-//           !isPanelSelected
-//         )
-//         .attr('aria-selected', (!isPanelSelected).toString());
-
-//       currHeader
-//         .children('.ui-icon')
-//         .toggleClass('ui-icon-triangle-1-e', isPanelSelected)
-//         .toggleClass('ui-icon-triangle-1-s', !isPanelSelected);
-
-//       currContent.toggleClass('accordion-content-active', !isPanelSelected);
-
-//       if (isPanelSelected) {
-//         currContent.slideUp();
-//       } else {
-//         currContent.slideDown();
-//       }
-
-//       return false;
-//     },
-//   });
-// }
+#createAccordion(){
+  $('#accordion').accordion({ header: "h2", collapsible: true });
+}
 }
 
 const instance = new AddToRead(); // створює об'єкт  AddToRead
@@ -148,5 +102,5 @@ if(instance.isHomePage()){ //перевірка чи знаходишся на h
 }
 else{
   instance.renderReadPage(); //малюю readPage
-  instance.getDateLocalStorege();
+  // instance.getDateLocalStorege();
 }

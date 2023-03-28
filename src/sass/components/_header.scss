@@ -169,6 +169,7 @@
   height: 31px;
   // left: 16px;
   // top: 105px;
+  cursor: pointer;
 
   background-color: var(--body-color-light-theme);
   border: 1px solid var(--blue-main-color);
@@ -216,7 +217,6 @@
   width: 110%;
   height: 1px;
   background-color: var(--blue-main-color);
-
 }
 
 .screen-desktop .header__box {

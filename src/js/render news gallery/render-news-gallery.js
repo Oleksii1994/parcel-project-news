@@ -89,7 +89,7 @@ async function pageLoadHandler() {
     ) {
       murkupPage.firstMurkupPage = [...newsMarkup].splice(0, 7);
       murkupPage.secontMurkupPage = [...newsMarkup].splice(7, 8);
-      murkupPage.thirdMurkupPage = [...newsMarkup].splice(15, 20);
+      murkupPage.thirdMurkupPage = [...newsMarkup].splice(16, 20);
     } else if (window.matchMedia('(min-width: 1280px)').matches) {
       murkupPage.firstMurkupPage = [...newsMarkup].splice(0, 8);
       murkupPage.secontMurkupPage = [...newsMarkup].splice(8, 9);

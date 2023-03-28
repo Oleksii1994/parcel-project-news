@@ -9,8 +9,10 @@ export const markup = {
     const svgD = 'icon-check';
     return arr.map(({ img, title, text, date, id, category, url }, index) => {
       return `
-      <li id="${id}" class="gallery__item" data-aos="fade-up"
-     data-aos-duration="1000">
+      <li id="${id}" 
+      class="gallery__item" data-aos="fade-up"
+     data-aos-duration="1000"
+     >
         <div class="gallery-thumb" style="background-image: url('${img}')">
           <p class="gallery-thumb__subtitle">${category}</p>
           <p class="gallery-thumb__already">
@@ -49,8 +51,9 @@ export const markupForFavoritesAndRead = {
     const svgC = 'icon-like-icon';
     return arr
       .map(({ img, title, text, date, id, category, url }) => {
-        return `<li id="${id}" class="gallery__item" data-aos="fade-up"
-     data-aos-duration="1000">
+        return `<li id="${id}" class="gallery__item" 
+   
+     >
   <div class="gallery-thumb" style="background-image: url('${img}')">
       <p class="gallery-thumb__subtitle">${category}</p>
       <p class="gallery-thumb__already">

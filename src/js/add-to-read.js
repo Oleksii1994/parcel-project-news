@@ -1,9 +1,7 @@
-import { markup } from './renderMarkup';
+import { markupForFavoritesAndRead } from './renderMarkup';
 import { refs } from './refs/refs';
 import { setToLS, getFromLS } from './local-storage-logic';
-import { sendEmailVerification } from 'firebase/auth';
-
-const listArticlesRef = document.querySelector('#accordion');
+// import { sendEmailVerification } from 'firebase/auth';
 
 const READ_KEY = 'read_news';
 
@@ -23,12 +21,43 @@ class AddToRead {
     // console.log(linkReadMore)
   }
 
-  renderReadPage() {
-    //рендер маркапу
-    const dataFromLS = getFromLS(READ_KEY);
-    const newMarkup = markup.createGalleryCardMarkup(dataFromLS);
-    listArticlesRef.innerHTML = newMarkup;
+  renderReadPage(){ //рендер маркапу
+  const dataFromLS = getFromLS(READ_KEY);
+  const markupTemplate = document.querySelector('#markup-template');
+  const template = markupTemplate.innerHTML;
+  markupTemplate.remove();
+  const result = this.#getDateLocalStorege(dataFromLS);
+  this.#generateAccordionHTML(result, template)
+  this.#createAccordion();
   }
+
+#getDateLocalStorege(dataFromLS){
+    const objects = dataFromLS; 
+    const dates = objects.map(obj => obj.LSDate); 
+    const uniqueDates = dates.filter((LSDate, index) => dates.indexOf(LSDate) === index); 
+    const result = [];
+  
+    uniqueDates.forEach(LSDate => {
+      const news = objects.filter(obj => obj.LSDate === LSDate)
+      result.push({ LSDate: LSDate, news: news });
+    });
+    console.log(result);
+    return result;
+  }
+
+
+#generateAccordionHTML(result, template) {
+    const listArticlesRef = document.querySelector('#accordion');
+    result.forEach(el => {
+      const section = template.replaceAll('{{title}}', el.LSDate).replaceAll('{{card}}',
+      markupForFavoritesAndRead.createGalleryCardMarkup(el.news))
+
+      const div = document.createElement("div");
+      listArticlesRef.appendChild(div);
+      div.innerHTML = section
+    });
+  }
+
 
   #onReadClick(event) {
     const targetItem = event.target.closest('.gallery__item');
@@ -52,55 +81,20 @@ class AddToRead {
     const category = targetItem.querySelector(
       '.gallery-thumb__subtitle'
     ).textContent;
+    const LSDate = new Date().toLocaleDateString()
     const url = targetItem.querySelector('.thumb__link').href;
-    const article = { img: img(), title, text, date, id, category, url };
+    const article = { img: img(), title, text, date, id, category, url, LSDate};
     const dataFromLS = getFromLS(READ_KEY) || [];
+    console.log(LSDate)
     // добавляємо в localStorage
     const present = dataFromLS.find(article => article.id === id);
-    if (!present) {
-      setToLS(READ_KEY, [...dataFromLS, article]); // dataFromLS.push(article) // setToLS(READ_KEY, dataFromLS);
+    if (!present) { 
+      setToLS(READ_KEY, [...dataFromLS, article], [LSDate]);   // dataFromLS.push(article) // setToLS(READ_KEY, dataFromLS);
     }
   }
-  #createAccordion() {
-    $('#accordion').accordion({
-      collapsible: true,
-      beforeActivate: function (event, ui) {
-        let currHeader, currContent, isPanelSelected;
-        if (ui.newHeader[0]) {
-          currHeader = ui.newHeader;
-          currContent = currHeader.next('.ui-accordion-content');
-        } else {
-          currHeader = ui.oldHeader;
-          currContent = currHeader.next('.ui-accordion-content');
-        }
-
-        isPanelSelected = currHeader.attr('aria-selected') === 'true';
-
-        currHeader
-          .toggleClass('ui-corner-all', isPanelSelected)
-          .toggleClass(
-            'accordion-header-active ui-state-active ui-corner-top',
-            !isPanelSelected
-          )
-          .attr('aria-selected', (!isPanelSelected).toString());
-
-        currHeader
-          .children('.ui-icon')
-          .toggleClass('ui-icon-triangle-1-e', isPanelSelected)
-          .toggleClass('ui-icon-triangle-1-s', !isPanelSelected);
-
-        currContent.toggleClass('accordion-content-active', !isPanelSelected);
-
-        if (isPanelSelected) {
-          currContent.slideUp();
-        } else {
-          currContent.slideDown();
-        }
-
-        return false;
-      },
-    });
-  }
+#createAccordion(){
+  $('#accordion').accordion({ header: "h2", collapsible: true });
+}
 }
 
 const instance = new AddToRead(); // створює об'єкт  AddToRead

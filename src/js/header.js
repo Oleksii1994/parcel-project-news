@@ -9,10 +9,6 @@ import { selectedDate } from './newCalendar';
 import { makePaginationButtons } from './pagination';
 import { showLoader, hideLoader } from './loading';
 
-// export let totalButtons = Math.ceil(newsApi.hits / perPage);
-const paginationBox = document.querySelector('.pagination__container');
-paginationBox.style.display = 'none';
-
 const notifyOptions = {
   width: '450px',
   position: 'right-top',
@@ -81,7 +77,6 @@ async function onFormSearchSubmit(event) {
         NormalizeData.searchData(docs)
       )
     );
-    makePaginationButtons(newsApi.totalHits);
   } catch (error) {
     console.log(error);
     Notify.failure(`${error}`);

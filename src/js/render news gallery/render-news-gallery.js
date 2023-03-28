@@ -14,6 +14,7 @@ import { addWeatherMarkup } from '../renderMarkup';
 import { input } from '../newCalendar';
 import { selectedDate } from '../newCalendar';
 import _debounce from 'debounce';
+import { ref } from '@firebase/database';
 
 let latitude = 50.431;
 let longitude = 30.532;
@@ -27,8 +28,9 @@ window.addEventListener('load', pageLoadHandler, { once: true });
 input.addEventListener('change', _debounce(onCalendarChange, 1500));
 
 async function pageLoadHandler() {
+  markup.clearMarkup(refs.galleryEl);
+  showLoader();
   try {
-    showLoader();
     location();
 
     let previousViewportWidth = window.innerWidth;
@@ -158,8 +160,8 @@ async function pageLoadHandler() {
         );
       }
       setTimeout(() => {
-        document.querySelector('.tui-ico-prev').innerHTML = 'Prev';
-        document.querySelector('.tui-ico-next').innerHTML = 'Next';
+        document.querySelector('.tui-ico-prev').innerHTML = '< Prev';
+        document.querySelector('.tui-ico-next').innerHTML = 'Next >';
       }, 1000);
     });
     ////////////////////////////////////////////////////// Evant який додається коли генерується markup
@@ -349,7 +351,7 @@ function onCalendarChange(e) {
   );
 }
 
-function smoothScrollToTop() {
+export function smoothScrollToTop() {
   const currentPosition =
     document.documentElement.scrollTop || document.body.scrollTop;
   if (currentPosition > 0) {

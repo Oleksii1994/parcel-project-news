@@ -71,6 +71,12 @@ export const markupForFavoritesAndRead = {
       .join('');
   },
 
+  getHtmlListItemsArr(htmlString) {
+    const htmlArray = htmlString.split('</li>').filter(item => item !== '');
+    const formattedHtmlArray = htmlArray.map(item => item + '</li>');
+    return formattedHtmlArray;
+  },
+
   clearMarkup(ref) {
     ref.innerHTML = '';
   },

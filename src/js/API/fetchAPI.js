@@ -46,7 +46,7 @@ class NewsAPIService {
   }
 
   async fetchPopularArticles() {
-    const URL = `${this.#BASE_URL}mostpopular/v2/viewed/1.json?api-key=${
+    const URL = `${this.#BASE_URL}mostpopular/v2/viewed/30.json?api-key=${
       this.#API_KEY
     }`;
     const response = await fetch(URL);
@@ -65,14 +65,13 @@ class NewsAPIService {
     const URL = `${this.#BASE_URL}${SEARCH_BY_CATEGORY_PATH}api-key=${
       this.#API_KEY
     }&${params}`;
-    console.log(URL);
     const response = await fetch(URL);
-    this.incrementCatPage();
+    // this.incrementCatPage();
     this.errorHandle(response, response.statusText);
     const { results, num_results } = await response.json();
     this.#num_results = num_results;
     this.#totalButtons = this.setTotalButtons();
-    console.log(NormalizeData.categoryData(results));
+    this.#newsDataArr = NormalizeData.categoryData(results);
     return results;
   }
 
@@ -86,10 +85,6 @@ class NewsAPIService {
     this.currentPage += 1;
   }
 
-  incrementCatPage() {
-    this.catCurrentPage += 1;
-  }
-
   resetCatPage() {
     this.catCurrentPage = 0;
   }
@@ -99,12 +94,18 @@ class NewsAPIService {
   }
 
   updateParams() {
-    if (this.beginDate !== '') {
+    if (this.beginDate !== '' && this.endDate !== '') {
       Object.assign(this.#searchParams, {
         q: this.searchQuery,
         page: this.currentPage,
         begin_date: this.beginDate,
         end_date: this.endDate,
+      });
+    } else if (this.beginDate !== '' && this.endDate === '') {
+      Object.assign(this.#searchParams, {
+        q: this.searchQuery,
+        page: this.currentPage,
+        begin_date: this.beginDate,
       });
     } else {
       Object.assign(this.#searchParams, {
@@ -129,7 +130,7 @@ class NewsAPIService {
   }
 
   setTotalButtons() {
-    let totalButtons = Math.ceil(this.#num_results / this.#per_page);
+    let totalButtons = Math.floor(this.#num_results);
     if (totalButtons > 200) {
       totalButtons = 200;
       return totalButtons;
@@ -226,33 +227,13 @@ class NewsAPIService {
     return this.#totalButtons;
   }
 
-  // set ctgCurrentPage(newPage) {
-  //   this.catCurrentPage = newPage;
-  // }
+  get catPerPage() {
+    return this.#per_page;
+  }
 
-  // get ctgCurrentPage() {
-  //   return this.catCurrentPage;
-  // }
+  get numResults() {
+    return this.#num_results;
+  }
 }
 
 export const newsApi = new NewsAPIService();
-
-// tests
-// console.log(selectedDate);
-// newsApi.query = 'covid';
-// newsApi.fetchSearchArticles();
-// newsApi.fetchCategories();
-// newsApi.fetchPopularArticles();
-// newsApi.fetchArticlesByCategory();
-
-// get interval() {
-//   return this.period;
-// }
-
-// set interval(date) {
-//   const currentDate = new Date();
-//   const formattedDate = `${currentDate.getFullYear()}${String(
-//     currentDate.getMonth() + 1
-//   ).padStart(2, '0')}${String(currentDate.getDay() + 1).padStart(2, '0')}`;
-//   this.period = formattedDate - date;
-// }

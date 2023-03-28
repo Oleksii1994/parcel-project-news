@@ -136,7 +136,6 @@ function onLoadFavoritesPage() {
 
   listArticlesRef.innerHTML =
     markupForFavoritesAndRead.createGalleryCardMarkup(dataFromLS);
-
   listArticlesRef.addEventListener('click', onListArticlesClick);
 }
 

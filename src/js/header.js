@@ -2,11 +2,13 @@ import Notiflix from 'notiflix';
 import { refs } from './refs/refs';
 import { newsApi } from './API/fetchAPI';
 import { Notify } from 'notiflix';
-import { markup, markupForFavoritesAndRead } from './renderMarkup';
+import { markup } from './renderMarkup';
 import { NormalizeData } from './API/api-data-normalaizer';
 import { selectedDate } from './newCalendar';
 import { makePaginationButtons } from './pagination';
 import { showLoader, hideLoader } from './loading';
+
+// export let totalButtons = Math.ceil(newsApi.hits / perPage);
 
 const notifyOptions = {
   width: '450px',
@@ -41,10 +43,8 @@ const observer = new IntersectionObserver(onEntry, options);
 
 async function onFormSearchSubmit(event) {
   event.preventDefault();
-  //отключение скрола
-  observer.unobserve(sentinel);
-  //========================================================
   const value = event.currentTarget.elements.searchQuery.value.trim();
+  // markup.clearMarkup(refs.galleryEl);
   if (!value) {
     return;
   }
@@ -59,22 +59,18 @@ async function onFormSearchSubmit(event) {
   checkDate();
 
   try {
-    // подключение скрола
-    observer.observe(sentinel);
-    //
     let { docs } = await newsApi.fetchSearchArticles();
     hideLoader();
-    if (!docs.length) {
-      refs.notFoundBox.innerHTML = `<h2 class="not-found-box__title">We haven’t found news from <br> this categories</h2>
-      <img src="https://live.staticflickr.com/65535/52770181328_d91f5366f0_z.jpg">`;
-      return;
-    }
+    // if (!docs.length) {
+    //   refs.notFoundPage.classList.remove('not-found-page');
+    // //   refs.notFoundPage.classList.add('not-found-page--visually');
+    // //   return;
+    // }
     markup.renderMarkup(
       refs.galleryEl,
-      markupForFavoritesAndRead.createGalleryCardMarkup(
-        NormalizeData.searchData(docs)
-      )
+      markup.createGalleryCardMarkup(NormalizeData.searchData(docs))
     );
+    makePaginationButtons(newsApi.totalHits);
   } catch (error) {
     // console.log(error);
     Notify.failure(`${error}`);
@@ -88,7 +84,7 @@ function onDocumentClick(event) {
     return;
   }
   const target = event.target.closest('.form-search');
-  // console.log(target);
+  console.log(target);
   if (!target) {
     if (refs.formSearch.elements.searchQuery.value.trim()) {
       return;

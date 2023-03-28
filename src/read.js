@@ -5,5 +5,6 @@ import './js/mobile-menu-read';
 import './js/API/api-data-normalaizer';
 import './js/switch-theme';
 // import './js/header';
-// import './js/firebace/firebace-main';
+import './js/firebace/firebace-main';
 import './js/switcher-mobile-menu';
+import './js/btnToUp';

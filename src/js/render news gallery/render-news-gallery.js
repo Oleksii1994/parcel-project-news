@@ -1,3 +1,4 @@
+import Pagination from 'tui-pagination';
 import { newsApi } from '../API/fetchAPI';
 import { NormalizeData } from '../API/api-data-normalaizer';
 import { onLoadHomePage } from '../add-to-favorite';
@@ -16,6 +17,11 @@ import _debounce from 'debounce';
 
 let latitude = 50.431;
 let longitude = 30.532;
+const paginationBoxForPopular = `<div id="tui-pagination-container" class="tui-pagination"></div>`;
+
+//
+
+//
 
 window.addEventListener('load', pageLoadHandler, { once: true });
 input.addEventListener('change', _debounce(onCalendarChange, 1500));
@@ -45,9 +51,116 @@ async function pageLoadHandler() {
     const newsMarkup = markup.createGalleryCardMarkup(
       NormalizeData.popularData(results)
     );
-    addWeatherMarkup(newsMarkup);
-    markup.renderMarkup(refs.galleryEl, newsMarkup.join(''));
+
+    //_________________________________________  масив для пагинации_________________________
+
+    // let firstMurkupPage = [];
+    // let secontMurkupPage = [];
+    // let thirdMurkupPage = [];
+
+    const murkupPage = {
+      firstMurkupPage: [],
+      secontMurkupPage: [],
+      thirdMurkupPage: [],
+      fourthMurkupPage: [],
+      fifthMurkupPage: [],
+    };
+    const paginationOptions = {
+      totalItems: 20,
+      page: 1,
+      itemsPerPage: 7,
+      visiblePages: 10,
+      centerAlign: true,
+    };
+
+    if (
+      window.matchMedia('(min-width: 320px)').matches &&
+      window.matchMedia('(max-width: 767px)').matches
+    ) {
+      paginationOptions.itemsPerPage = 4;
+      murkupPage.firstMurkupPage = [...newsMarkup].splice(0, 4);
+      murkupPage.secontMurkupPage = [...newsMarkup].splice(4, 4);
+      murkupPage.thirdMurkupPage = [...newsMarkup].splice(8, 4);
+      murkupPage.fourthMurkupPage = [...newsMarkup].splice(12, 4);
+      murkupPage.fifthMurkupPage = [...newsMarkup].splice(16, 4);
+    } else if (
+      window.matchMedia('(min-width: 768px)').matches &&
+      window.matchMedia('(max-width: 1279px)').matches
+    ) {
+      murkupPage.firstMurkupPage = [...newsMarkup].splice(0, 7);
+      murkupPage.secontMurkupPage = [...newsMarkup].splice(7, 8);
+      murkupPage.thirdMurkupPage = [...newsMarkup].splice(15, 20);
+    } else if (window.matchMedia('(min-width: 1280px)').matches) {
+      murkupPage.firstMurkupPage = [...newsMarkup].splice(0, 8);
+      murkupPage.secontMurkupPage = [...newsMarkup].splice(8, 9);
+      murkupPage.thirdMurkupPage = [...newsMarkup].splice(17, 20);
+    }
+
+    murkupPage.firstMurkupPage.push(paginationBoxForPopular);
+
+    //--------------------------------------------------------------------------------------
+
+    addWeatherMarkup(murkupPage.firstMurkupPage);
+    markup.renderMarkup(refs.galleryEl, murkupPage.firstMurkupPage.join(''));
     onLoadHomePage();
+
+    // ==========================================================================
+
+    const container = document.getElementById('tui-pagination-container');
+
+    const instance = new Pagination(container, paginationOptions);
+
+    // Обработчик события изменения текущей страницы
+    instance.on('beforeMove', event => {
+      smoothScrollToTop();
+      const currentPage = event.page;
+      // console.log(`Текущая страница: ${currentPage}`);
+
+      const elementsToDelete = refs.galleryEl.querySelectorAll(
+        ':scope > *:not(#tui-pagination-container)'
+      );
+      for (let i = 0; i < elementsToDelete.length; i++) {
+        refs.galleryEl.removeChild(elementsToDelete[i]);
+      }
+
+      if (currentPage === 1) {
+        markupForFavoritesAndRead.renderMarkupBefore(
+          container,
+          murkupPage.firstMurkupPage.join('')
+        );
+      }
+
+      if (currentPage === 2) {
+        markupForFavoritesAndRead.renderMarkupBefore(
+          container,
+          murkupPage.secontMurkupPage.join('')
+        );
+      }
+      if (currentPage === 3) {
+        markupForFavoritesAndRead.renderMarkupBefore(
+          container,
+          murkupPage.thirdMurkupPage.join('')
+        );
+      }
+
+      if (currentPage === 4) {
+        markupForFavoritesAndRead.renderMarkupBefore(
+          container,
+          murkupPage.fourthMurkupPage.join('')
+        );
+      }
+
+      if (currentPage === 5) {
+        markupForFavoritesAndRead.renderMarkupBefore(
+          container,
+          murkupPage.fifthMurkupPage.join('')
+        );
+      }
+      setTimeout(() => {
+        document.querySelector('.tui-ico-prev').textContent = 'Prev';
+        document.querySelector('.tui-ico-next').textContent = 'Next';
+      }, 1000);
+    });
     ////////////////////////////////////////////////////// Evant який додається коли генерується markup
     const event = new Event('build');
     refs.galleryEl.dispatchEvent(event);
@@ -203,6 +316,9 @@ async function pageLoadHandler() {
       refsWeather.weatherBox.style.alignItems = 'center';
       location();
     }
+
+    document.querySelector('.tui-ico-prev').textContent = 'Prev';
+    document.querySelector('.tui-ico-next').textContent = 'Next';
   } catch (error) {
     console.log(error);
     Notify.failure(`${error}`);
@@ -230,4 +346,13 @@ function onCalendarChange(e) {
     refs.galleryEl,
     markupForFavoritesAndRead.createGalleryCardMarkup(filteredNews)
   );
+}
+
+function smoothScrollToTop() {
+  const currentPosition =
+    document.documentElement.scrollTop || document.body.scrollTop;
+  if (currentPosition > 0) {
+    window.requestAnimationFrame(smoothScrollToTop);
+    window.scrollTo(0, currentPosition - currentPosition / 6);
+  }
 }

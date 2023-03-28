@@ -18,8 +18,8 @@ export const markup = {
           </p>
           ${
             checkPresentArticle(id)
-              ? `<button type="button" class="gallery-thumb__btn"><p class="gallery-thumb__name add">Remove from favorite<svg width="16" height="16"><use href="${svgA}#${svgB}"></use></svg></p></button>`
-              : `<button type="button" class="gallery-thumb__btn"><p class="gallery-thumb__name add">Add to favorite<svg width="16" height="16"><use href="${svgA}#${svgC}"></use></svg></p></button>`
+              ? `<button type="button" class="gallery-thumb__btn"><span class="gallery-thumb__name add">Remove from favorite<svg width="16" height="16"><use href="${svgA}#${svgB}"></use></svg></span></button>`
+              : `<button type="button" class="gallery-thumb__btn"><span class="gallery-thumb__name add">Add to favorite<svg width="16" height="16"><use href="${svgA}#${svgC}"></use></svg></span></button>`
           }
         </div>
         <h3 class="gallery__title">${title}</h3>
@@ -56,8 +56,8 @@ export const markupForFavoritesAndRead = {
       </p>
     ${
       checkPresentArticle(id)
-        ? `<button type="button" class="gallery-thumb__btn"><p class="gallery-thumb__name add">Remove from favorite<svg class="gallery-thumb__icon" width="16" height="16"><use href="${svgA}#${svgB}"></use></svg></p></button>`
-        : `<button type="button" class="gallery-thumb__btn"><p class="gallery-thumb__name add">Add to favorite<svg class="gallery-thumb__icon" width="16" height="16"><use href="${svgA}#${svgC}"></use></svg></p></button>`
+        ? `<button type="button" class="gallery-thumb__btn"><span class="gallery-thumb__name add">Remove from favorite<svg class="gallery-thumb__icon" width="16" height="16"><use href="${svgA}#${svgB}"></use></svg></span></button>`
+        : `<button type="button" class="gallery-thumb__btn"><span class="gallery-thumb__name add">Add to favorite<svg class="gallery-thumb__icon" width="16" height="16"><use href="${svgA}#${svgC}"></use></svg></span></button>`
     }
   </div>
     <h3 class="gallery__title">${title}</h3>

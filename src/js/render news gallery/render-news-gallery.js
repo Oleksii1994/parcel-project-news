@@ -327,6 +327,7 @@ async function pageLoadHandler() {
 
 function onCalendarChange(e) {
   let filteredNews = [];
+
   filteredNews = newsApi.newsDataArr.filter(item => {
     const dateString = NormalizeData.formatDateToString(item.date);
     if (selectedDate[1] === '') {
@@ -336,9 +337,8 @@ function onCalendarChange(e) {
     }
   });
   // if (filteredNews.length === 0) {
-  //   refs.notFoundBox.classList.add('not-found-box');
-  //   refs.notFoundBox.innerHTML = `<h2 class="not-found-box__title">We haven’t found news from <br> this date</h2>
-  //   <img src="https://live.staticflickr.com/65535/52770181328_d91f5366f0_z.jpg">`;
+  //   refs.notFoundPage.classList.remove('not-found-page');
+  //   refs.notFoundPage.classList.add('not-found-page--visually');
   //   return;
   // }
   markup.clearMarkup(refs.galleryEl);

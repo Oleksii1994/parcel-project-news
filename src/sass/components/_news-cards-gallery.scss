@@ -177,5 +177,9 @@
     @include for-size(tablet) {
       @include text(400, 16, 22);
     }
+    &:hover,
+    &:focus {
+      transform: scale(1.2);
+    }
   }
 }

@@ -3,12 +3,15 @@ import { refs } from './refs/refs';
 import { newsApi } from './API/fetchAPI';
 import { Notify } from 'notiflix';
 import { markup } from './renderMarkup';
+import { markup, markupForFavoritesAndRead } from './renderMarkup';
 import { NormalizeData } from './API/api-data-normalaizer';
 import { selectedDate } from './newCalendar';
 import { makePaginationButtons } from './pagination';
 import { showLoader, hideLoader } from './loading';
 
 // export let totalButtons = Math.ceil(newsApi.hits / perPage);
+const paginationBox = document.querySelector('.pagination__container');
+paginationBox.style.display = 'none';
 
 const notifyOptions = {
   width: '450px',
@@ -30,19 +33,22 @@ refs.formSearch.addEventListener('submit', onFormSearchSubmit);
 const sentinel = document.querySelector('#sentinel');
 
 const onEntry = entries => {
-  // console.log('awdawd');
+  console.log('awdawd');
   fetchAndRenderSearchNews();
 };
 const options = {
   rootMargin: '300px',
 };
 const observer = new IntersectionObserver(onEntry, options);
-// console.log(observer);
+console.log(observer);
 
 //==========================================================
 
 async function onFormSearchSubmit(event) {
   event.preventDefault();
+  //отключение скрола
+  observer.unobserve(sentinel);
+  //========================================================
   const value = event.currentTarget.elements.searchQuery.value.trim();
   // markup.clearMarkup(refs.galleryEl);
   if (!value) {
@@ -59,24 +65,25 @@ async function onFormSearchSubmit(event) {
   checkDate();
 
   try {
+    // подключение скрола
+    observer.observe(sentinel);
+    //
     let { docs } = await newsApi.fetchSearchArticles();
     hideLoader();
-    // if (!docs.length) {
-    //   refs.notFoundPage.classList.remove('not-found-page');
-    // //   refs.notFoundPage.classList.add('not-found-page--visually');
-    // //   return;
-    // }
-    console.log(markup.createGalleryCardMarkup(NormalizeData.searchData(docs)));
+    if (!docs.length) {
+      refs.notFoundBox.innerHTML = `<h2 class="not-found-box__title">We haven’t found news from <br> this categories</h2>
+      <img src="https://live.staticflickr.com/65535/52770181328_d91f5366f0_z.jpg">`;
+      return;
+    }
     markup.renderMarkup(
       refs.galleryEl,
-      markup
-        .createGalleryCardMarkup(NormalizeData.searchData(docs))
-        .splice(0, 9)
-        .join('')
+      markupForFavoritesAndRead.createGalleryCardMarkup(
+        NormalizeData.searchData(docs)
+      )
     );
     makePaginationButtons(newsApi.totalHits);
   } catch (error) {
-    // console.log(error);
+    console.log(error);
     Notify.failure(`${error}`);
   }
 }

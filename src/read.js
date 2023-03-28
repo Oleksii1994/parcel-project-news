@@ -1,4 +1,5 @@
 import './js/add-to-read';
+import './js/add-to-favorite'
 import './js/adaptive-devices';
 import './js/API/fetchAPI';
 import './js/mobile-menu-read';

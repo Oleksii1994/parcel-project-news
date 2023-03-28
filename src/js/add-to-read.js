@@ -1,4 +1,4 @@
-import { markup } from './renderMarkup';
+import { markupForFavoritesAndRead } from './renderMarkup';
 import { refs } from './refs/refs';
 import { setToLS, getFromLS } from './local-storage-logic';
 // import { sendEmailVerification } from 'firebase/auth';
@@ -50,7 +50,7 @@ class AddToRead {
     const listArticlesRef = document.querySelector('#accordion');
     result.forEach(el => {
       const section = template.replaceAll('{{title}}', el.LSDate).replaceAll('{{card}}',
-      markup.createGalleryCardMarkup(el.news))
+      markupForFavoritesAndRead.createGalleryCardMarkup(el.news))
 
       const div = document.createElement("div");
       listArticlesRef.appendChild(div);

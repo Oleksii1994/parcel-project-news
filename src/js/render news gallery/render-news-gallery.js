@@ -14,6 +14,8 @@ import { addWeatherMarkup } from '../renderMarkup';
 import { input } from '../newCalendar';
 import { selectedDate } from '../newCalendar';
 import _debounce from 'debounce';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 let latitude = 50.431;
 let longitude = 30.532;
@@ -22,6 +24,7 @@ const paginationBoxForPopular = `<li id="tuiPagCon"><div id="tui-pagination-cont
 //
 
 //
+Aos.init();
 
 window.addEventListener('load', pageLoadHandler, { once: true });
 input.addEventListener('change', _debounce(onCalendarChange, 1500));

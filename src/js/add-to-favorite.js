@@ -2,6 +2,7 @@ import { markupForFavoritesAndRead } from './renderMarkup';
 // import { pageLoadHandler } from './render news gallery/render-news-gallery';
 import { setToLS, getFromLS } from './local-storage-logic';
 import { refs } from './refs/refs';
+import _debounce from 'debounce';
 // =====================================================Юра
 import Notiflix from 'notiflix';
 import { initializeApp, firebase } from 'firebase/app';
@@ -36,7 +37,7 @@ const database = getDatabase(app);
 const auth = getAuth();
 const usersRef = ref(database, 'users');
 // ===========================================================
-
+const favorPage = document.querySelector('.favorite');
 const notFoundRef = document.querySelector('.not-found-box');
 const listArticlesRef = document.querySelector('#news-list');
 
@@ -121,6 +122,7 @@ export function checkPresentArticle(id) {
   return present;
 }
 
+// favorPage.addEventListener('click', _debounce(onLoadFavoritesPage, 1500));
 function onLoadFavoritesPage() {
   const dataFromLS = getFromLS(FAVORITE_KEY);
 
@@ -171,10 +173,7 @@ function checkLS() {
 
   if (!dataFromLS.length) {
     notFoundRef.classList.remove('not-found-box-hidden');
-    // notFoundRef.innerHTML = `<h2 class="not-found-box__title">We haven’t found news from <br> this date</h2>
-    //   <img src="https://www.flickr.com/photos/197971475@N07/52773618182/in/dateposted-public.png>`;
-    // window.scrollTo(0, 0);
-  }
+      }
   }, 100)
 }
 
@@ -182,8 +181,12 @@ if (document.title === 'Favorite') {
   onLoadFavoritesPage();
 }
 
-// onLoadFavoritesPage(); /////треба викликати цю функцію при клікі на посилання Favorite
 
+// =============================================================================
+// notFoundRef.innerHTML = `<h2 class="not-found-box__title">We haven’t found news from <br> this date</h2>
+    //   <img src="https://www.flickr.com/photos/197971475@N07/52773618182/in/dateposted-public.png>`;
+    // window.scrollTo(0, 0);
+// onLoadFavoritesPage(); /////треба викликати цю функцію при клікі на посилання Favorite
 // notFoundRef.classList.add('not-found-box-hidden');
 // if (!dataFromLS.length && notFoundRef !== null) {
 //   notFoundRef.innerHTML = `<h2 class="not-found-box__title hidden">You haven't added anything <br> to favorite!</h2>

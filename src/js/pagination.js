@@ -3,12 +3,12 @@ import { markup } from './renderMarkup';
 import { refs } from './refs/refs';
 import { NormalizeData } from './API/api-data-normalaizer';
 import { hideLoader, showLoader } from './loading';
-
+import { markupForFavoritesAndRead } from './renderMarkup';
 import { Notify } from 'notiflix';
 
 // let perPage = 8;
 // let totalItems = newsApi.totalHits;
-let currentPage = 1;
+let currentPage = newsApi.catCurrentPage;
 
 let totalButtons = newsApi.totalHits + 1;
 const pagWrap = document.querySelector('.pagination');
@@ -19,7 +19,7 @@ const pagBtnNext = document.querySelector('.pagination__next-btn');
 console.log('currentPage ' + currentPage);
 console.log(`render NewsPage By Number - ${currentPage}`);
 
-if (currentPage === 1) {
+if (currentPage === 0) {
   disablePrevPaginationButton();
 }
 
@@ -27,7 +27,7 @@ if (currentPage === 1) {
 // makePaginationButtons(totalButtons);
 
 // з самого початку робимо активною першу кнопку
-if (currentPage === 1 && pagWrap.firstElementChild) {
+if (currentPage === 0 && pagWrap.firstElementChild) {
   pagWrap.firstElementChild.classList.add('active-pag');
 }
 
@@ -35,14 +35,15 @@ pagBtnPrev.addEventListener('click', handlePaginationButtonPrev);
 pagBtnNext.addEventListener('click', handlePaginationButtonNext);
 
 export function makePaginationButtons(totalButtons) {
+  refs.paginationContainerEL.classList.remove('visually-hidden');
   clearPagination();
   // варіант взагалі без точок
   if (totalButtons < 8) {
-    for (let i = 1; i <= totalButtons; i++) {
+    for (let i = 0; i <= totalButtons; i++) {
       // -------СТВОРЮВАННЯ КНОПКИ
 
       const pageNumberBtn = document.createElement('button');
-      pageNumberBtn.textContent = `${i}`;
+      pageNumberBtn.textContent = `${i + 1}`;
       pageNumberBtn.className = 'pagination__page-number-btn';
       if (currentPage === i) {
         pageNumberBtn.classList.add('active-pag');
@@ -61,12 +62,12 @@ export function makePaginationButtons(totalButtons) {
         // ЗАМІСТЬ КОНСОЛЯ ТУТ ТРЕБА ПРОПИСАТИ ФУНКЦІЮ, ЯКА БУДЕ РЕНДЕРИТИ СТОРНІКУ НОВИН ЗА ЇЇ НОМЕРОМ
         console.log(`render NewsPage By Number - ${i}`);
 
-        await fetchAndRenderNews(i);
+        await fetchAndRendercategoryNews(i);
 
         // міняю поточну сторінку
         currentPage = i;
 
-        if (currentPage !== 1) {
+        if (currentPage !== 0) {
           ablePrevPaginationButton();
         } else {
           disablePrevPaginationButton();
@@ -85,12 +86,12 @@ export function makePaginationButtons(totalButtons) {
   if (totalButtons >= 8) {
     //варіант точок на кінці
     if (currentPage <= 3) {
-      for (let i = 1; i <= totalButtons; i++) {
+      for (let i = 0; i <= totalButtons; i++) {
         const pageNumberBtn = document.createElement('button');
         if ((i >= 6) & (i != totalButtons)) {
           continue;
         } else {
-          pageNumberBtn.textContent = `${i}`;
+          pageNumberBtn.textContent = `${i + 1}`;
         }
 
         pageNumberBtn.className = 'pagination__page-number-btn';
@@ -111,12 +112,12 @@ export function makePaginationButtons(totalButtons) {
           // ЗАМІСТЬ КОНСОЛЯ ТУТ ТРЕБА ПРОПИСАТИ ФУНКЦІЮ, ЯКА БУДЕ РЕНДЕРИТИ СТОРНІКУ НОВИН ЗА ЇЇ НОМЕРОМ
           console.log(`render NewsPage By Number - ${i}`);
 
-          await fetchAndRenderNews(i);
+          await fetchAndRendercategoryNews(i);
 
           // міняю поточну сторінку
           currentPage = i;
 
-          if (currentPage !== 1) {
+          if (currentPage !== 0) {
             ablePrevPaginationButton();
           } else {
             disablePrevPaginationButton();
@@ -134,7 +135,7 @@ export function makePaginationButtons(totalButtons) {
     }
     // варіант точок на початку та в кінці
     if ((currentPage >= 4) & (currentPage < totalButtons - 3)) {
-      for (let i = 1; i <= totalButtons; i++) {
+      for (let i = 0; i <= totalButtons; i++) {
         const pageNumberBtn = document.createElement('button');
         if (
           i === currentPage - 1 ||
@@ -143,7 +144,7 @@ export function makePaginationButtons(totalButtons) {
           i === 1 ||
           i === totalButtons
         ) {
-          pageNumberBtn.textContent = `${i}`;
+          pageNumberBtn.textContent = `${i + 1}`;
         } else {
           continue;
         }
@@ -166,12 +167,12 @@ export function makePaginationButtons(totalButtons) {
           // ЗАМІСТЬ КОНСОЛЯ ТУТ ТРЕБА ПРОПИСАТИ ФУНКЦІЮ, ЯКА БУДЕ РЕНДЕРИТИ СТОРНІКУ НОВИН ЗА ЇЇ НОМЕРОМ
           console.log(`render NewsPage By Number - ${i}`);
 
-          await fetchAndRenderNews(i);
+          await fetchAndRendercategoryNews(i);
 
           // міняю поточну сторінку
           currentPage = i;
 
-          if (currentPage !== 1) {
+          if (currentPage !== 0) {
             ablePrevPaginationButton();
           } else {
             disablePrevPaginationButton();
@@ -216,12 +217,12 @@ export function makePaginationButtons(totalButtons) {
           // ЗАМІСТЬ КОНСОЛЯ ТУТ ТРЕБА ПРОПИСАТИ ФУНКЦІЮ, ЯКА БУДЕ РЕНДЕРИТИ СТОРНІКУ НОВИН ЗА ЇЇ НОМЕРОМ
           console.log(`render NewsPage By Number - ${i}`);
 
-          await fetchAndRenderNews(i);
+          await fetchAndRendercategoryNews(i);
 
           // міняю поточну сторінку
           currentPage = i;
 
-          if (currentPage !== 1) {
+          if (currentPage !== 0) {
             ablePrevPaginationButton();
           } else {
             disablePrevPaginationButton();
@@ -272,9 +273,9 @@ async function handlePaginationButtonPrev() {
   console.log('currentPage ' + currentPage);
   // ЗАМІСТЬ КОНСОЛЯ ТУТ ТРЕБА ПРОПИСАТИ ФУНКЦІЮ, ЯКА БУДЕ РЕНДЕРИТИ СТОРНІКУ НОВИН ЗА ЇЇ НОМЕРОМ
   console.log(`render NewsPage By Number - ${currentPage}`);
-  await fetchAndRenderNews(currentPage);
+  await fetchAndRendercategoryNews(currentPage);
   // це логіка щоб забирати/додавати класс
-  makePaginationButtons(newsApi.totalHits);
+  makePaginationButtons(newsApi.totalButtons);
 }
 
 async function handlePaginationButtonNext() {
@@ -284,7 +285,7 @@ async function handlePaginationButtonNext() {
   currentPage += 1;
 
   //  тут ТОТАЛБАТОНС НЕ ПРИХОДИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  if (currentPage === totalButtons) {
+  if (currentPage === newsApi.totalButtons) {
     disableNextPaginationButton();
   }
 
@@ -292,29 +293,48 @@ async function handlePaginationButtonNext() {
   // ЗАМІСТЬ КОНСОЛЯ ТУТ ТРЕБА ПРОПИСАТИ ФУНКЦІЮ, ЯКА БУДЕ РЕНДЕРИТИ СТОРНІКУ НОВИН ЗА ЇЇ НОМЕРОМ
   console.log(`render NewsPage By Number - ${currentPage}`);
 
-  await fetchAndRenderNews(currentPage);
+  await fetchAndRendercategoryNews(currentPage);
 
   // це логіка щоб забирати/додавати класс
-  makePaginationButtons(newsApi.totalHits);
+  makePaginationButtons(newsApi.totalButtons);
 }
 function clearPagination() {
   pagWrap.innerHTML = '';
 }
 
-async function fetchAndRenderNews(i) {
+async function fetchAndRendercategoryNews(i) {
   try {
-    newsApi.page = i;
+    newsApi.catCurrentPage = i;
     showLoader();
     markup.clearMarkup(refs.galleryEl);
     window.scrollTo(0, 0);
-    const { docs } = await newsApi.fetchSearchArticles();
+    const results = await newsApi.fetchArticlesByCategory();
     hideLoader();
-    markup.renderMarkup(
+    markupForFavoritesAndRead.renderMarkup(
       refs.galleryEl,
-      markup.createGalleryCardMarkup(NormalizeData.searchData(docs))
+      markupForFavoritesAndRead.createGalleryCardMarkup(
+        NormalizeData.categoryData(results)
+      )
     );
   } catch (error) {
     console.log(error);
     Notify.failure(`${error}`);
   }
 }
+
+// async function fetchAndRenderNews(i) {
+//   try {
+//     showLoader();
+//     markup.clearMarkup(refs.galleryEl);
+//     window.scrollTo(0, 0);
+//     const { docs } = await newsApi.fetchSearchArticles();
+//     hideLoader();
+//     markup.renderMarkup(
+//       refs.galleryEl,
+//       markup.createGalleryCardMarkup(NormalizeData.searchData(docs))
+//     );
+//   } catch (error) {
+//     console.log(error);
+//     Notify.failure(`${error}`);
+//   }
+// }

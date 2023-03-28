@@ -1,7 +1,8 @@
-import { markup } from './renderMarkup';
+import { markupForFavoritesAndRead } from './renderMarkup';
 // import { pageLoadHandler } from './render news gallery/render-news-gallery';
 import { setToLS, getFromLS } from './local-storage-logic';
 import { refs } from './refs/refs';
+import _debounce from 'debounce';
 // =====================================================Юра
 import Notiflix from 'notiflix';
 import { initializeApp, firebase } from 'firebase/app';
@@ -36,7 +37,7 @@ const database = getDatabase(app);
 const auth = getAuth();
 const usersRef = ref(database, 'users');
 // ===========================================================
-
+const favorPage = document.querySelector('.favorite');
 const notFoundRef = document.querySelector('.not-found-box');
 const listArticlesRef = document.querySelector('#news-list');
 
@@ -46,6 +47,9 @@ const FAVORITE_KEY = 'favorite_news';
 
 export function onLoadHomePage() {
   const FAVORITE_KEY = 'favorite_news';
+  const svgA = new URL('../images/icon-card.svg', import.meta.url);
+  const svgB = 'icon-like';
+  const svgC = 'icon-like-icon';
 
   refs.galleryEl.addEventListener('click', onGalleryClick);
 
@@ -100,15 +104,13 @@ export function onLoadHomePage() {
       }
       // ===========================================================
 
-      targetBtn.innerHTML =
-        '<p class="gallery-thumb__name add">Add to favorite<span class="gallery-thumb__icon">&#9825;</span></p>';
+      targetBtn.innerHTML = `<p class="gallery-thumb__name add">Add to favorite<svg width="16" height="16"><use href="${svgA}#${svgC}"></use></svg></p>`;
       return;
     }
 
     const newData = [...dataFromLS, { ...article }];
     setToLS(FAVORITE_KEY, newData);
-    targetBtn.innerHTML =
-      '<p class="gallery-thumb__name add">Remove from favorite<span class="gallery-thumb__icon">&#10084;</span></p>';
+    targetBtn.innerHTML = `<p class="gallery-thumb__name add">Remove from favorite<svg width="16" height="16"><use href="${svgA}#${svgB}"></svg></p>`;
   }
 }
 
@@ -120,6 +122,7 @@ export function checkPresentArticle(id) {
   return present;
 }
 
+// favorPage.addEventListener('click', _debounce(onLoadFavoritesPage, 1500));
 function onLoadFavoritesPage() {
   const dataFromLS = getFromLS(FAVORITE_KEY);
 
@@ -131,16 +134,15 @@ function onLoadFavoritesPage() {
   notFoundRef.classList.add('not-found-box-hidden');
   if (listArticlesRef === null) return;
 
-  listArticlesRef.innerHTML = markup.createGalleryCardMarkup(dataFromLS);
+  listArticlesRef.innerHTML =
+    markupForFavoritesAndRead.createGalleryCardMarkup(dataFromLS);
 
   listArticlesRef.addEventListener('click', onListArticlesClick);
-  console.log('nfdbkhvgdj');
 }
 
 function onListArticlesClick(event) {
   const targetBtn = event.target.closest('.gallery-thumb__btn');
-  console.log('remove click');
-  checkLS();
+   
   if (!targetBtn) {
     return;
   }
@@ -152,22 +154,39 @@ function onListArticlesClick(event) {
   if (present) {
     const newData = dataFromLS.filter(article => article.id !== id);
     setToLS(FAVORITE_KEY, newData);
-    const newMarkup = markup.createGalleryCardMarkup(newData);
+
+    if (!newData.length) {
+      checkLS();
+    }
+    
+    const newMarkup = markupForFavoritesAndRead.createGalleryCardMarkup(newData);
+
     listArticlesRef.innerHTML = newMarkup;
     return;
   }
 }
 
 function checkLS() {
-  const dataFromLS = getFromLS(FAVORITE_KEY);
-  if (dataFromLS !== [] && dataFromLS.length !== -1) {
+
+  setTimeout(() =>{
+    const dataFromLS = getFromLS(FAVORITE_KEY);
+
+  if (!dataFromLS.length) {
     notFoundRef.classList.remove('not-found-box-hidden');
-    window.scrollTo(0, 0);
-  }
+      }
+  }, 100)
 }
 
-// onLoadFavoritesPage(); /////треба викликати цю функцію при клікі на посилання Favorite
+if (document.title === 'Favorite') {
+  onLoadFavoritesPage();
+}
 
+
+// =============================================================================
+// notFoundRef.innerHTML = `<h2 class="not-found-box__title">We haven’t found news from <br> this date</h2>
+    //   <img src="https://www.flickr.com/photos/197971475@N07/52773618182/in/dateposted-public.png>`;
+    // window.scrollTo(0, 0);
+// onLoadFavoritesPage(); /////треба викликати цю функцію при клікі на посилання Favorite
 // notFoundRef.classList.add('not-found-box-hidden');
 // if (!dataFromLS.length && notFoundRef !== null) {
 //   notFoundRef.innerHTML = `<h2 class="not-found-box__title hidden">You haven't added anything <br> to favorite!</h2>

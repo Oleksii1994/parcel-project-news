@@ -52,6 +52,8 @@
   fill: var(--blue-main-color);
   left: 13px;
 
+  pointer-events: none;
+
   &.opened {
     fill: var(--white-main-color);
   }
@@ -94,6 +96,8 @@
   right: 11px;
   fill: var(--body-color-dark-theme);
   transition: transform 0.25s ease-in-out;
+
+  pointer-events: none;
 
   &.opened {
     fill: var(--white-main-color);

@@ -2,7 +2,9 @@ import { newsApi } from './API/fetchAPI';
 import { refs } from './refs/refs';
 import { NormalizeData } from './API/api-data-normalaizer';
 import { markup } from './renderMarkup';
+import { markupForFavoritesAndRead } from './renderMarkup';
 import { Notify } from 'notiflix';
+import { makePaginationButtons } from './pagination';
 
 const categories = [
   {
@@ -246,7 +248,6 @@ function onWindowsResize(e) {
           `<div class="categories__other-btn-box"><button class="categories__other-box-item" data-categoryName="${elem.section}" type="button">${elem.display_name}</button></div>`
       )
       .join('');
-    console.log(markup);
     otherBoxRef.innerHTML = markup;
     return;
   }
@@ -398,20 +399,26 @@ async function onBtnsClick(e) {
 
 async function categoriesFetch(e) {
   e.preventDefault();
-  newsApi.currentCategory = e.target.textContent.toLowerCase();
+  newsApi.currentCategory = newsApi.encodeCategory(
+    e.target.textContent.toLowerCase()
+  );
   try {
     const data = await newsApi.fetchArticlesByCategory();
-    if (data === '') {
-      refs.notFoundBox.innerHTML = `<h2 class="not-found-box__title">We haven’t found news from <br> this date</h2>
-      <img src="https://live.staticflickr.com/65535/52770181328_d91f5366f0_z.jpg">`;
-      return;
-    }
+    newsApi.resetCatPage();
+    // if (data === '') {
+    //   refs.notFoundPage.classList.remove('not-found-page');
+    //   refs.notFoundPage.classList.add('not-found-page--visually');
+    //   return;
+    // }
     newsApi.newsDataArr = NormalizeData.categoryData(data);
     markup.clearMarkup(refs.galleryEl);
-    markup.renderMarkup(
+    markupForFavoritesAndRead.renderMarkup(
       refs.galleryEl,
-      markup.createGalleryCardMarkup(NormalizeData.categoryData(data))
+      markupForFavoritesAndRead.createGalleryCardMarkup(
+        NormalizeData.categoryData(data)
+      )
     );
+    makePaginationButtons(newsApi.totalButtons);
   } catch (error) {
     console.log(error);
     Notify.failure(`${error}`);

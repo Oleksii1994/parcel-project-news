@@ -7,16 +7,18 @@ const READ_KEY = 'read_news';
 
 class AddToRead {
   isHomePage() {
-    const homePage = refs.galleryEl
+    const homePage = refs.galleryEl;
     if (homePage) {
       return true;
     }
     return false;
   }
-  addListenersToHomePage(){
-      const linkReadMore = document.querySelectorAll('.thumb__link');
-      linkReadMore.forEach(link => link.addEventListener('click', this.#onReadClick));
-      console.log(linkReadMore)
+  addListenersToHomePage() {
+    const linkReadMore = document.querySelectorAll('.thumb__link');
+    linkReadMore.forEach(link =>
+      link.addEventListener('click', this.#onReadClick)
+    );
+    // console.log(linkReadMore)
   }
 
   renderReadPage(){ //рендер маркапу
@@ -59,6 +61,9 @@ class AddToRead {
 
   #onReadClick(event) {
     const targetItem = event.target.closest('.gallery__item');
+    const alreadyReadText = targetItem.querySelector('.gallery-thumb__already'); //Додали з Яною стилі на li щоб з'являлась надпис Alredy Read
+    targetItem.classList.add('gallery__item--background'); //додаємо блюр на картку
+    alreadyReadText.classList.add('gallery-thumb__already--show'); //opacity на картку
 
     const img = () => {
       const resWithoutStart = targetItem
@@ -94,13 +99,16 @@ class AddToRead {
 
 const instance = new AddToRead(); // створює об'єкт  AddToRead
 
-if(instance.isHomePage()){ //перевірка чи знаходишся на homePage
-  refs.galleryEl.addEventListener('build', () =>{
+if (instance.isHomePage()) {
+  //перевірка чи знаходишся на homePage
+  refs.galleryEl.addEventListener('build', () => {
     instance.addListenersToHomePage(); //опрацьовую клік на readMore
   });
-  
-}
-else{
+} else {
   instance.renderReadPage(); //малюю readPage
-  // instance.getDateLocalStorege();
 }
+
+// if (!dataFromLS.length && notFoundRef !== null) {
+//   notFoundRef.innerHTML = `<h2 class="not-found-title hidden">You haven't added anything to favorite!</h2><img src="https://live.staticflickr.com/65535/52770181328_d91f5366f0_z.jpg">`;
+//   return;
+// }

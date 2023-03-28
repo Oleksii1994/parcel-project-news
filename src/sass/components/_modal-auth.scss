@@ -38,10 +38,10 @@
   top: 30px;
   right: 90px;
   color: white;
-  font-size: 40px;
-  font-weight: 800;
   cursor: pointer;
   padding: 0px 15px 0 15px;
+
+  stroke: var(--white-main-color);
 
   @media (min-width: 768px) {
     display: block;
@@ -56,6 +56,7 @@
 }
 
 .exit-modal-in-box {
+  stroke: var(--black-main-color);
   cursor: pointer;
   padding: 0 15px;
   font-size: 25px;
@@ -69,7 +70,9 @@
   }
 }
 
-#login-box {
+.login-box__signUp,
+.login-box__logIn,
+.login-box__logOut {
   position: relative;
   margin: 5% auto;
   width: 260px;
@@ -183,4 +186,8 @@ h1 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     transition: 0.1s ease;
   }
+}
+
+.exit-modal__icon {
+  pointer-events: none;
 }

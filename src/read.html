@@ -19,7 +19,61 @@
     <script src="../node_modules/jqueryui/jquery-ui.min.js"></script>
   </head>
   <body>
-    <include src="./partials/header.html"></include>
+    <header class="header">
+      <div class="container header__container">
+        <a class="header__logo" href="./index.html">News</a>
+        <nav class="nav">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <a class="nav__link" href="./index.html">Home</a>
+            </li>
+            <li class="nav__item" >
+              <a class="nav__link" href="./favorites.html">Favorite</a>
+            </li>
+            <li class="nav__item">
+              <a class="nav__link current__fav" href="./read.html">Read</a>
+            </li>
+          </ul>
+        </nav>
+    
+        <form class="form-search">
+          <input
+            class="form-search__input"
+            type="text"
+            placeholder="Search |"
+            name="searchQuery"
+            autocomplete="off"
+          />
+          <button class="form-search__button" type="submit" name="button">
+            <svg class="form-search__icon" width="20" height="20">
+              <use href="./images/header/header.svg#icon-search"></use>
+            </svg>
+          </button>
+        </form>
+        <!-- Budna Elvira -->
+        <button
+          class="mobile-menu__burger-button js-open-menu js-open-menu-favorites js-open-menu-read"
+          type="button"
+        >
+          <svg
+            class="mobile-menu__icon mobile-menu__icon--close"
+            width="24"
+            height="24"
+            aria-label="Перемикач мобільного меню"
+          >
+            <use
+              class="mobile-menu__icon-cross"
+              href="./images/burger-menu/symbol-defs.svg#icon-burger-menu"
+            ></use>
+          </svg>
+        </button>
+        <!-- світчер теми -->
+        <div class="header__box">
+          <include src="./partials/switch-theme.html"></include>
+          <button class="auth-button" id="authButton">LogIn</button>
+        </div>
+      </div>
+    </header>
     <main>
       <section>
         <div id="accordion"></div>
@@ -35,7 +89,9 @@
       </section>
     </main>
     <include src="./partials/footer.html"></include>
-    <!-- <include src="./partials/mobile-menu-read.html"></include> -->
+    <include src="./partials/mobile-menu-read.html"></include>
+    <include src="./partials/modal-auth.html"></include>
+    <div class="btn-up btn-up_hide"></div>
     <!-- <script type="module" src="./js/accordion.js"></script> -->
     <script type="module" src="./read.js"></script>
   </body>

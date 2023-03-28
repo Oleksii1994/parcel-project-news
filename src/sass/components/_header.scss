@@ -11,10 +11,12 @@
   width: 320px;
   padding: 0 16px;
   margin: 0 auto;
-  .screen-tablet & {
+
+  @include for-size(tablet) {
     width: 768px;
   }
-  .screen-desktop & {
+
+  @include for-size(desktop) {
     width: 1280px;
   }
 }
@@ -25,7 +27,8 @@
   align-items: center;
   padding-right: 38px;
   position: relative;
-  .screen-tablet & {
+
+  @include for-size(tablet) {
     padding-right: 0;
   }
 }
@@ -39,10 +42,11 @@
     color: var(--body-color-light-theme);
     display: block;
   }
-  .screen-tablet & {
+  @include for-size(tablet) {
     margin-right: 48px;
   }
-  .screen-desktop & {
+
+  @include for-size(desktop) {
     @include text(700, 42, 57);
     margin-right: 102px;
   }
@@ -69,8 +73,14 @@
   .dark-theme & {
     color: var(--body-color-light-theme);
   }
-  .screen-desktop & {
+
+  @include for-size(desktop) {
     @include text(700, 18, 25);
+  }
+  &:hover,
+  &:focus {
+    color: var(--blue-color);
+    transform: scale(1.2);
   }
 }
 
@@ -79,8 +89,6 @@
 }
 
 .form-search__input {
-  transform: scale(0);
-  background-color: transparent;
   border: none;
   width: 173px;
   height: 31px;
@@ -89,9 +97,12 @@
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 48px;
-  transition: transform 320ms linear;
-  color: var(--black-main-color);
+  outline: none;
 
+  color: var(--black-main-color);
+  background-color: transparent;
+  transition: transform 320ms linear;
+  transform: scale(0);
   .dark-theme & {
     color: var(--body-color-light-theme);
     border: 1px solid var(--body-color-light-theme);
@@ -122,15 +133,16 @@
 }
 
 .form-search__button {
+  position: absolute;
+  top: 7px;
+  right: 14px;
   width: 20px;
   height: 20px;
   background-color: transparent;
   fill: var(--black-main-color);
   border: none;
   padding: 0;
-  position: absolute;
-  top: 7px;
-  right: 14px;
+
   @include for-size(tablet) {
     top: 7px;
     left: 14px;
@@ -143,14 +155,10 @@
 
 .header .switch__wrapper {
   display: none;
-  .screen-tablet &,
-  .screen-desktop & {
+  @media screen and (min-width: 768px) {
     display: flex;
   }
 }
-
-// .auth-button {
-// }
 
 .header__box {
   display: flex;
@@ -158,8 +166,10 @@
   gap: 10px;
 }
 
-.screen-desktop .header__box {
-  flex-direction: row;
+.header__box {
+  @include for-size(desktop) {
+    flex-direction: row;
+  }
 }
 .auth-button {
   @media screen and (max-width: 767px) {
@@ -167,8 +177,7 @@
   }
   width: auto;
   height: 31px;
-  // left: 16px;
-  // top: 105px;
+  cursor: pointer;
 
   background-color: var(--body-color-light-theme);
   border: 1px solid var(--blue-main-color);
@@ -186,6 +195,11 @@
   justify-content: center;
   align-items: center;
   fill: currentColor;
+  &:hover,
+  &:focus {
+    color: var(--main-black-text-color);
+    background-color: var(--transparent-blue-color);
+  }
 }
 
 .nav__link.current__page::after {
@@ -201,12 +215,24 @@
 
 .nav {
   margin-right: 32px;
-
-  .screen-desktop & {
+  @include for-size(desktop) {
     margin-right: 90px;
   }
 }
 
-.screen-desktop .header__box {
-  align-items: center;
+.nav__link.current__fav::after {
+  content: '';
+  transform: translateX(50%);
+  position: absolute;
+  bottom: -5px;
+  left: -60%;
+  width: 110%;
+  height: 1px;
+  background-color: var(--blue-main-color);
+}
+
+.header__box {
+  @include for-size(desktop) {
+    align-items: center;
+  }
 }

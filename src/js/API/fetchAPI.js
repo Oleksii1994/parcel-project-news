@@ -12,8 +12,10 @@ class NewsAPIService {
   };
   #newsDataArr = [];
   #hits;
-  #per_page = 10;
+  #per_page = 5;
   #totalHits = 0;
+  #totalButtons = 0;
+  #num_results = 0;
 
   constructor() {
     this.searchQuery = '';
@@ -22,6 +24,7 @@ class NewsAPIService {
     this.beginDate = '';
     this.endDate = '';
     this.updateSearchParams = true;
+    this.catCurrentPage = 0;
   }
 
   async fetchSearchArticles() {
@@ -35,8 +38,7 @@ class NewsAPIService {
     const {
       response: { docs, meta },
     } = await response.json();
-    console.log(URL);
-    console.log(meta);
+    this.incrementPage();
     this.#hits = meta.hits;
     this.#totalHits = this.setTotalHits();
     this.#newsDataArr = NormalizeData.searchData(docs);
@@ -44,7 +46,7 @@ class NewsAPIService {
   }
 
   async fetchPopularArticles() {
-    const URL = `${this.#BASE_URL}mostpopular/v2/viewed/30.json?api-key=${
+    const URL = `${this.#BASE_URL}mostpopular/v2/viewed/1.json?api-key=${
       this.#API_KEY
     }`;
     const response = await fetch(URL);
@@ -54,13 +56,23 @@ class NewsAPIService {
   }
 
   async fetchArticlesByCategory() {
+    this.setPerCategoryPage();
+    const params = new URLSearchParams({
+      offset: this.catCurrentPage,
+      limit: this.#per_page,
+    });
     const SEARCH_BY_CATEGORY_PATH = `news/v3/content/nyt/${this.category}.json?`;
     const URL = `${this.#BASE_URL}${SEARCH_BY_CATEGORY_PATH}api-key=${
       this.#API_KEY
-    }`;
+    }&${params}`;
+    console.log(URL);
     const response = await fetch(URL);
+    this.incrementCatPage();
     this.errorHandle(response, response.statusText);
-    const { results } = await response.json();
+    const { results, num_results } = await response.json();
+    this.#num_results = num_results;
+    this.#totalButtons = this.setTotalButtons();
+    console.log(NormalizeData.categoryData(results));
     return results;
   }
 
@@ -72,6 +84,14 @@ class NewsAPIService {
 
   incrementPage() {
     this.currentPage += 1;
+  }
+
+  incrementCatPage() {
+    this.catCurrentPage += 1;
+  }
+
+  resetCatPage() {
+    this.catCurrentPage = 0;
   }
 
   resetPage() {
@@ -99,12 +119,46 @@ class NewsAPIService {
   }
 
   setTotalHits() {
-    let totalHits = Math.ceil(this.#hits / this.#per_page);
+    let totalHits = Math.ceil(this.#hits / 10);
     if (totalHits > 200) {
       totalHits = 200;
       return totalHits;
     } else {
       return totalHits;
+    }
+  }
+
+  setTotalButtons() {
+    let totalButtons = Math.ceil(this.#num_results / this.#per_page);
+    if (totalButtons > 200) {
+      totalButtons = 200;
+      return totalButtons;
+    } else {
+      return totalButtons;
+    }
+  }
+
+  encodeCategory(category) {
+    if (category.includes(' ')) {
+      return encodeURIComponent(category);
+    } else {
+      return category;
+    }
+  }
+
+  setPerCategoryPage() {
+    if (
+      window.matchMedia('(min-width: 320px)').matches &&
+      window.matchMedia('(max-width: 767px)').matches
+    ) {
+      return (this.#per_page = 5);
+    } else if (
+      window.matchMedia('(min-width: 768px)').matches &&
+      window.matchMedia('(max-width: 1279px)').matches
+    ) {
+      return (this.#per_page = 8);
+    } else if (window.matchMedia('(min-width: 1280px)').matches) {
+      return (this.#per_page = 9);
     }
   }
 
@@ -164,17 +218,21 @@ class NewsAPIService {
     this.#hits = newHits;
   }
 
-  get perPage() {
-    return this.#per_page;
-  }
-
-  set perPage(newPage) {
-    this.perPage = newPage;
-  }
-
   get totalHits() {
     return this.#totalHits;
   }
+
+  get totalButtons() {
+    return this.#totalButtons;
+  }
+
+  // set ctgCurrentPage(newPage) {
+  //   this.catCurrentPage = newPage;
+  // }
+
+  // get ctgCurrentPage() {
+  //   return this.catCurrentPage;
+  // }
 }
 
 export const newsApi = new NewsAPIService();

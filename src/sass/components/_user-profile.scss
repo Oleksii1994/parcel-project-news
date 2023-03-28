@@ -25,7 +25,7 @@
   }
 }
 .profile-img {
-  width: 80px;
+  width: 161px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -76,7 +76,7 @@
     align-items: center;
     gap: 10px;
 
-    color: var(--body-color-dark-theme);
+    color: currentColor;
     font-family: font(_poppins);
     @include text(600, 12, 16);
 
@@ -90,7 +90,7 @@
   }
 
   &__info {
-    color: var(--main-black-text-color);
+    color: currentColor;
     font-family: font(_manrope);
     @include text(500, 12, 20);
 

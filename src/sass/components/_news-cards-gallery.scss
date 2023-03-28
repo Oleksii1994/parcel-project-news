@@ -1,57 +1,20 @@
-.not-found-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  &__title {
-    font-family: font(_poppins);
-    @include text(700, 20, 27);
-    letter-spacing: -0.01em;
-    text-align: center;
-    margin-bottom: 40px;
-    @include for-size(tablet) {
-      @include text(700, 40, 55);
-    }
-  }
-
-  &__picture {
-    margin-top: 40px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 248px;
-  height: auto;
-
-  @include for-size(tablet) {
-    width: 270px;
-  }
-
-  @include for-size(desktop) {
-    width: 350px;
-  }
-  }
-
-  &-hidden {
-    display: none;
-  }
-}
-
 .gallery {
   position: relative;
   width: 100%;
-  padding: 0 16px;
+  padding-right: 16px;
+  padding-bottom: 40px;
+  padding-left: 16px;
 
-  @include for-size(tablet) {
+  @include for-size(mobile) {
     width: 320px;
   }
   @include for-size(tablet) {
     width: 768px;
+    padding-bottom: 48px;
   }
   @include for-size(desktop) {
     width: 1280px;
+    padding-bottom: 60px;
   }
 
   &__list {
@@ -83,7 +46,7 @@
       width: 393px;
     }
     &--background {
-      opacity: 0.8;
+      opacity: 0.6;
     }
   }
 
@@ -178,14 +141,10 @@
   &__name {
     display: flex;
     align-items: center;
+    gap: 5px;
 
     font-family: font(_manrope);
     @include text(500, 12, 15);
-  }
-
-  &__icon {
-    margin-left: 4px;
-    color: var(--blue-color);
   }
 }
 .remove {
@@ -213,10 +172,16 @@
     cursor: url(../images/touch.svg), pointer;
     color: var(--blue-main-color);
     font-family: font(_manrope);
+    transition-property: transform;
+    transition-duration: 250ms;
     @include text(400, 14, 19);
 
     @include for-size(tablet) {
       @include text(400, 16, 22);
+    }
+    &:hover,
+    &:focus {
+      transform: scale(1.2);
     }
   }
 }

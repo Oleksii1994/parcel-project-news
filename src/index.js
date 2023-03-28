@@ -15,3 +15,4 @@ import './js/pagination';
 
 import './js/firebace/firebace-main';
 import './js/switcher-mobile-menu';
+import './js/btnToUp';

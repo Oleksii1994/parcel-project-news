@@ -52,7 +52,9 @@ export const markupForFavoritesAndRead = {
     return arr
       .map(({ img, title, text, date, id, category, url }) => {
         return `<li id="${id}" class="gallery__item" 
-   
+   data-aos="fade-up"
+     data-aos-duration="1000"
+     
      >
   <div class="gallery-thumb" style="background-image: url('${img}')">
       <p class="gallery-thumb__subtitle">${category}</p>

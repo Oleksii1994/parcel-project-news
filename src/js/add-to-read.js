@@ -1,7 +1,10 @@
 import { markupForFavoritesAndRead } from './renderMarkup';
 import { refs } from './refs/refs';
 import { setToLS, getFromLS } from './local-storage-logic';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 // import { sendEmailVerification } from 'firebase/auth';
+Aos.init();
 
 const READ_KEY = 'read_news';
 
@@ -21,43 +24,48 @@ class AddToRead {
     // console.log(linkReadMore)
   }
 
-  renderReadPage(){ //рендер маркапу
-  const dataFromLS = getFromLS(READ_KEY);
-  const markupTemplate = document.querySelector('#markup-template');
-  const template = markupTemplate.innerHTML;
-  markupTemplate.remove();
-  const result = this.#getDateLocalStorege(dataFromLS);
-  this.#generateAccordionHTML(result, template)
-  this.#createAccordion();
+  renderReadPage() {
+    //рендер маркапу
+    const dataFromLS = getFromLS(READ_KEY);
+    const markupTemplate = document.querySelector('#markup-template');
+    const template = markupTemplate.innerHTML;
+    markupTemplate.remove();
+    const result = this.#getDateLocalStorege(dataFromLS);
+    this.#generateAccordionHTML(result, template);
+    this.#createAccordion();
   }
 
-#getDateLocalStorege(dataFromLS){
-    const objects = dataFromLS; 
-    const dates = objects.map(obj => obj.LSDate); 
-    const uniqueDates = dates.filter((LSDate, index) => dates.indexOf(LSDate) === index); 
+  #getDateLocalStorege(dataFromLS) {
+    const objects = dataFromLS;
+    const dates = objects.map(obj => obj.LSDate);
+    const uniqueDates = dates.filter(
+      (LSDate, index) => dates.indexOf(LSDate) === index
+    );
     const result = [];
-  
+
     uniqueDates.forEach(LSDate => {
-      const news = objects.filter(obj => obj.LSDate === LSDate)
+      const news = objects.filter(obj => obj.LSDate === LSDate);
       result.push({ LSDate: LSDate, news: news });
     });
     console.log(result);
     return result;
   }
 
-
-#generateAccordionHTML(result, template) {
+  #generateAccordionHTML(result, template) {
     const listArticlesRef = document.querySelector('#accordion');
     result.forEach(el => {
-      const section = template.replaceAll('{{title}}', el.LSDate).replaceAll('{{card}}',
-      markupForFavoritesAndRead.createGalleryCardMarkup(el.news))
+      const section = template
+        .replaceAll('{{title}}', el.LSDate)
+        .replaceAll(
+          '{{card}}',
+          markupForFavoritesAndRead.createGalleryCardMarkup(el.news)
+        );
 
-      const div = document.createElement("div");
+      const div = document.createElement('div');
       listArticlesRef.appendChild(div);
-      div.innerHTML = section
+      div.innerHTML = section;
     });
   }
-
 
   #onReadClick(event) {
     const targetItem = event.target.closest('.gallery__item');
@@ -81,20 +89,29 @@ class AddToRead {
     const category = targetItem.querySelector(
       '.gallery-thumb__subtitle'
     ).textContent;
-    const LSDate = new Date().toLocaleDateString()
+    const LSDate = new Date().toLocaleDateString();
     const url = targetItem.querySelector('.thumb__link').href;
-    const article = { img: img(), title, text, date, id, category, url, LSDate};
+    const article = {
+      img: img(),
+      title,
+      text,
+      date,
+      id,
+      category,
+      url,
+      LSDate,
+    };
     const dataFromLS = getFromLS(READ_KEY) || [];
-    console.log(LSDate)
+    console.log(LSDate);
     // добавляємо в localStorage
     const present = dataFromLS.find(article => article.id === id);
-    if (!present) { 
-      setToLS(READ_KEY, [...dataFromLS, article], [LSDate]);   // dataFromLS.push(article) // setToLS(READ_KEY, dataFromLS);
+    if (!present) {
+      setToLS(READ_KEY, [...dataFromLS, article], [LSDate]); // dataFromLS.push(article) // setToLS(READ_KEY, dataFromLS);
     }
   }
-#createAccordion(){
-  $('#accordion').accordion({ header: "h2", collapsible: true });
-}
+  #createAccordion() {
+    $('#accordion').accordion({ header: 'h2', collapsible: true });
+  }
 }
 
 const instance = new AddToRead(); // створює об'єкт  AddToRead

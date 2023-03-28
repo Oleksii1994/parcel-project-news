@@ -69,7 +69,9 @@
   }
 }
 
-#login-box {
+.login-box__signUp,
+.login-box__logIn,
+.login-box__logOut {
   position: relative;
   margin: 5% auto;
   width: 260px;

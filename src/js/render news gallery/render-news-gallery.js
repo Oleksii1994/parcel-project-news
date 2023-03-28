@@ -17,7 +17,7 @@ import _debounce from 'debounce';
 
 let latitude = 50.431;
 let longitude = 30.532;
-const paginationBoxForPopular = `<li><div id="tui-pagination-container" class="tui-pagination"></div></li>`;
+const paginationBoxForPopular = `<li id="tuiPagCon"><div id="tui-pagination-container" class="tui-pagination"></div></li>`;
 
 //
 
@@ -107,6 +107,7 @@ async function pageLoadHandler() {
     // ==========================================================================
 
     const container = document.getElementById('tui-pagination-container');
+    const tuiPagCon = document.getElementById('tuiPagCon');
 
     const instance = new Pagination(container, paginationOptions);
 
@@ -114,51 +115,51 @@ async function pageLoadHandler() {
     instance.on('beforeMove', event => {
       smoothScrollToTop();
       const currentPage = event.page;
-      // console.log(`Текущая страница: ${currentPage}`);
 
       const elementsToDelete = refs.galleryEl.querySelectorAll(
-        ':scope > *:not(#tui-pagination-container)'
+        ':scope > *:not(#tuiPagCon)'
       );
+
       for (let i = 0; i < elementsToDelete.length; i++) {
         refs.galleryEl.removeChild(elementsToDelete[i]);
       }
 
       if (currentPage === 1) {
         markupForFavoritesAndRead.renderMarkupBefore(
-          container,
+          tuiPagCon,
           murkupPage.firstMurkupPage.join('')
         );
       }
 
       if (currentPage === 2) {
         markupForFavoritesAndRead.renderMarkupBefore(
-          container,
+          tuiPagCon,
           murkupPage.secontMurkupPage.join('')
         );
       }
       if (currentPage === 3) {
         markupForFavoritesAndRead.renderMarkupBefore(
-          container,
+          tuiPagCon,
           murkupPage.thirdMurkupPage.join('')
         );
       }
 
       if (currentPage === 4) {
         markupForFavoritesAndRead.renderMarkupBefore(
-          container,
+          tuiPagCon,
           murkupPage.fourthMurkupPage.join('')
         );
       }
 
       if (currentPage === 5) {
         markupForFavoritesAndRead.renderMarkupBefore(
-          container,
+          tuiPagCon,
           murkupPage.fifthMurkupPage.join('')
         );
       }
       setTimeout(() => {
-        document.querySelector('.tui-ico-prev').textContent = 'Prev';
-        document.querySelector('.tui-ico-next').textContent = 'Next';
+        document.querySelector('.tui-ico-prev').innerHTML = 'Prev';
+        document.querySelector('.tui-ico-next').innerHTML = 'Next';
       }, 1000);
     });
     ////////////////////////////////////////////////////// Evant який додається коли генерується markup

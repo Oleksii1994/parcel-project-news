@@ -11,12 +11,19 @@
   width: 320px;
   padding: 0 16px;
   margin: 0 auto;
-  .screen-tablet & {
+  // .screen-tablet & {
+  //   width: 768px;
+  // }
+  @include for-size(tablet) {
     width: 768px;
   }
-  .screen-desktop & {
+
+  @include for-size(desktop) {
     width: 1280px;
   }
+  // .screen-desktop & {
+  //   width: 1280px;
+  // }
 }
 
 .header__container.container {
@@ -25,7 +32,10 @@
   align-items: center;
   padding-right: 38px;
   position: relative;
-  .screen-tablet & {
+  // .screen-tablet & {
+  //   padding-right: 0;
+  // }
+  @include for-size(tablet) {
     padding-right: 0;
   }
 }
@@ -39,13 +49,23 @@
     color: var(--body-color-light-theme);
     display: block;
   }
-  .screen-tablet & {
+  // .screen-tablet & {
+  //   margin-right: 48px;
+  // }
+
+  @include for-size(tablet) {
     margin-right: 48px;
   }
-  .screen-desktop & {
+
+  @include for-size(desktop) {
     @include text(700, 42, 57);
     margin-right: 102px;
   }
+
+  // .screen-desktop & {
+  //   @include text(700, 42, 57);
+  //   margin-right: 102px;
+  // }
 }
 
 .nav__list {
@@ -69,7 +89,10 @@
   .dark-theme & {
     color: var(--body-color-light-theme);
   }
-  .screen-desktop & {
+  // .screen-desktop & {
+  //   @include text(700, 18, 25);
+  // }
+  @include for-size(desktop) {
     @include text(700, 18, 25);
   }
 }
@@ -143,10 +166,13 @@
 
 .header .switch__wrapper {
   display: none;
-  .screen-tablet &,
-  .screen-desktop & {
+  @media screen and (min-width: 768px) {
     display: flex;
   }
+  // .screen-tablet &,
+  // .screen-desktop & {
+  //   display: flex;
+  // }
 }
 
 // .auth-button {
@@ -158,8 +184,11 @@
   gap: 10px;
 }
 
-.screen-desktop .header__box {
-  flex-direction: row;
+.header__box {
+  @include for-size(desktop) {
+    flex-direction: row;
+  }
+  // flex-direction: row;
 }
 .auth-button {
   @media screen and (max-width: 767px) {
@@ -203,7 +232,10 @@
 .nav {
   margin-right: 32px;
 
-  .screen-desktop & {
+  // .screen-desktop & {
+  //   margin-right: 90px;
+  // }
+  @include for-size(desktop) {
     margin-right: 90px;
   }
 }
@@ -219,6 +251,9 @@
   background-color: var(--blue-main-color);
 }
 
-.screen-desktop .header__box {
-  align-items: center;
+.header__box {
+  // align-items: center;
+  @include for-size(desktop) {
+    align-items: center;
+  }
 }

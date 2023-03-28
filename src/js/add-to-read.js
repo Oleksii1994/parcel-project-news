@@ -22,6 +22,7 @@ class AddToRead {
     );
     // console.log(linkReadMore)
   }
+
   renderReadPage() {
     //рендер маркапу
     const dataFromLS = getFromLS(READ_KEY);
@@ -31,6 +32,9 @@ class AddToRead {
 
   #onReadClick(event) {
     const targetItem = event.target.closest('.gallery__item');
+    const alreadyReadText = targetItem.querySelector('.gallery-thumb__already'); //Додали з Яною стилі на li щоб з'являлась надпис Alredy Read
+    targetItem.classList.add('gallery__item--background'); //додаємо блюр на картку
+    alreadyReadText.classList.add('gallery-thumb__already--show'); //opacity на картку
 
     const img = () => {
       const resWithoutStart = targetItem

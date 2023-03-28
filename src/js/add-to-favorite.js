@@ -3,6 +3,8 @@ import { markupForFavoritesAndRead } from './renderMarkup';
 import { setToLS, getFromLS } from './local-storage-logic';
 import { refs } from './refs/refs';
 import _debounce from 'debounce';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 // =====================================================Юра
 import Notiflix from 'notiflix';
 import { initializeApp, firebase } from 'firebase/app';
@@ -20,6 +22,8 @@ import {
   addOrDeleteFavoriteNews,
   getFavNews,
 } from './firebace/firebace-for-favorite';
+
+Aos.init();
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDD_Eh4tyvM30ivpTHWqfHo7r2h0gDev4Y',

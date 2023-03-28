@@ -1,7 +1,10 @@
 import { markupForFavoritesAndRead } from './renderMarkup';
 import { refs } from './refs/refs';
 import { setToLS, getFromLS } from './local-storage-logic';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 // import { sendEmailVerification } from 'firebase/auth';
+Aos.init();
 
 const READ_KEY = 'read_news';
 

@@ -134,16 +134,6 @@ if (galleryRef) {
 async function fetchAndRenderSearchNews() {
   console.log(newsApi.page);
 
-  setTimeout(() => {
-    if (newsApi.page >= newsApi.totalHits) {
-      Notiflix.Notify.failure(
-        "We're sorry, but you've reached the end of search results."
-      );
-      observer.unobserve(sentinel);
-      return;
-    }
-  }, 1000);
-
   try {
     showLoader();
     const { docs } = await newsApi.fetchSearchArticles();

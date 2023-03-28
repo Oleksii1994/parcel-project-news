@@ -1,72 +1,83 @@
-.read-container{
-    padding: 60px 16px;
+// .read-container{
+//     padding: 60px 16px;
+// }
+// .screen-desktop{
+//     .read-container{
+//         padding: 60px 16px;
+//     }
+// }
+// .item__position{
+//     display: flex;
+//     justify-content: center;
+//     gap: 32px;
+// }
+// .screen-desktop{
+//     .item__position{
+//         display: flex;
+//         justify-content: center;
+//         gap: 32px;
+//     }
+// }
+// .card{
+//     width: 395px;
+// }
+// .screen-desktop{
+//     .card{
+//         width: 395px;
+//     }
+// }
+// .description__card{
+//     margin-top: 20px;
+// }
+// .screen-desktop{
+//     .description__card{
+//         margin-top: 20px;
+//     }
+// }
+// .title__card{
+//     font-family: 'Manrope';
+//     font-size: 32px;
+//     line-height: 44px;
+//     letter-spacing: -0.01em;
+//     color: #111321;
+//     width: 353px;
+//     margin-bottom: 20px;
+// }
+// .screen-desktop{
+//     .title__card{
+//         font-family: 'Manrope';
+//         font-size: 32px;
+//         line-height: 44px;
+//         letter-spacing: -0.01em;
+//         color: #111321;
+//         width: 353px;
+//         margin-bottom: 20px;
+//     }
+//     }
+// .subtitle__card{
+//     font-family: 'Manrope';
+//     font-weight: 400;
+//     font-size: 16px;
+//     line-height: 22px;
+//     width: 353px;
+// }
+// .screen-desktop{
+//     .subtitle__card{
+//         font-family: 'Manrope';
+//         font-weight: 400;
+//         font-size: 16px;
+//         line-height: 22px;
+//         width: 353px;
+//     }
+//     }
+
+// .title__accordion{
+//     border: none;
+//     border-bottom: 1px solid;
+//     color: #929292;
+// }
+    
+.read{
+    height: auto;
+    padding-bottom: 60px;
 }
-.screen-desktop{
-    .read-container{
-        padding: 60px 16px;
-    }
-}
-.item__position{
-    display: flex;
-    justify-content: center;
-    gap: 32px;
-}
-.screen-desktop{
-    .item__position{
-        display: flex;
-        justify-content: center;
-        gap: 32px;
-    }
-}
-.card{
-    width: 395px;
-}
-.screen-desktop{
-    .card{
-        width: 395px;
-    }
-}
-.description__card{
-    margin-top: 20px;
-}
-.screen-desktop{
-    .description__card{
-        margin-top: 20px;
-    }
-}
-.title__card{
-    font-family: 'Manrope';
-    font-size: 32px;
-    line-height: 44px;
-    letter-spacing: -0.01em;
-    color: #111321;
-    width: 353px;
-    margin-bottom: 20px;
-}
-.screen-desktop{
-    .title__card{
-        font-family: 'Manrope';
-        font-size: 32px;
-        line-height: 44px;
-        letter-spacing: -0.01em;
-        color: #111321;
-        width: 353px;
-        margin-bottom: 20px;
-    }
-    }
-.subtitle__card{
-    font-family: 'Manrope';
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 22px;
-    width: 353px;
-}
-.screen-desktop{
-    .subtitle__card{
-        font-family: 'Manrope';
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 22px;
-        width: 353px;
-    }
-    }

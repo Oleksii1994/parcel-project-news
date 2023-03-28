@@ -13,7 +13,7 @@
       height="35"
     />
     <link rel="stylesheet" href="./sass/index.scss" />
-    <link rel="stylesheet" href="../node_modules/jqueryui/jquery-ui.min.css" />
+    <link rel="stylesheet" href="../node_modules/jqueryui/jquery-ui.css" />
     <!-- <script type="module" src="./read.js"></script> -->
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/jqueryui/jquery-ui.min.js"></script>
@@ -76,16 +76,19 @@
     </header>
     <main>
       <section>
-        <div id="accordion"></div>
+        <div class="container read">
+          <div class="accordion" id="accordion"></div>
 
-        <div id="markup-template">
-          <h2>{{title}}</h2>
-          <div>
-            <ul class="news-list list gallery__list">
-              {{card}}
-            </ul>
+          <div id="markup-template">
+            <h2 class="title__accordion">{{title}}</h2>
+            <div>
+              <ul class="news-list list gallery__list">
+                {{card}}
+              </ul>
+            </div>
           </div>
         </div>
+
       </section>
     </main>
     <include src="./partials/footer.html"></include>

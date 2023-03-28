@@ -17,7 +17,7 @@ import _debounce from 'debounce';
 
 let latitude = 50.431;
 let longitude = 30.532;
-const paginationBoxForPopular = `<div id="tui-pagination-container" class="tui-pagination"></div>`;
+const paginationBoxForPopular = `<li><div id="tui-pagination-container" class="tui-pagination"></div></li>`;
 
 //
 

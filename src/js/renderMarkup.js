@@ -78,6 +78,10 @@ export const markupForFavoritesAndRead = {
   renderMarkup(ref, markup) {
     ref.insertAdjacentHTML('beforeend', markup);
   },
+
+  renderMarkupBefore(ref, markup) {
+    ref.insertAdjacentHTML('beforebegin', markup);
+  },
 };
 
 export function addWeatherMarkup(arr) {

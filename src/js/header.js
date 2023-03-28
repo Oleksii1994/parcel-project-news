@@ -1,3 +1,4 @@
+import Notiflix from 'notiflix';
 import { refs } from './refs/refs';
 import { newsApi } from './API/fetchAPI';
 import { Notify } from 'notiflix';
@@ -27,14 +28,14 @@ refs.formSearch.addEventListener('submit', onFormSearchSubmit);
 const sentinel = document.querySelector('#sentinel');
 
 const onEntry = entries => {
-  console.log('awdawd');
+  // console.log('awdawd');
   fetchAndRenderSearchNews();
 };
 const options = {
   rootMargin: '300px',
 };
 const observer = new IntersectionObserver(onEntry, options);
-console.log(observer);
+// console.log(observer);
 
 //==========================================================
 
@@ -75,7 +76,7 @@ async function onFormSearchSubmit(event) {
       )
     );
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     Notify.failure(`${error}`);
   }
 }

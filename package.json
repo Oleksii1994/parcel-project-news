@@ -29,6 +29,7 @@
     "jqueryui": "^1.11.1",
     "modern-normalize": "^1.1.0",
     "notiflix": "^3.2.6",
+    "tui-pagination": "^3.4.1",
     "vanilla-tilt": "^1.8.0"
   },
   "devDependencies": {

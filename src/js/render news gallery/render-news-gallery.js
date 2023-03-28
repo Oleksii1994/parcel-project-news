@@ -212,7 +212,8 @@ async function pageLoadHandler() {
     function renderWeather(data) {
       const weather = data.weather[0];
       return `
-  <div class="weather__main">
+  <div class="weather__main" data-aos="fade-up"
+     data-aos-duration="1000">
     <p class="main-temp">${Math.round(data.main.temp - 273) + '&deg;'}</p>
     <div class="weather-line"></div>
     <div class="weather__main-position">
@@ -247,7 +248,8 @@ async function pageLoadHandler() {
           const weatherDescription = weather.main;
 
           return `
-    <div class="weather-day">
+    <div class="weather-day" data-aos="fade-up"
+     data-aos-duration="1000">
       <p class="weather-day__temp">${Math.round(temp - 273) + '&deg;'}</p>
       <div class="weather-day__icon-box">
         <img 

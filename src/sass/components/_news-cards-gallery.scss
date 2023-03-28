@@ -172,6 +172,8 @@
     cursor: url(../images/touch.svg), pointer;
     color: var(--blue-main-color);
     font-family: font(_manrope);
+    transition-property: transform;
+    transition-duration: 250ms;
     @include text(400, 14, 19);
 
     @include for-size(tablet) {

@@ -9,7 +9,10 @@ export const markup = {
     const svgD = 'icon-check';
     return arr.map(({ img, title, text, date, id, category, url }, index) => {
       return `
-      <li id="${id}" class="gallery__item">
+      <li id="${id}" 
+      class="gallery__item" data-aos="fade-up"
+     data-aos-duration="1000"
+     >
         <div class="gallery-thumb" style="background-image: url('${img}')">
           <p class="gallery-thumb__subtitle">${category}</p>
           <p class="gallery-thumb__already">
@@ -48,7 +51,11 @@ export const markupForFavoritesAndRead = {
     const svgC = 'icon-like-icon';
     return arr
       .map(({ img, title, text, date, id, category, url }) => {
-        return `<li id="${id}" class="gallery__item">
+        return `<li id="${id}" class="gallery__item" 
+   data-aos="fade-up"
+     data-aos-duration="1000"
+     
+     >
   <div class="gallery-thumb" style="background-image: url('${img}')">
       <p class="gallery-thumb__subtitle">${category}</p>
       <p class="gallery-thumb__already">
@@ -91,7 +98,8 @@ export const markupForFavoritesAndRead = {
 };
 
 export function addWeatherMarkup(arr) {
-  const weatherMarkup = `<li class="weather">
+  const weatherMarkup = `<li class="weather" data-aos="fade-left"
+     data-aos-duration="1000">
   <div class="weather-box"></div>
   <button class="weather-button">Weather for Week</button>
 </li>`;

@@ -13,7 +13,8 @@
       height="35"
     />
     <link rel="stylesheet" href="./sass/index.scss" />
-    <link rel="stylesheet" href="../node_modules/jqueryui/jquery-ui.min.css">
+    <link rel="stylesheet" href="../node_modules/jqueryui/jquery-ui.css" />
+    <!-- <script type="module" src="./read.js"></script> -->
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/jqueryui/jquery-ui.min.js"></script>
   </head>
@@ -75,57 +76,26 @@
     </header>
     <main>
       <section>
-        <div id="accordion">
-          <h3>Section 1</h3>
-          <div>
-            <p>
-            <div class="not-found">
-            <ul class="news-list list gallery__list" id="news-list">
-            </ul>
+        <div class="container read">
+          <div class="accordion" id="accordion"></div>
+
+          <div id="markup-template">
+            <h2 class="title__accordion">{{title}}</h2>
+            <div>
+              <ul class="news-list list gallery__list">
+                {{card}}
+              </ul>
             </div>
-            </p>
-          </div>
-          <h3>Section 2</h3>
-          <div>
-            <p>
-              <ul class="news-list list" id="news-list">
-
-              </ul>
-            </p>
-          </div>
-          <h3>Section 3</h3>
-          <div>
-            <p>
-              <ul class="news-list list" id="news-list">
-                
-              </ul>
-            </p>
-            <ul>
-
-            </ul>
-          </div>
-          <h3>Section 4</h3>
-          <div>
-            <p>
-              <ul>
-
-              </ul>
-            </p>
-            <p>
-              <ul>
-
-              </ul>
-            </p>
           </div>
         </div>
+
       </section>
     </main>
     <include src="./partials/footer.html"></include>
     <include src="./partials/mobile-menu-read.html"></include>
     <include src="./partials/modal-auth.html"></include>
     <div class="btn-up btn-up_hide"></div>
-    <script type="module" src="./read.js"></script>
     <!-- <script type="module" src="./js/accordion.js"></script> -->
+    <script type="module" src="./read.js"></script>
   </body>
 </html>
-

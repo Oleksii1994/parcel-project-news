@@ -3,6 +3,8 @@ import { markupForFavoritesAndRead } from './renderMarkup';
 import { setToLS, getFromLS } from './local-storage-logic';
 import { refs } from './refs/refs';
 import _debounce from 'debounce';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 // =====================================================Юра
 import Notiflix from 'notiflix';
 import { initializeApp, firebase } from 'firebase/app';
@@ -20,6 +22,8 @@ import {
   addOrDeleteFavoriteNews,
   getFavNews,
 } from './firebace/firebace-for-favorite';
+
+Aos.init();
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDD_Eh4tyvM30ivpTHWqfHo7r2h0gDev4Y',
@@ -136,13 +140,12 @@ function onLoadFavoritesPage() {
 
   listArticlesRef.innerHTML =
     markupForFavoritesAndRead.createGalleryCardMarkup(dataFromLS);
-
   listArticlesRef.addEventListener('click', onListArticlesClick);
 }
 
 function onListArticlesClick(event) {
   const targetBtn = event.target.closest('.gallery-thumb__btn');
-   
+
   if (!targetBtn) {
     return;
   }
@@ -158,8 +161,9 @@ function onListArticlesClick(event) {
     if (!newData.length) {
       checkLS();
     }
-    
-    const newMarkup = markupForFavoritesAndRead.createGalleryCardMarkup(newData);
+
+    const newMarkup =
+      markupForFavoritesAndRead.createGalleryCardMarkup(newData);
 
     listArticlesRef.innerHTML = newMarkup;
     return;
@@ -167,25 +171,23 @@ function onListArticlesClick(event) {
 }
 
 function checkLS() {
-
-  setTimeout(() =>{
+  setTimeout(() => {
     const dataFromLS = getFromLS(FAVORITE_KEY);
 
-  if (!dataFromLS.length) {
-    notFoundRef.classList.remove('not-found-box-hidden');
-      }
-  }, 100)
+    if (!dataFromLS.length) {
+      notFoundRef.classList.remove('not-found-box-hidden');
+    }
+  }, 100);
 }
 
 if (document.title === 'Favorite') {
   onLoadFavoritesPage();
 }
 
-
 // =============================================================================
 // notFoundRef.innerHTML = `<h2 class="not-found-box__title">We haven’t found news from <br> this date</h2>
-    //   <img src="https://www.flickr.com/photos/197971475@N07/52773618182/in/dateposted-public.png>`;
-    // window.scrollTo(0, 0);
+//   <img src="https://www.flickr.com/photos/197971475@N07/52773618182/in/dateposted-public.png>`;
+// window.scrollTo(0, 0);
 // onLoadFavoritesPage(); /////треба викликати цю функцію при клікі на посилання Favorite
 // notFoundRef.classList.add('not-found-box-hidden');
 // if (!dataFromLS.length && notFoundRef !== null) {
@@ -200,13 +202,11 @@ alt="underfined-picture"/>
 <source 
 srcset="https://www.flickr.com/photos/197971475@N07/52773621142/in/dateposted-public/, https://www.flickr.com/photos/197971475@N07/52774569180/in/dateposted-public/ 2x" 
 type="image/png" 
-media="(max-width:767.98px)" 
-alt="underfined-picture"/>
+media="(max-width:767.98px)"/>
 <source 
 srcset="https://www.flickr.com/photos/197971475@N07/52774412304/in/dateposted-public/ 1x, https://www.flickr.com/photos/197971475@N07/52774150291/in/dateposted-public/ 2x" 
 type="image/png" 
-media="(min-width: 1279.98px)"
-alt="underfined-picture"/>
+media="(min-width: 1279.98px)"/>
 <img 
 class="underfined___picture"
 src="https://www.flickr.com/photos/197971475@N07/52773618182/in/dateposted-public.png" 

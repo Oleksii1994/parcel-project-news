@@ -14,7 +14,8 @@ import { addWeatherMarkup } from '../renderMarkup';
 import { input } from '../newCalendar';
 import { selectedDate } from '../newCalendar';
 import _debounce from 'debounce';
-import { ref } from '@firebase/database';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 let latitude = 50.431;
 let longitude = 30.532;
@@ -23,6 +24,7 @@ const paginationBoxForPopular = `<li id="tuiPagCon"><div id="tui-pagination-cont
 //
 
 //
+Aos.init();
 
 window.addEventListener('load', pageLoadHandler, { once: true });
 input.addEventListener('change', _debounce(onCalendarChange, 1500));
@@ -211,7 +213,8 @@ async function pageLoadHandler() {
     function renderWeather(data) {
       const weather = data.weather[0];
       return `
-  <div class="weather__main">
+  <div class="weather__main" data-aos="fade-up"
+     data-aos-duration="1000">
     <p class="main-temp">${Math.round(data.main.temp - 273) + '&deg;'}</p>
     <div class="weather-line"></div>
     <div class="weather__main-position">
@@ -246,7 +249,8 @@ async function pageLoadHandler() {
           const weatherDescription = weather.main;
 
           return `
-    <div class="weather-day">
+    <div class="weather-day" data-aos="fade-up"
+     data-aos-duration="1000">
       <p class="weather-day__temp">${Math.round(temp - 273) + '&deg;'}</p>
       <div class="weather-day__icon-box">
         <img 

@@ -38,15 +38,23 @@
 //   }
 // }
 
+.dark-theme-box--mobile-menu {
+  color: var(--dark-grey-text-color);
+}
+
+.light-theme-box--mobile-menu {
+  color: var(--dark-grey-text-color);
+}
+
 .light-theme--mobile-menu .light-theme-box--mobile-menu,
 .light-theme--mobile-menu .dark-theme-box--mobile-menu {
   color: var(--dark-grey-text-color);
 }
 
-.dark-theme--mobile-menu .dark-theme-box--mobile-menu,
-.dark-theme--mobile-menu .light-theme-box--mobile-menu {
-  color: var(--body-color-light-theme);
-}
+// .dark-theme--mobile-menu .dark-theme-box--mobile-menu,
+// .dark-theme--mobile-menu .light-theme-box--mobile-menu {
+//   color: var(--body-color-light-theme);
+// }
 
 .dark-theme-box--mobile-menu.mobile-menu--active,
 .light-theme-box--mobile-menu.mobile-menu--active {

@@ -39,15 +39,23 @@
   }
 }
 
+.dark-theme-box {
+  color: var(--dark-grey-text-color);
+}
+
+.light-theme-box {
+  color: var(--dark-grey-text-color);
+}
+
 .light-theme .light-theme-box,
 .light-theme .dark-theme-box {
   color: var(--dark-grey-text-color);
 }
 
-.dark-theme .dark-theme-box,
-.dark-theme .light-theme-box {
-  color: var(--body-color-light-theme);
-}
+// .dark-theme .dark-theme-box,
+// .dark-theme .light-theme-box {
+//   color: var(--body-color-light-theme);
+// }
 
 .dark-theme-box.active-tablet,
 .light-theme-box.active-tablet {

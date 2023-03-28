@@ -87,7 +87,7 @@ export const markupForFavoritesAndRead = {
 };
 
 export function addWeatherMarkup(arr) {
-  const weatherMarkup = `<li class="weather" data-aos="fade-up"
+  const weatherMarkup = `<li class="weather" data-aos="fade-left"
      data-aos-duration="1000">
   <div class="weather-box"></div>
   <button class="weather-button">Weather for Week</button>

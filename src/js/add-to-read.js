@@ -1,9 +1,52 @@
+import Notiflix from 'notiflix';
+import { initializeApp, firebase } from 'firebase/app';
+import {
+  getDatabase,
+  set,
+  ref,
+  update,
+  get,
+  child,
+  userId,
+} from 'firebase/database';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from 'firebase/auth';
+
+//========================================================
+
 import { markupForFavoritesAndRead } from './renderMarkup';
 import { refs } from './refs/refs';
 import { setToLS, getFromLS } from './local-storage-logic';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 import { notFoundRef, FAVORITE_KEY, checkLS } from './add-to-favorite';
+import { addToReadNews } from './firebace/faribece-for-read';
+
+//========================================================
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyDD_Eh4tyvM30ivpTHWqfHo7r2h0gDev4Y',
+  authDomain: 'project-goit2023-js.firebaseapp.com',
+  databaseURL: 'https://project-goit2023-js-default-rtdb.firebaseio.com',
+  projectId: 'project-goit2023-js',
+  storageBucket: 'project-goit2023-js.appspot.com',
+  messagingSenderId: '407142734195',
+  appId: '1:407142734195:web:6d45ec3cdde16415370d06',
+  measurementId: 'G-VMY0EQ75TG',
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const auth = getAuth();
+const usersRef = ref(database, 'users');
+
+//==============================================================
 
 // import { sendEmailVerification } from 'firebase/auth';
 Aos.init();
@@ -108,6 +151,18 @@ class AddToRead {
     console.log(LSDate);
     // добавляємо в localStorage
     const present = dataFromLS.find(article => article.id === id);
+
+    console.log(article);
+
+    // ========================================================================
+    const user = auth.currentUser;
+    if (user) {
+      const userId = user.uid;
+      addToReadNews(article, userId);
+    }
+
+    //=========================================================================
+
     if (!present) {
       setToLS(READ_KEY, [...dataFromLS, article], [LSDate]); // dataFromLS.push(article) // setToLS(READ_KEY, dataFromLS);
     }

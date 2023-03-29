@@ -13,21 +13,25 @@ import { API_KEY } from '../API/weatherAPI';
 import { addWeatherMarkup } from '../renderMarkup';
 import { input } from '../newCalendar';
 import { selectedDate } from '../newCalendar';
-import _debounce from 'debounce';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
 let latitude = 50.431;
 let longitude = 30.532;
 const paginationBoxForPopular = `<li id="tuiPagCon"><div id="tui-pagination-container" class="tui-pagination"></div></li>`;
-
+let previousValue, currentValue;
+const customEvent = new Event('customchange');
 //
 
 //
 Aos.init();
 
 window.addEventListener('load', pageLoadHandler, { once: true });
-input.addEventListener('change', _debounce(onCalendarChange, 1500));
+input.addEventListener('input', () => {
+  trackThirdChange(input);
+});
+
+input.addEventListener('customchange', onCalendarChange);
 
 async function pageLoadHandler() {
   markup.clearMarkup(refs.galleryEl);
@@ -332,6 +336,22 @@ async function pageLoadHandler() {
   }
 }
 
+function trackThirdChange(element) {
+  if (!previousValue) {
+    previousValue = element.value;
+    Notify.info(
+      'Please select the end date or click on the selected date again'
+    );
+    return;
+  }
+  if (currentValue === element.value) {
+    return;
+  }
+  previousValue = currentValue;
+  currentValue = element.value;
+  element.dispatchEvent(customEvent);
+}
+
 function onCalendarChange(e) {
   let filteredNews = [];
 
@@ -343,6 +363,9 @@ function onCalendarChange(e) {
       return dateString >= selectedDate[0] && dateString <= selectedDate[1];
     }
   });
+  // ======================================================================================================================================
+  // ''''''='''''------ТУТ ТРЕБА ДОДАТИ ПЕРЕВІРКУ ЯКЩО НЕ ЗНАЙДЕНІ НОВИНИ!!!!!!!!!!!
+  // ======================================================================================================================================
   // if (filteredNews.length === 0) {
   //   refs.notFoundPage.classList.remove('not-found-page');
   //   refs.notFoundPage.classList.add('not-found-page--visually');

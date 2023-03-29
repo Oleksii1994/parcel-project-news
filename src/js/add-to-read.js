@@ -92,7 +92,7 @@ class AddToRead {
       const news = objects.filter(obj => obj.LSDate === LSDate);
       result.push({ LSDate: LSDate, news: news });
     });
-    console.log(result);
+    // console.log(result);
     return result;
   }
 
@@ -148,11 +148,11 @@ class AddToRead {
       LSDate,
     };
     const dataFromLS = getFromLS(READ_KEY) || [];
-    console.log(LSDate);
+    // console.log(LSDate);
     // добавляємо в localStorage
     const present = dataFromLS.find(article => article.id === id);
 
-    console.log(article);
+    // console.log(article);
 
     // ========================================================================
     const user = auth.currentUser;
@@ -168,7 +168,7 @@ class AddToRead {
     }
   }
   #createAccordion() {
-    $('#accordion').accordion({ header: 'h2', collapsible: true, heightStyle: 'panel' });
+    $('#accordion').accordion({ header: 'h2', collapsible: true, heightStyle: 'panel',autoHeight: false, animated: false,});
   }
 }
 

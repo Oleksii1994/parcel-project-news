@@ -12,7 +12,8 @@
       width="35"
       height="35"
     />
-    <link rel="stylesheet" href="./sass/index.scss" />
+    <link rel="stylesheet" href="./sass/components/_read.scss" />
+    <link rel="stylesheet" href="./sass/index.scss">
     <link rel="stylesheet" href="../node_modules/jqueryui/jquery-ui.css" />
     <!-- <script type="module" src="./read.js"></script> -->
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
@@ -120,7 +121,8 @@
 
           <div id="markup-template">
             <h2 class="title__accordion">{{title}}</h2>
-            <div>
+            
+            <div class="content__card">
               <ul class="news-list list gallery__list" id="read-news-list">
                 {{card}}
               </ul>

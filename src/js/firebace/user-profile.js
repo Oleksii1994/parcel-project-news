@@ -69,7 +69,7 @@ function getNameAndEmail() {
           );
           const newsRead = userArr.newsReadData.filter(item => item !== '');
 
-          console.log(userArr);
+          // console.log(userArr);
 
           refs.profileImgCard.src = `${userArr.userPhoto}`;
           refs.userName.innerHTML = userArr.username;
@@ -87,21 +87,20 @@ function getNameAndEmail() {
 function changeUserPassword(e) {
   e.preventDefault();
   const input = e.target.children[1].value;
-  console.log(input);
-  if (refs.changePasswordPrg.textContent === 'old password') {
+
+  if (refs.changePasswordPrg.textContent === 'Old password:') {
     get(usersRef)
       .then(snapshot => {
         snapshot.forEach(childSnapshot => {
           const user = auth.currentUser;
 
-          // console.log(user.uid);
-
           const userArr = childSnapshot.val();
-          if (userArr.email === user.email) {
+
+          if (userArr.email.toLowerCase() === user.email.toLowerCase()) {
             // console.log(userArr.password);
             if (input === userArr.password) {
               Notiflix.Notify.success('Corect Password');
-              refs.changePasswordPrg.innerHTML = 'new password';
+              refs.changePasswordPrg.innerHTML = 'New password:';
             } else {
               Notiflix.Notify.failure('Wrong password, please try again');
             }
@@ -113,14 +112,14 @@ function changeUserPassword(e) {
         console.error(error);
       });
   }
-  if (refs.changePasswordPrg.textContent === 'new password') {
+  if (refs.changePasswordPrg.textContent === 'New password:') {
     get(usersRef)
       .then(snapshot => {
         snapshot.forEach(childSnapshot => {
           const user = auth.currentUser;
           const userArr = childSnapshot.val();
-          if (userArr.email === user.email) {
-            refs.changePasswordPrg.innerHTML = 'old password';
+          if (userArr.email.toLowerCase() === user.email.toLowerCase()) {
+            refs.changePasswordPrg.innerHTML = 'Old password:';
             // console.log(userArr.password);
             Notiflix.Notify.success('Password changed successfully');
             return update(ref(database, `users/${user.uid}`), {
@@ -184,7 +183,7 @@ function editPhotoFun() {
               })
                 .then(() => {
                   // console.log('News added to favorites');
-                  Notiflix.Notify.success('News added to favorites');
+                  Notiflix.Notify.success('Photo added to profile');
                 })
                 .catch(error => {
                   Notiflix.Notify.failure(

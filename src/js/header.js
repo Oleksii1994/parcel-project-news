@@ -29,14 +29,12 @@ refs.formSearch.addEventListener('submit', onFormSearchSubmit);
 const sentinel = document.querySelector('#sentinel');
 
 const onEntry = entries => {
-  console.log('awdawd');
   fetchAndRenderSearchNews();
 };
 const options = {
   rootMargin: '300px',
 };
 const observer = new IntersectionObserver(onEntry, options);
-console.log(observer);
 
 //==========================================================
 
@@ -61,9 +59,6 @@ async function onFormSearchSubmit(event) {
   checkDate();
 
   try {
-    // подключение скрола
-    observer.observe(sentinel);
-    //
     let { docs } = await newsApi.fetchSearchArticles();
     hideLoader();
     if (!docs.length) {
@@ -73,12 +68,19 @@ async function onFormSearchSubmit(event) {
       refs.notFoundPage.classList.add('not-found-page');
       refs.notFoundPage.classList.remove('not-found-page--visually');
     }
+
     markup.renderMarkup(
       refs.galleryEl,
       markupForFavoritesAndRead.createGalleryCardMarkup(
         NormalizeData.searchData(docs)
       )
     );
+
+    // подключение скрола
+    setTimeout(() => {
+      observer.observe(sentinel);
+    }, 1000);
+    //
   } catch (error) {
     console.log(error);
     Notify.failure(`${error}`);

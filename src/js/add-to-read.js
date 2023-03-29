@@ -172,7 +172,7 @@ class AddToRead {
   }
 }
 
-const instance = new AddToRead(); // створює об'єкт  AddToRead
+export const instance = new AddToRead(); // створює об'єкт  AddToRead
 
 if (instance.isHomePage()) {
   //перевірка чи знаходишся на homePage

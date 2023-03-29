@@ -49,6 +49,7 @@ export const markupForFavoritesAndRead = {
     const svgA = new URL('../images/icon-card.svg', import.meta.url);
     const svgB = 'icon-like';
     const svgC = 'icon-like-icon';
+    const svgD = 'icon-check';
     return arr
       .map(({ img, title, text, date, id, category, url }) => {
         return `<li id="${id}" class="gallery__item" 
@@ -59,7 +60,8 @@ export const markupForFavoritesAndRead = {
   <div class="gallery-thumb" style="background-image: url('${img}')">
       <p class="gallery-thumb__subtitle">${category}</p>
       <p class="gallery-thumb__already">
-        Already read
+          Already read
+        <svg width="18" height="18"><use href="${svgA}#${svgD}"></use></svg>
       </p>
     ${
       checkPresentArticle(id)

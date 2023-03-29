@@ -4,13 +4,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./images/creators/favicon.png" type="image/png" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link rel="stylesheet" href="./sass/index.scss" />
     <title>Creators</title>
   </head>
-  <body>
+  <body class="bgc">
     <!-- Header section -->
     <header class="creator-header">
-      <a class="creator-header__link" href="./index.html">News</a>
+      <img
+        class="creator-header__logo"
+        src="./images/creators/logo.png"
+        alt="logo teams"
+      />
       <nav class="creator__nav">
         <ul class="creator-nav__list">
           <li class="creator-nav__item">
@@ -31,22 +37,13 @@
       <!-- Hero section -->
       <section class="hero">
         <div class="hero__container">
-          <div class="hero-text__block">
-            <h1 class="hero__title">
-              The best of<br />
-              developer's team
-            </h1>
-            <p class="hero__text">
-              Creation of adaptive responsive websites on html css js stack Our
-              motto - You can always do better
-            </p>
-          </div>
-
+          <h1 class="hero__title">The best of developer's team</h1>
           <img
             class="hero__img"
-            src="./images/creators.png"
+            src="./images/creators/scripters.jpg"
             alt="Build Project"
           />
+          <p class="hero__text"></p>
         </div>
       </section>
       <!-- Developer section -->
@@ -63,7 +60,7 @@
               />
               <div class="developer__box">
                 <h3 class="developer__name">Олексій Кочуров</h3>
-                <p class="developer__duties">Team Lead</p>
+                <p class="developer__duties">Team Lead \ Developer</p>
                 <ul class="developer-social__list">
                   <li class="developer-social__item">
                     <a
@@ -915,5 +912,6 @@
       </section>
     </main>
     <include src="./partials/footer.html"></include>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   </body>
 </html>

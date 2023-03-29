@@ -60,7 +60,6 @@ export function addToReadNews(article, userId) {
       });
 
       if (articleExists) {
-        console.log('Article already exists');
         Notiflix.Notify.success('News already added to read');
         return;
       }

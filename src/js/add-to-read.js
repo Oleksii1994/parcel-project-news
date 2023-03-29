@@ -168,7 +168,7 @@ class AddToRead {
     }
   }
   #createAccordion() {
-    $('#accordion').accordion({ header: 'h2', collapsible: true });
+    $('#accordion').accordion({ header: 'h2', collapsible: true, heightStyle: 'panel' });
   }
 }
 

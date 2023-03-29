@@ -6,7 +6,7 @@ import { markup } from './renderMarkup';
 import { markup, markupForFavoritesAndRead } from './renderMarkup';
 import { NormalizeData } from './API/api-data-normalaizer';
 import { selectedDate } from './newCalendar';
-import { makePaginationButtons } from './pagination';
+
 import { showLoader, hideLoader } from './loading';
 
 const notifyOptions = {

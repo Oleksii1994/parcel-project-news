@@ -4,7 +4,7 @@ import './js/API/fetchAPI';
 import './js/mobile-menu';
 import './js/loading';
 import './js/API/api-data-normalaizer';
-import './js/input-actions';
+
 import './js/switch-theme';
 import './js/newCalendar';
 import './js/categories-btns';

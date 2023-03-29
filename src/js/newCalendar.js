@@ -12,6 +12,7 @@ const calendar = document.querySelector('.calendar__icon');
 const options = {
   minuteIncrement: 1,
   dateFormat: 'Y-m-d',
+  minDate: '2021-01',
   maxDate: 'today',
   mode: 'range',
   onClose(selectedDates, dateStr, instance) {

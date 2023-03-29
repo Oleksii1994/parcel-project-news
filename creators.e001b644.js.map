@@ -1,0 +1,1 @@
+{"mappings":"qhBAGAA,EAHAC,EAAA,UAGIC","sources":["src/creators.js"],"sourcesContent":["import Aos from 'aos';\nimport 'aos/dist/aos.css';\n\nAos.init();\n"],"names":["$parcel$interopDefault","parcelRequire","init"],"version":3,"file":"creators.e001b644.js.map"}

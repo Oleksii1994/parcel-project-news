@@ -92,7 +92,6 @@ class AddToRead {
       const news = objects.filter(obj => obj.LSDate === LSDate);
       result.push({ LSDate: LSDate, news: news });
     });
-    console.log(result);
     return result;
   }
 
@@ -172,7 +171,7 @@ class AddToRead {
   }
 }
 
-const instance = new AddToRead(); // створює об'єкт  AddToRead
+export const instance = new AddToRead(); // створює об'єкт  AddToRead
 
 if (instance.isHomePage()) {
   //перевірка чи знаходишся на homePage

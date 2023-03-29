@@ -15,6 +15,7 @@ import { input } from '../newCalendar';
 import { selectedDate } from '../newCalendar';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
+import { getFromLS } from '../local-storage-logic';
 
 let latitude = 50.431;
 let longitude = 30.532;
@@ -32,6 +33,22 @@ input.addEventListener('input', () => {
 });
 
 input.addEventListener('customchange', onCalendarChange);
+
+export function checkAlreadyReadArticle(id) {
+  //кожен хто імпортує собі цю функцію, має також імпортувати ось це
+  // import { setToLS, getFromLS } from './local-storage-logic';
+  const READ_KEY = 'read_news';
+  const dataFromLS = getFromLS(READ_KEY);
+  const present = dataFromLS.find(article => article.id === id);
+  if (!present) {
+    return;
+  } else {
+    const targetItem = document.getElementById(present.id);
+    const alreadyReadText = targetItem.querySelector('.gallery-thumb__already');
+    targetItem.style.opacity = '0.7';
+    alreadyReadText.classList.add('gallery-thumb__already--show');
+  }
+}
 
 async function pageLoadHandler() {
   markup.clearMarkup(refs.galleryEl);
@@ -110,6 +127,14 @@ async function pageLoadHandler() {
 
     addWeatherMarkup(murkupPage.firstMurkupPage);
     markup.renderMarkup(refs.galleryEl, murkupPage.firstMurkupPage.join(''));
+
+    // =============================================================================================================
+
+    NormalizeData.popularData(results).forEach(obj =>
+      checkAlreadyReadArticle(obj.id)
+    );
+    // ====================================================================================
+
     onLoadHomePage();
 
     // ==========================================================================

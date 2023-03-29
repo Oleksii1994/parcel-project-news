@@ -409,20 +409,17 @@ async function categoriesFetch(e) {
   showLoader();
   try {
     const data = await newsApi.fetchArticlesByCategory();
-    newsApi.resetCatPage();
-    hideLoader();
-    const paginationOptions = {
-      totalItems: newsApi.totalButtons,
-      page: 1,
-      itemsPerPage: newsApi.catPerPage,
-      visiblePages: newsApi.catPerPage,
-      centerAlign: true,
-    };
+    // ======================================================================================================================================
+    // ''''''='''''------ТУТ ТРЕБА ДОДАТИ ПЕРЕВІРКУ ЯКЩО НЕ ЗНАЙДЕНІ НОВИНИ!!!!!!!!!!!
+    // ======================================================================================================================================
     // if (data === '') {
     //   refs.notFoundPage.classList.remove('not-found-page');
     //   refs.notFoundPage.classList.add('not-found-page--visually');
     //   return;
     // }
+    newsApi.resetCatPage();
+    hideLoader();
+    const paginationOptions = setPaginationOptions();
     newsApi.newsDataArr = NormalizeData.categoryData(data);
     markup.clearMarkup(refs.galleryEl);
     const categoryNewsMarkupArr = markupForFavoritesAndRead.getHtmlListItemsArr(
@@ -489,4 +486,25 @@ async function paginationCategoryFetch(tuiPagCon) {
     console.log(error);
     Notify.failure(`${error}`);
   }
+}
+
+function setAmountOfVisiblePages() {
+  if (
+    window.matchMedia('(min-width: 320px)').matches &&
+    window.matchMedia('(max-width: 767px)').matches
+  ) {
+    return 3;
+  } else {
+    return 5;
+  }
+}
+
+function setPaginationOptions() {
+  return {
+    totalItems: newsApi.totalButtons,
+    page: 1,
+    itemsPerPage: newsApi.catPerPage,
+    visiblePages: setAmountOfVisiblePages(),
+    centerAlign: true,
+  };
 }

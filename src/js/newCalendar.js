@@ -2,7 +2,7 @@ import format from 'date-fns/format';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import { NormalizeData } from './API/api-data-normalaizer';
-
+import { Notify } from 'notiflix';
 export let selectedDate = '';
 let open = false;
 let inputOpen = false;
@@ -51,6 +51,7 @@ function arrowToggle(deg) {
 
 input.addEventListener('click', () => {
   if (open === false) {
+    Notify.info('Please select a starting date');
     open = true;
     // console.log(open);
     return;

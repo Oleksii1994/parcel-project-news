@@ -144,7 +144,24 @@ function onLoadFavoritesPage(ref) {
   if (ref === null) return;
 
   ref.innerHTML = markupForFavoritesAndRead.createGalleryCardMarkup(dataFromLS);
+  dataFromLS.forEach(obj => checkAlreadyReadArticle(obj.id));
   ref.addEventListener('click', onListArticlesClick);
+}
+
+function checkAlreadyReadArticle(id) {
+  //кожен хто імпортує собі цю функцію, має також імпортувати ось це
+  // import { setToLS, getFromLS } from './local-storage-logic';
+  const READ_KEY = 'read_news';
+  const dataFromLS = getFromLS(READ_KEY);
+  const present = dataFromLS.find(article => article.id === id);
+  if (!present) {
+    return;
+  } else {
+    const targetItem = document.getElementById(present.id);
+    const alreadyReadText = targetItem.querySelector('.gallery-thumb__already');
+    targetItem.style.opacity = '0.7';
+    alreadyReadText.classList.add('gallery-thumb__already--show');
+  }
 }
 
 function onListArticlesClick(event) {
@@ -170,6 +187,7 @@ function onListArticlesClick(event) {
       markupForFavoritesAndRead.createGalleryCardMarkup(newData);
 
     listArticlesRef.innerHTML = newMarkup;
+    newData.forEach(obj => checkAlreadyReadArticle(obj.id));
     return;
   }
 }

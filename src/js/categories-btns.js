@@ -7,6 +7,8 @@ import { markupForFavoritesAndRead } from './renderMarkup';
 import { Notify } from 'notiflix';
 import { smoothScrollToTop } from './render news gallery/render-news-gallery';
 import { showLoader, hideLoader } from './loading';
+import { instance } from './add-to-read';
+import { checkAlreadyReadArticle } from './render news gallery/render-news-gallery';
 
 const paginationBoxForCategories = `<li id="tuiPagCon"><div id="tui-pagination-container" class="tui-pagination"></div></li>`;
 const categories = [
@@ -431,6 +433,12 @@ async function categoriesFetch(e) {
       refs.galleryEl,
       categoryNewsMarkupArr.join('')
     );
+
+    NormalizeData.categoryData(data).forEach(obj =>
+      checkAlreadyReadArticle(obj.id)
+    );
+
+    instance.addListenersToHomePage(); //опрацьовую клік на readMore
 
     const container = document.getElementById('tui-pagination-container');
     const tuiPagCon = document.getElementById('tuiPagCon');

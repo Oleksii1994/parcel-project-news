@@ -363,14 +363,13 @@ function onCalendarChange(e) {
       return dateString >= selectedDate[0] && dateString <= selectedDate[1];
     }
   });
-  // ======================================================================================================================================
-  // ''''''='''''------ТУТ ТРЕБА ДОДАТИ ПЕРЕВІРКУ ЯКЩО НЕ ЗНАЙДЕНІ НОВИНИ!!!!!!!!!!!
-  // ======================================================================================================================================
-  // if (filteredNews.length === 0) {
-  //   refs.notFoundPage.classList.remove('not-found-page');
-  //   refs.notFoundPage.classList.add('not-found-page--visually');
-  //   return;
-  // }
+  if (filteredNews.length === 0) {
+    refs.notFoundPage.classList.remove('not-found-page');
+    refs.notFoundPage.classList.add('not-found-page--visually');
+  } else {
+    refs.notFoundPage.classList.add('not-found-page');
+    refs.notFoundPage.classList.remove('not-found-page--visually');
+  }
   markup.clearMarkup(refs.galleryEl);
   markup.renderMarkup(
     refs.galleryEl,

@@ -67,9 +67,11 @@ async function onFormSearchSubmit(event) {
     let { docs } = await newsApi.fetchSearchArticles();
     hideLoader();
     if (!docs.length) {
-      refs.notFoundBox.innerHTML = `<h2 class="not-found-box__title">We haven’t found news from <br> this categories</h2>
-      <img src="https://live.staticflickr.com/65535/52770181328_d91f5366f0_z.jpg">`;
-      return;
+      refs.notFoundPage.classList.remove('not-found-page');
+      refs.notFoundPage.classList.add('not-found-page--visually');
+    } else {
+      refs.notFoundPage.classList.add('not-found-page');
+      refs.notFoundPage.classList.remove('not-found-page--visually');
     }
     markup.renderMarkup(
       refs.galleryEl,
@@ -134,8 +136,6 @@ if (galleryRef) {
 // infinity scroll
 
 async function fetchAndRenderSearchNews() {
-  console.log(newsApi.page);
-
   try {
     showLoader();
     const { docs } = await newsApi.fetchSearchArticles();

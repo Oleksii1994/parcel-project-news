@@ -409,14 +409,13 @@ async function categoriesFetch(e) {
   showLoader();
   try {
     const data = await newsApi.fetchArticlesByCategory();
-    // ======================================================================================================================================
-    // ''''''='''''------ТУТ ТРЕБА ДОДАТИ ПЕРЕВІРКУ ЯКЩО НЕ ЗНАЙДЕНІ НОВИНИ!!!!!!!!!!!
-    // ======================================================================================================================================
-    // if (data === '') {
-    //   refs.notFoundPage.classList.remove('not-found-page');
-    //   refs.notFoundPage.classList.add('not-found-page--visually');
-    //   return;
-    // }
+    if (data === '') {
+      refs.notFoundPage.classList.remove('not-found-page');
+      refs.notFoundPage.classList.add('not-found-page--visually');
+    } else {
+      refs.notFoundPage.classList.add('not-found-page');
+      refs.notFoundPage.classList.remove('not-found-page--visually');
+    }
     newsApi.resetCatPage();
     hideLoader();
     const paginationOptions = setPaginationOptions();

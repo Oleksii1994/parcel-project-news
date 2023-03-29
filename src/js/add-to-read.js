@@ -3,6 +3,8 @@ import { refs } from './refs/refs';
 import { setToLS, getFromLS } from './local-storage-logic';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
+import { notFoundRef, FAVORITE_KEY, checkLS } from './add-to-favorite';
+
 // import { sendEmailVerification } from 'firebase/auth';
 Aos.init();
 
@@ -124,6 +126,95 @@ if (instance.isHomePage()) {
   });
 } else {
   instance.renderReadPage(); //малюю readPage
+}
+
+const readRefs = {
+  readGalleryList: document.querySelector('#read-news-list'),
+};
+
+if (document.title === 'Read') {
+  onLoadReadPage(readRefs.readGalleryList);
+}
+
+function onLoadReadPage(ref) {
+  const dataFromLS = getFromLS(READ_KEY);
+  const svgA = new URL('../images/icon-card.svg', import.meta.url);
+  const svgB = 'icon-like';
+  const svgC = 'icon-like-icon';
+  const svgD = 'icon-check';
+  notFoundRef.classList.add('not-found-box-hidden');
+  if (!dataFromLS.length) {
+    notFoundRef.classList.remove('not-found-box-hidden');
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+    return;
+  }
+  if (ref === null) return;
+  ref.addEventListener('click', onGalleryClick);
+
+  // ref.innerHTML = markupForFavoritesAndRead.createGalleryCardMarkup(dataFromLS);
+
+  function onGalleryClick(event) {
+    const targetBtn = event.target.closest('.gallery-thumb__btn');
+    if (!targetBtn) {
+      return;
+    }
+
+    const targetItem = event.target.closest('.gallery__item');
+
+    const img = () => {
+      const resWithoutStart = targetItem
+        .querySelector('.gallery-thumb')
+        .style.backgroundImage.split('');
+
+      resWithoutStart.splice(0, 5);
+      resWithoutStart.splice(-2, 2);
+
+      return resWithoutStart.join('');
+    };
+    const title = targetItem.querySelector('.gallery__title').textContent;
+    const text = targetItem.querySelector('.gallery__text').textContent;
+    const date = targetItem.querySelector('.thumb__text').textContent;
+    const id = targetItem.id;
+    const category = targetItem.querySelector(
+      '.gallery-thumb__subtitle'
+    ).textContent;
+    const url = targetItem.querySelector('.thumb__link').href;
+    const article = { img: img(), title, text, date, id, category, url };
+    const dataFromLS = getFromLS(FAVORITE_KEY);
+    // добавляємо в localStorage
+    const present = dataFromLS.find(article => article.id === id);
+
+    // ===========================================================
+    // const user = auth.currentUser;
+    // if (user) {
+    //   const userId = user.uid;
+    //   addOrDeleteFavoriteNews(article, userId, targetBtn);
+    // }
+    // ===========================================================
+
+    if (present) {
+      const newData = dataFromLS.filter(article => article.id !== id);
+      setToLS(FAVORITE_KEY, newData);
+
+      // ===========================================================
+      // const user = auth.currentUser;
+      // if (user) {
+      //   const userId = user.uid;
+      //   addOrDeleteFavoriteNews(article, userId, targetBtn);
+      // }
+      // ===========================================================
+
+      targetBtn.innerHTML = `<p class="gallery-thumb__name add">Add to favorite<svg width="16" height="16"><use href="${svgA}#${svgC}"></use></svg></p>`;
+      return;
+    }
+
+    const newData = [...dataFromLS, { ...article }];
+    setToLS(FAVORITE_KEY, newData);
+    targetBtn.innerHTML = `<p class="gallery-thumb__name add">Remove from favorite<svg width="16" height="16"><use href="${svgA}#${svgB}"></svg></p>`;
+  }
 }
 
 // if (!dataFromLS.length && notFoundRef !== null) {

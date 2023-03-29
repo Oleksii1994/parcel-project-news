@@ -42,12 +42,12 @@ const auth = getAuth();
 const usersRef = ref(database, 'users');
 // ===========================================================
 const favorPage = document.querySelector('.favorite');
-const notFoundRef = document.querySelector('.not-found-box');
+export const notFoundRef = document.querySelector('.not-found-box');
 const listArticlesRef = document.querySelector('#news-list');
 
 // document.body.classList.remove('screen-tablet');
 // document.body.classList.add('screen-mobile');
-const FAVORITE_KEY = 'favorite_news';
+export const FAVORITE_KEY = 'favorite_news';
 
 export function onLoadHomePage() {
   const FAVORITE_KEY = 'favorite_news';
@@ -127,20 +127,24 @@ export function checkPresentArticle(id) {
 }
 
 // favorPage.addEventListener('click', _debounce(onLoadFavoritesPage, 1500));
-function onLoadFavoritesPage() {
+function onLoadFavoritesPage(ref) {
   const dataFromLS = getFromLS(FAVORITE_KEY);
 
   if (!dataFromLS.length) {
     notFoundRef.classList.remove('not-found-box-hidden');
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+
     return;
   }
 
   notFoundRef.classList.add('not-found-box-hidden');
-  if (listArticlesRef === null) return;
+  if (ref === null) return;
 
-  listArticlesRef.innerHTML =
-    markupForFavoritesAndRead.createGalleryCardMarkup(dataFromLS);
-  listArticlesRef.addEventListener('click', onListArticlesClick);
+  ref.innerHTML = markupForFavoritesAndRead.createGalleryCardMarkup(dataFromLS);
+  ref.addEventListener('click', onListArticlesClick);
 }
 
 function onListArticlesClick(event) {
@@ -170,18 +174,23 @@ function onListArticlesClick(event) {
   }
 }
 
-function checkLS() {
+export function checkLS() {
   setTimeout(() => {
     const dataFromLS = getFromLS(FAVORITE_KEY);
 
     if (!dataFromLS.length) {
       notFoundRef.classList.remove('not-found-box-hidden');
+
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
     }
   }, 100);
 }
 
 if (document.title === 'Favorite') {
-  onLoadFavoritesPage();
+  onLoadFavoritesPage(listArticlesRef);
 }
 
 // =============================================================================

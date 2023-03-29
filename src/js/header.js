@@ -28,11 +28,21 @@ refs.formSearch.addEventListener('submit', onFormSearchSubmit);
 
 const sentinel = document.querySelector('#sentinel');
 
+// const onEntry = entries => {
+//   console.log(entries);
+//   fetchAndRenderSearchNews();
+// };
+
 const onEntry = entries => {
-  fetchAndRenderSearchNews();
+  entries.forEach(entry => {
+    if (entry.isIntersecting && newsApi.query !== '') {
+      fetchAndRenderSearchNews();
+    }
+  });
 };
+
 const options = {
-  rootMargin: '300px',
+  rootMargin: '350px',
 };
 const observer = new IntersectionObserver(onEntry, options);
 

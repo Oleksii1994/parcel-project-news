@@ -27,7 +27,7 @@
             <li class="nav__item">
               <a class="nav__link" href="./index.html">Home</a>
             </li>
-            <li class="nav__item" >
+            <li class="nav__item">
               <a class="nav__link" href="./favorites.html">Favorite</a>
             </li>
             <li class="nav__item">
@@ -35,7 +35,7 @@
             </li>
           </ul>
         </nav>
-    
+
         <form class="form-search">
           <input
             class="form-search__input"
@@ -76,19 +76,57 @@
     </header>
     <main>
       <section>
+        <div class="not-found-box" data-aos="fade-up" data-aos-duration="1000">
+          <h2 class="not-found-box__title">
+            You haven't added anything <br />
+            favorite!
+          </h2>
+          <picture>
+            <source
+              srcset="
+                ./images/mobile-png/nofound-mob-1x.png 1x,
+                ./images/mobile-png/nofound-mob-1x.png 2x
+              "
+              type="image/png"
+              media="(max-width: 479px)"
+            />
+            <source
+              srcset="
+                ./images/tablet-png/nofound-tab-1x.png 1x,
+                ./images/tablet-png/nofound-tab-1x.png 2x
+              "
+              type="image/png"
+              media="(max-width:767px)"
+            />
+            <source
+              srcset="
+                ./images/desktop-png/nofound-des-1x.png 1x,
+                ./images/desktop-png/nofound-des-1x.png 2x
+              "
+              type="image/png"
+              media="(min-width: 1279px)"
+            />
+            <img
+              class="not-found-box___picture"
+              src="./images/desktop-png/nofound-des-1x.png"
+              alt="underfined-picture"
+              width="601"
+              height="478"
+            />
+          </picture>
+        </div>
         <div class="container read">
           <div class="accordion" id="accordion"></div>
 
           <div id="markup-template">
             <h2 class="title__accordion">{{title}}</h2>
             <div>
-              <ul class="news-list list gallery__list">
+              <ul class="news-list list gallery__list" id="read-news-list">
                 {{card}}
               </ul>
             </div>
           </div>
         </div>
-
       </section>
     </main>
     <include src="./partials/footer.html"></include>

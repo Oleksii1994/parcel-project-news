@@ -39,7 +39,6 @@ export let LOCALSTORAGE_USER = '';
 export const usersRef = ref(database, 'users');
 
 const refses = {
-  // body: document.querySelector('body'),
   singUp: document.querySelector('#singUp'),
   login: document.querySelector('#login'),
   logOut: document.querySelector('#logOut'),
@@ -61,11 +60,8 @@ export function singUpFun(e) {
   const password = document.getElementById('password').value;
   const username = document.getElementById('username').value;
 
-  // console.log(email);
-
   createUserWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
-      //
       const user = userCredential.user;
 
       set(ref(database, 'users/' + user.uid), {
@@ -79,7 +75,6 @@ export function singUpFun(e) {
 
       alert('user created');
       location.reload();
-      //
     })
     .catch(error => {
       const errorCode = error.code;
@@ -123,7 +118,7 @@ export function logOutFun(e) {
   signOut(auth)
     .then(() => {
       alert('User loged out!');
-      // location.reload();
+
       window.location.href = './index.html';
     })
     .catch(error => {
@@ -144,8 +139,6 @@ onAuthStateChanged(auth, user => {
     refses.containerLogIn.style.display = 'none';
     refses.authButton.textContent = 'Profile/LogOut';
     refses.authButtonMobileText.textContent = `Profile/LogOut`;
-
-    // console.log(user.uid);
   } else {
     refses.authButton.textContent = 'LogIn';
     refses.authButtonMobileText.textContent = 'LogIn';
@@ -160,15 +153,12 @@ get(usersRef)
     const users = [];
     snapshot.forEach(childSnapshot => {
       const user = childSnapshot.val();
-      // console.log(user.username);
+
       user.id = childSnapshot.key;
       users.push(user);
     });
-    // console.log(users);
   })
-  .catch(error => {
-    // console.error(error);
-  });
+  .catch(error => {});
 
 //  Открытие и закрытие модалки ...........................................
 
@@ -193,12 +183,7 @@ function onCloseModal(e) {
 // Добавление и удаление вкладка любимое
 
 function addToFavouriteNews(article) {
-  // const inputObj = {
-  //   name: input,
-  //   id: Math.round(Math.random() * 100000),
-  // };
   const user = auth.currentUser;
-  // console.log(user);
 
   if (user) {
     const userId = user.uid;
@@ -213,15 +198,11 @@ function addToFavouriteNews(article) {
         });
 
         const filteredNewsArr = newsArr.filter(Boolean);
-        // console.log(filteredNewsArr);
-
-        // addToFavourite.reset();
 
         return update(ref(database, `users/${userId}`), {
           newsFavouriteData: filteredNewsArr,
         })
           .then(() => {
-            // console.log('News added to favorites');
             Notiflix.Notify.success('News added to favorites');
             newsArr.splice(0, newsArr.length);
           })
@@ -270,7 +251,6 @@ function deliteFromFavouriteNews(e) {
           newsFavouriteData: filteredNewsArr,
         })
           .then(() => {
-            // console.log('News deleted successfully');
             Notiflix.Notify.success('News removed from favorites');
           })
           .catch(error => {
@@ -295,17 +275,14 @@ function getFavNews() {
       if (user === null) {
         return;
       }
-      // console.log(user.email);
 
       snapshot.forEach(childSnapshot => {
         const userArr = childSnapshot.val();
-        // console.log(userArr.email);
+
         if (userArr.email === user.email) {
-          // console.log(userArr.newsFavouriteData);
           favNewsArr.push(
             ...userArr.newsFavouriteData.filter(item => item !== '')
           );
-          // console.log(favNewsArr);
         }
       });
     })
@@ -327,7 +304,6 @@ function addToReadNews(e) {
     id: Math.round(Math.random() * 100000),
   };
   const user = auth.currentUser;
-  // console.log(user);
 
   if (user) {
     const userId = user.uid;
@@ -348,7 +324,6 @@ function addToReadNews(e) {
           newsReadData: filteredNewsArr,
         })
           .then(() => {
-            // console.log('News updated successfully');
             Notiflix.Notify.success('News added to read');
             newsArr.splice(0, newsArr.length);
           })
@@ -419,15 +394,12 @@ function getReadNews() {
       if (user === null) {
         return;
       }
-      // console.log(user.email);
 
       snapshot.forEach(childSnapshot => {
         const userArr = childSnapshot.val();
-        // console.log(userArr.email);
+
         if (userArr.email === user.email) {
-          // console.log(userArr.newsFavouriteData);
           readNewsArr.push(...userArr.newsReadData.filter(item => item !== ''));
-          // console.log(favNewsArr);
         }
       });
     })
@@ -437,21 +409,3 @@ function getReadNews() {
 
   return readNewsArr;
 }
-
-// console.log('fav', getFavNews());
-
-// console.log('read', getReadNews());
-
-// Перенаправление в личный
-
-// const buttonInProfile = document.querySelector('#buttonInProfile');
-
-// buttonInProfile.addEventListener('click', e => {
-//   if (auth.currentUser) {
-//     window.location.href = './auth-page.html';
-//   } else {
-//     Notiflix.Notify.info(
-//       'To gain access to your personal account you need to log in or register'
-//     );
-//   }
-// });

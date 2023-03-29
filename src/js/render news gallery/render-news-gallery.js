@@ -2,7 +2,7 @@ import Pagination from 'tui-pagination';
 import { newsApi } from '../API/fetchAPI';
 import { NormalizeData } from '../API/api-data-normalaizer';
 import { onLoadHomePage } from '../add-to-favorite';
-// import { onLoadPageHomeForRead } from '../read';
+
 import { refs } from '../refs/refs';
 import { markup, markupForFavoritesAndRead } from '../renderMarkup';
 import { Notify } from 'notiflix';
@@ -78,10 +78,6 @@ async function pageLoadHandler() {
     );
 
     //_________________________________________  масив для пагинации_________________________
-
-    // let firstMurkupPage = [];
-    // let secontMurkupPage = [];
-    // let thirdMurkupPage = [];
 
     const murkupPage = {
       firstMurkupPage: [],

@@ -243,7 +243,6 @@ setTimeout(() => {
 otherBoxRef.addEventListener('click', onOtherBoxClick);
 
 function onWindowsResize(e) {
-  // console.log(window.innerWidth);
   if (window.innerWidth < 768) {
     categoriesOtherTextRef.textContent = 'Categories';
     categoriesBtnListRef.innerHTML = '';
@@ -257,7 +256,6 @@ function onWindowsResize(e) {
     return;
   }
   if (window.innerWidth < 1280) {
-    // console.log(categoriesBtnListRef.innerHTML);
     if (categoriesBtnListRef.children.length === visibleOtherBtn.tablet) {
       return;
     }
@@ -279,8 +277,6 @@ function onWindowsResize(e) {
     return;
   }
   if (window.innerWidth > 1279) {
-    // console.log(categoriesBtnListRef.innerHTML);
-
     if (categoriesBtnListRef.children.length === visibleOtherBtn.desktop) {
       return;
     }
@@ -318,8 +314,6 @@ function onOtherBtnClick(e) {
 
 function onLoadPage(categories) {
   if (window.innerWidth < 768) {
-    //  console.log(window.matchMedia('(max-width: 767px)'));
-
     categoriesOtherTextRef.textContent = 'Categories';
     const markup = categories
       .map(
@@ -327,7 +321,7 @@ function onLoadPage(categories) {
           `<div class="categories__other-btn-box"><button class="categories__other-box-item" data-categoryName="${elem.section}" type="button">${elem.display_name}</button></div>`
       )
       .join('');
-    // console.log(markup);
+
     otherBoxRef.innerHTML = markup;
     return;
   }
@@ -351,7 +345,6 @@ function onLoadPage(categories) {
   if (window.innerWidth > 1279) {
     categoriesOtherTextRef.textContent = 'Other';
 
-    // console.log(categoriesBtnListRef.innerHTML);
     if (categoriesBtnListRef.children.length === visibleOtherBtn.desktop) {
       return;
     }
@@ -391,13 +384,6 @@ async function onBtnsClick(e) {
   if (e.target.nodeName !== 'BUTTON') {
     return;
   }
-
-  // for (let i = 0; i < categoriesBtnListRef.children.length; i++) {
-  //   categoriesOtherBtn[i].classList.remove('active');
-  // }
-
-  // categoriesOtherBtn.classList.remove('active');
-  // e.target.classList.add('active');
 
   categoriesFetch(e);
 }

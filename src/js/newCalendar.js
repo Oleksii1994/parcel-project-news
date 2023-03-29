@@ -22,11 +22,9 @@ const options = {
       arrowToggle(deg);
       return;
     }
-    // selectedDate = format(new Date(selectedDates[0]), 'yyyyMMdd');
-    // console.log(selectedDate);
+
     arrowToggle(deg);
     selectedDate = NormalizeData.convertDates(input.value);
-    // console.log(selectedDate);
   },
   onOpen() {
     let deg = 180;
@@ -54,11 +52,10 @@ input.addEventListener('click', () => {
   if (open === false) {
     Notify.info('Please select a starting date');
     open = true;
-    // console.log(open);
+
     return;
   } else {
     fp.close();
     open = false;
-    // console.log(open);
   }
 });

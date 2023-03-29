@@ -28,11 +28,6 @@ refs.formSearch.addEventListener('submit', onFormSearchSubmit);
 
 const sentinel = document.querySelector('#sentinel');
 
-// const onEntry = entries => {
-//   console.log(entries);
-//   fetchAndRenderSearchNews();
-// };
-
 const onEntry = entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting && newsApi.query !== '') {

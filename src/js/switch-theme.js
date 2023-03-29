@@ -1,10 +1,6 @@
 import { refs } from './refs/refs.js';
 import { THEMES } from './refs/const.js';
-// const body = document.querySelector('body'); //////////// імпортую рефс
-// const themeSwitch = document.querySelector('#theme-switch');
-// const lightThemeBox = document.querySelector('.light-theme-box');
-// const darkThemeBox = document.querySelector('.dark-theme-box');
-// const THEMES = { LIGHT_THEME: 'light-theme', DARK_THEME: 'dark-theme' }; //////////// імпортую конст
+
 refs.themeSwitch.addEventListener('change', changeTheme);
 
 onLoadPage();
@@ -26,7 +22,6 @@ function changeTheme() {
 function onLoadPage() {
   const theme = getSavedTheme() || THEMES.LIGHT_THEME;
 
-  // body.classList.add(THEMES.LIGHT_THEME);
   if (theme === THEMES.LIGHT_THEME) {
     refs.lightThemeBox.classList.add('active-tablet');
     refs.body.classList.add(THEMES.LIGHT_THEME);

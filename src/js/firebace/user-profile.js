@@ -57,7 +57,7 @@ function getNameAndEmail() {
     .then(snapshot => {
       snapshot.forEach(childSnapshot => {
         const user = auth.currentUser;
-        // console.log(user);
+
         if (!user) {
           return;
         }
@@ -68,8 +68,6 @@ function getNameAndEmail() {
             item => item !== ''
           );
           const newsRead = userArr.newsReadData.filter(item => item !== '');
-
-          // console.log(userArr);
 
           refs.profileImgCard.src = `${userArr.userPhoto}`;
           refs.userName.innerHTML = userArr.username;
@@ -97,7 +95,6 @@ function changeUserPassword(e) {
           const userArr = childSnapshot.val();
 
           if (userArr.email.toLowerCase() === user.email.toLowerCase()) {
-            // console.log(userArr.password);
             if (input === userArr.password) {
               Notiflix.Notify.success('Corect Password');
               refs.changePasswordPrg.innerHTML = 'New password:';
@@ -120,7 +117,7 @@ function changeUserPassword(e) {
           const userArr = childSnapshot.val();
           if (userArr.email.toLowerCase() === user.email.toLowerCase()) {
             refs.changePasswordPrg.innerHTML = 'Old password:';
-            // console.log(userArr.password);
+
             Notiflix.Notify.success('Password changed successfully');
             return update(ref(database, `users/${user.uid}`), {
               password: input,
@@ -182,7 +179,6 @@ function editPhotoFun() {
                 userPhoto: photoData,
               })
                 .then(() => {
-                  // console.log('News added to favorites');
                   Notiflix.Notify.success('Photo added to profile');
                 })
                 .catch(error => {

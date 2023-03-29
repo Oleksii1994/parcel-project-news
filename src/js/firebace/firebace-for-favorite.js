@@ -37,15 +37,13 @@ const usersRef = ref(database, 'users');
 export function addOrDeleteFavoriteNews(article, userId, targetBtn) {
   const currentUser = auth.currentUser;
 
-  // console.log(currentUser);
-
   get(usersRef)
     .then(snapshot => {
       const newsArr = [];
       let articleExists = false;
       snapshot.forEach(childSnapshot => {
         const user = childSnapshot.val();
-        // console.log(user);
+
         if (user.email === currentUser.email) {
           // check if email matches
           user.newsFavouriteData.forEach(item => {
@@ -56,7 +54,6 @@ export function addOrDeleteFavoriteNews(article, userId, targetBtn) {
           });
         }
       });
-      // console.log(newsArr);
 
       if (articleExists) {
         console.log('Article already exists');
@@ -65,17 +62,11 @@ export function addOrDeleteFavoriteNews(article, userId, targetBtn) {
           return item.id !== article.id;
         });
 
-        // console.log(filteredNewsArr);
-
         const finalNewsArr = filteredNewsArr.filter(Boolean); // remove empty strings
-
-        // console.log(finalNewsArr);
 
         if (finalNewsArr.length === 0) {
           finalNewsArr.push('');
         }
-
-        // console.log(finalNewsArr);
 
         return update(ref(database, `users/${userId}`), {
           newsFavouriteData: finalNewsArr,
@@ -93,11 +84,7 @@ export function addOrDeleteFavoriteNews(article, userId, targetBtn) {
         newsArr.push(article);
         const filteredNewsArr = newsArr.filter(Boolean);
 
-        // console.log(filteredNewsArr);
-
         const finalNewsArr = filteredNewsArr.filter(Boolean); // remove empty strings
-
-        // console.log(finalNewsArr);
 
         return update(ref(database, `users/${userId}`), {
           newsFavouriteData: finalNewsArr,
@@ -150,52 +137,18 @@ export async function getFavNews() {
       return;
     }
 
-    // console.log(user);
-
     snapshot.forEach(childSnapshot => {
       const userArr = childSnapshot.val();
-      //   console.log(userArr);
+
       if (userArr.email === user.email) {
-        // console.log(userArr.newsFavouriteData);
         favNewsArr.push(
           ...userArr.newsFavouriteData.filter(item => item !== '')
         );
-        // console.log(favNewsArr);
       }
     });
 
     return favNewsArr;
-    // console.log(userRefs);
   } catch (error) {
     console.error(error);
   }
-  //   get(usersRef)
-  //     .then(snapshot => {
-  //       const user = auth.currentUser;
-  //       if (user === null) {
-  //         return;
-  //       }
-  //       // console.log(user.email);
-
-  //       snapshot.forEach(childSnapshot => {
-  //         const userArr = childSnapshot.val();
-  //         // console.log(userArr.email);
-  //         if (userArr.email === user.email) {
-  //           // console.log(userArr.newsFavouriteData);
-  //           favNewsArr.push(
-  //             ...userArr.newsFavouriteData.filter(item => item !== '')
-  //           );
-  //           // console.log(favNewsArr);
-  //         }
-  //       });
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //     });
-
-  //   console.log(favNewsArr);
-
-  //   return favNewsArr;
 }
-
-// console.log(getFavNews());

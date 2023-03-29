@@ -37,8 +37,6 @@ const usersRef = ref(database, 'users');
 export function addToReadNews(article, userId) {
   const currentUser = auth.currentUser;
 
-  // console.log(currentUser);
-
   get(usersRef)
     .then(snapshot => {
       const newsArr = [];

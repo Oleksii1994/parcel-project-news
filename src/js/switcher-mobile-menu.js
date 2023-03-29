@@ -1,5 +1,3 @@
-// import { refs } from './refs/refs.js';
-// import { THEMES } from './refs/const.js';
 const THEMES = {
   LIGHT_THEME: 'light-theme',
   DARK_THEME: 'dark-theme',

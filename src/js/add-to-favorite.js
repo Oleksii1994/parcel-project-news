@@ -45,8 +45,6 @@ const favorPage = document.querySelector('.favorite');
 export const notFoundRef = document.querySelector('.not-found-box');
 const listArticlesRef = document.querySelector('#news-list');
 
-// document.body.classList.remove('screen-tablet');
-// document.body.classList.add('screen-mobile');
 export const FAVORITE_KEY = 'favorite_news';
 
 export function onLoadHomePage() {
@@ -126,7 +124,6 @@ export function checkPresentArticle(id) {
   return present;
 }
 
-// favorPage.addEventListener('click', _debounce(onLoadFavoritesPage, 1500));
 function onLoadFavoritesPage(ref) {
   const dataFromLS = getFromLS(FAVORITE_KEY);
 
@@ -210,34 +207,3 @@ export function checkLS() {
 if (document.title === 'Favorite') {
   onLoadFavoritesPage(listArticlesRef);
 }
-
-// =============================================================================
-// notFoundRef.innerHTML = `<h2 class="not-found-box__title">We haven’t found news from <br> this date</h2>
-//   <img src="https://www.flickr.com/photos/197971475@N07/52773618182/in/dateposted-public.png>`;
-// window.scrollTo(0, 0);
-// onLoadFavoritesPage(); /////треба викликати цю функцію при клікі на посилання Favorite
-// notFoundRef.classList.add('not-found-box-hidden');
-// if (!dataFromLS.length && notFoundRef !== null) {
-//   notFoundRef.innerHTML = `<h2 class="not-found-box__title hidden">You haven't added anything <br> to favorite!</h2>
-//  `;
-//   return;
-/* <picture><source 
-srcset="https://www.flickr.com/photos/197971475@N07/52773618182/in/dateposted-public/ 1x, https://www.flickr.com/photos/197971475@N07/52774411229/in/dateposted-public/" 2x" 
-type="image/png" 
-media="(max-width: 479.98px)"
-alt="underfined-picture"/>
-<source 
-srcset="https://www.flickr.com/photos/197971475@N07/52773621142/in/dateposted-public/, https://www.flickr.com/photos/197971475@N07/52774569180/in/dateposted-public/ 2x" 
-type="image/png" 
-media="(max-width:767.98px)"/>
-<source 
-srcset="https://www.flickr.com/photos/197971475@N07/52774412304/in/dateposted-public/ 1x, https://www.flickr.com/photos/197971475@N07/52774150291/in/dateposted-public/ 2x" 
-type="image/png" 
-media="(min-width: 1279.98px)"/>
-<img 
-class="underfined___picture"
-src="https://www.flickr.com/photos/197971475@N07/52773618182/in/dateposted-public.png" 
-alt="underfined-picture" 
-width="248" 
-height="198"/>
-</picture> */

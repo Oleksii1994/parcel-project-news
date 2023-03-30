@@ -99,7 +99,7 @@ function onDocumentClick(event) {
     return;
   }
   const target = event.target.closest('.form-search');
-  console.log(target);
+
   if (!target) {
     if (refs.formSearch.elements.searchQuery.value.trim()) {
       return;
